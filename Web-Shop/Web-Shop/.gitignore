@@ -1,0 +1,25 @@
+﻿# Build results
+bin/
+obj/
+
+# Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Web.config lokalne postavke
+appsettings.Development.json
+Web.Debug.config
+Web.Release.config
+
+# Rider
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
