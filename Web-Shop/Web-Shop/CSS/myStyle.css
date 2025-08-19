@@ -1,0 +1,579 @@
+﻿/*LOGO*/
+.logo-bulk img {
+    width: 100px;
+}
+/*---------------HEADER---------------*/
+
+/*Slova hover u header top*/
+.header-top-my {
+    height: 54px;
+    background-color: #4e4a4a;
+    border-bottom: none !important;
+}
+
+.header-text {
+    color: white;
+}
+
+.header-middle.sticky-header {
+    background-color: #f4c542 !important;
+}
+
+.header-middle .menu > li > a:hover {
+    color: #D14B4A;
+}
+
+.header-top .header-right ul a:hover {
+    color: #D14B4A;
+}
+
+.header-kontakt {
+    margin: 0px !important;
+}
+
+.wp-viber-header {
+    margin-left: 6px !important;
+    margin-right: 3px !important;
+}
+
+.main-nav .menu .istaknute-kat:hover {
+    background-color: #f4c542;
+}
+
+.kat-div:hover {
+    background-color: #f4c542 !important;
+}
+.logo-rescue img {
+    width: 100px !important;
+}
+
+/*Header bottom*/
+.bottom-header, .bottom-header > div:nth-child(2) {
+    background-color: #D14B4A;
+}
+
+.user-icons {
+    font-size: 24px;
+    display: none;
+}
+
+.mobile-element {
+    font-size: 20px;
+}
+
+.mobile-element-podgrupa {
+    font-size: 14px;
+}
+
+.kosarica-header {
+    background-color: white;
+    width: 40px;
+    padding-left: 8px;
+    border-radius: 7px;
+}
+/*---------------SLIDER SLIKA------------------*/
+.home-slide {
+    position: relative;
+    width: 100%; /* Širina slidera je širina ekrana */
+}
+
+.slike-slider {
+    height: 850px;
+}
+
+.slider-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Slika pokriva cijelu širinu */
+    height: 100%; /* Slika pokriva cijelu visinu */
+    object-fit: cover; /* Prilagođava sliku da popuni prostor, bez deformacija */
+}
+
+/*----------------PRIJAVA-----------------*/
+.back-to-login {
+    margin: auto 0px;
+    color: #d04b4c;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 10;
+}
+/*Dugmići na slider*/
+.owl-theme .owl-nav button.owl-prev, .owl-theme .owl-nav button.owl-next {
+    background-color: #ffffff7a;
+    width: 28px;
+    /*border: 1px solid #000;*/
+}
+
+.web {
+    display: block;
+}
+
+.mob {
+    display: none !important;
+}
+
+#naslov-istaknuti {
+    margin-bottom: 20px;
+}
+
+.nadgrupa {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.naslov-istaknuto {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cijene-istaknuto {
+    text-align: center;
+}
+
+.nova-cijena-istaknuto {
+    color: #d14b4a;
+}
+/*-------------SLIDER ISTAKNUTI PROIZVODI*/
+.naslov-istaknuto {
+    white-space: nowrap; /* Sprečava prelazak u novi red */
+    overflow: hidden; /* Sakriva tekst koji prelazi izvan okvira */
+    text-overflow: ellipsis; /* Dodaje "..." kada je tekst predugačak */
+    width: 90%;
+    display: block;
+    text-align: center;
+}
+
+.shadow {
+    box-shadow: 10px 10px 5px 0px rgba(227,227,227,0.51);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(227,227,227,0.51);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(227,227,227,0.51);
+}
+
+.istaknuto-img {
+    /*width: 255px !important;
+    height: 255px !important;
+    object-fit: cover !important;*/
+    width: 500px !important;
+    max-width: 95% !important;
+    display: block !important;
+    margin: auto !important;
+}
+/*---------------NAJNOVIJI--------------*/
+.naziv-najnovijih {
+    max-width: 250px;
+    overflow: hidden !important;
+}
+/*---------------KONTAKT---------------*/
+textarea.form-control {
+    max-width: 480px !important;
+}
+
+.div-kontakt-reset {
+    width: 20%;
+    margin: 0 auto;
+    height: 40px;
+    background: #8080801f;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*---------------FOOTER ---------------*/
+#footer-logo {
+    width: 50%;
+    margin: auto;
+}
+
+#footer-table {
+    line-height: 2;
+}
+
+    #footer-table li {
+        font-size: 14px;
+    }
+
+.footer-middle .container {
+    max-width: 70%;
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+}
+
+.wp-vb-logo {
+    width: 22px !important;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.whatsapp-item {
+    white-space: nowrap;
+}
+
+.line {
+    width: 100%;
+    background-color: #fff;
+    margin-top: 0px;
+}
+
+.wp-viber {
+    margin-bottom: 0 !important
+}
+
+.footer-middle-my {
+    background-color: #f4c542 !important;
+}
+
+.naslov-footer {
+    color: #000000 !important;
+}
+
+.element-footer {
+    color: #302d2d !important;
+}
+
+    .element-footer:hover {
+        color: #d04b4c !important;
+    }
+/*---------------PAGING-------------------*/
+.pagination-area {
+    background: rgba(0,0,0,0) none repeat scroll 0 0;
+    /*border-top: 1px solid #eee;*/
+    margin: 0px 0 0;
+    padding: 0px 0px 20px 0px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+    .pagination-area ul {
+        margin-bottom: 0px;
+    }
+
+        .pagination-area ul li {
+            background: #f5f5f5;
+            color: #393939;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            height: 30px;
+            line-height: 30px;
+            margin: 0 0 0 5px;
+            width: 30px;
+            border-radius: 0px;
+        }
+
+            .pagination-area ul li a {
+                border: 1px solid #e0e0e0;
+                color: #363636;
+                display: block;
+                font-size: 12px;
+                font-weight: 700;
+                height: 30px;
+                width: 30px;
+                text-decoration: none;
+                border-radius: 0px;
+                transition: all .4s ease-out .2s;
+            }
+
+                .pagination-area ul li a:hover {
+                    background: #000000;
+                    border: 1px solid #000000;
+                    color: #fff;
+                }
+
+                .pagination-area ul li a.active {
+                    background: #1d4c9e;
+                    border: 1px solid #1d4c9e;
+                    border-radius: 0px;
+                    color: #fff;
+                    transition: all .4s ease-out .2s;
+                }
+
+.dugmic.prethodna, .dugmic.slijedeca {
+    padding: 3px;
+    background: #d14b4a;
+    border: none;
+    color: #fff;
+}
+
+    .dugmic.prethodna:hover, .dugmic.slijedeca:hover {
+        background: #6dbfb8;
+        /*  border: 1px solid #000000;*/
+        color: #fff;
+        cursor: pointer;
+    }
+
+.textP.polje.stranica {
+    padding: 5px;
+    text-align: center;
+    width: 50px;
+    font-weight: 600;
+}
+
+.toolbox .select-custom::after {
+    margin-top: 9px;
+}
+/*------------------HVALA--------------------*/
+#div-hvala {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    #div-hvala a {
+        display: block;
+        margin-top: 20px;
+        text-decoration: underline;
+        color: #D14B4A;
+        margin-top: 50px;
+    }
+
+    #div-hvala h1 {
+        margin-bottom: 20px;
+    }
+
+/*-----------------404----------------------*/
+#error-div {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    #error-div > h1 {
+        font-size: 300px;
+        font-weight: 900;
+        line-height: 300px;
+        display: block;
+        color: #909090;
+    }
+
+    #error-div > h5 {
+        text-transform: uppercase;
+        color: #d14b4a;
+        font-size: 50px;
+        font-weight: 900;
+        letter-spacing: 6px;
+        line-height: 90px;
+    }
+
+#unutarnji-error > a {
+    text-decoration: underline;
+    color: #d14b4a;
+}
+/*---------------REGISTRACIJA---------------*/
+.registration-div {
+    margin: auto;
+    margin-top: 10px;
+}
+
+/*---------------ARTIKAL---------------*/
+
+.naziv-artikla {
+    margin-bottom: 40px !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+.podjeli-proizvod label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.podjeli-proizvod {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-top: 70px;*/
+}
+
+.nova-cijena {
+    font-size: 30px;
+    margin-top: 10px;
+}
+/*Komentari ispod artikla*/
+.comment-line-my {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.comment-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px 20px 20px 20px;
+    max-width: 600px;
+    position: relative;
+    background: #fff;
+}
+
+.comment-name-date {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    background: #fff;
+    padding: 0 10px;
+    font-weight: 600;
+    color: #333;
+    transform: translateY(-50%);
+}
+
+    .comment-name-date .comment-stars {
+        margin-left: 10px;
+        display: inline-block;
+    }
+
+    .comment-name-date .star {
+        color: #ccc; /* Siva prazna */
+        font-size: 16px;
+        margin-right: 2px;
+    }
+
+        .comment-name-date .star.active {
+            color: #F79426; /* Narančasta puna */
+        }
+
+/*---------------STATIKA-------------*/
+.card-icon {
+    height: 100px !important;
+    width: auto !important;
+}
+
+/*---------------KOŠARICA-------------*/
+/*.bootstrap-touchspin .input-group-btn-vertical > .btn {
+    display: none !important;
+}*/
+.items-field {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+#sortiranje {
+    display: block;
+}
+/*--------------RECENZIJA-------------*/
+.tekst-hvala {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#forma-review {
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+}
+
+    .rating > label {
+        cursor: pointer;
+    }
+
+
+        .rating > label:before {
+            margin: 5px;
+            font-size: 2em;
+            font-family: FontAwesome;
+            content: "\f005";
+            /*display: inline-block;*/
+        }
+
+    .rating > input {
+        display: none;
+    }
+
+        .rating > input:checked ~ label,
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: #F79426;
+        }
+
+            .rating > input:checked + label:hover,
+            .rating > input:checked ~ label:hover,
+            .rating > label:hover ~ input:checked ~ label,
+            .rating > input:checked ~ label:hover ~ label {
+                color: #FECE31;
+            }
+
+/*---------------MEDIA---------------*/
+@media only screen and (max-width: 768px) {
+    .logo-rescue img {
+        width: 70px !important;
+    }
+
+    .user-icons {
+        font-size: 24px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .footer-middle .container {
+        max-width: 100%;
+        display: flex;
+        /*justify-content: space-around;*/
+    }
+
+    #footer-logo {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+
+    .web {
+        display: none !important;
+    }
+
+    .mob {
+        display: block !important;
+    }
+
+    .dugmicDodaj-artikal {
+        /*display: block !important;*/
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .sticky-header.fixed {
+        display: block !important;
+    }
+
+    #div-hvala > h1 {
+        font-size: 20px;
+    }
+
+    .naziv-najnovijih {
+        white-space: nowrap; /* Sprečava prelazak u novi red */
+        overflow: hidden; /* Sakriva tekst koji prelazi izvan okvira */
+        text-overflow: ellipsis; /* Dodaje "..." kada je tekst predugačak */
+        width: 90%;
+        display: block;
+        text-align: center;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .footer-middle .container {
+        max-width: 100%;
+        display: flex;
+        /*justify-content: space-around;*/
+    }
+
+    .user-icons {
+        font-size: 24px;
+        display: inline-block;
+        margin-right: 15px;
+    }
+}
