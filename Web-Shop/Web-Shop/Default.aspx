@@ -34,11 +34,10 @@
     </script>
 
     <%=Web_Shop.Komponente.ZajednickeMete() %>
-    <!--Web_Shop.Komponente.HeadCode() -->
+    <!--Put all the css files in function ZajednickeMete-->
+
 </head>
-<%--Web_Shop.Komponente.BodyCode()--%>
 <body>
-    <%=Web_Shop.Komponente.GoogleTagManager() %>
     <div class="page-wrapper">
         <header class="header">
             <%=Web_Shop.Komponente.Header() %>
@@ -53,9 +52,9 @@
                 'dots': false
             }">
                 <%=Web_Shop.Komponente.Slider() %>
+                <!--Banner slider on Default-->
             </div>
 
-            <!--Istaknuti proizvodi-->
             <div class="container">
                 <nav class="toolbox">
                     <div class="toolbox-left">
@@ -67,34 +66,37 @@
                 </nav>
                 <div class="row row-sm">
                     <%=Web_Shop.Komponente.IstaknutiProizvodi() %>
+                    <!--Istaknuti proizvodi na Default-->
                 </div>
                 <nav class="toolbox toolbox-pagination">
                 </nav>
             </div>
 
-            <!--Najnoviji proizvodi-->
             <div class="container">
                 <%=Web_Shop.Komponente.NajNovije() %>
+                <!--Novo iz ponude na Default-->
             </div>
         </main>
 
-        <!--Footer-->
         <%=Web_Shop.Komponente.Footer() %>
+        <!--Function for footer display-->
     </div>
     <div class="mobile-menu-overlay"></div>
 
-    <!--Mobitel Header i Navigation-->
+
     <div class="mobile-menu-container">
         <%=Web_Shop.Komponente.HeaderMobile() %>
+        <!--Mobile menu for header-->
     </div>
 
-    <!--Dodaj u kosaricu-->
+
     <%=Web_Shop.Komponente.DodajUKosaricu() %>
+    <!--Modal for adding product to cart-->
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
-    <!--Skripte-->
     <%=Web_Shop.Komponente.FooterScript() %>
+    <!--Footer scripts and links-->
     <script src="/assets/js/nouislider.min.js"></script>
 </body>
 </html>

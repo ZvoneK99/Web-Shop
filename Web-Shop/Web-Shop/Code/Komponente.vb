@@ -2,15 +2,15 @@
 
 Public Class Komponente
 
-    'Connection string for the database
-    Public Shared Function SQLKonekcija() As String
+    '--------------------------------------------------------------------------------------------General functions-----------------------------------------------------------------------------------------
+
+    Public Shared Function SQLKonekcija() As String     'Connection string for the database
         Dim html As New StringBuilder()
         html.Append(ConfigurationManager.ConnectionStrings("conZavrsni").ConnectionString)
         Return html.ToString()
     End Function
 
-
-    Public Shared Function ZajednickeMete() As String
+    Public Shared Function ZajednickeMete() As String   'All the meta tags and links that are common for all pages
         Dim html As New StringBuilder()
 
         html.Append("<meta charset='UTF-8' />")
@@ -66,19 +66,7 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
-
-    Public Shared Function GoogleTagManager() As String
-        Dim html As New StringBuilder
-
-        'Google Tag Manager (noscript)
-        html.Append("<noscript><iframe src=""https://www.googletagmanager.com/ns.html?id=GTM-W3CFCSK"" ")
-        html.Append(" height=""0"" width=""0"" style=""display:none;visibility:hidden""></iframe></noscript>")
-
-        Return html.ToString()
-    End Function
-
-
-    Public Shared Function Header() As String
+    Public Shared Function Header() As String   'All the header components that are common for all pages
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
@@ -105,11 +93,10 @@ Public Class Komponente
 
         html.Append("<div class='header-right'>")
         html.Append("<ul>")
-        If HttpContext.Current.Session("ValjanUser") = False Then
+        If HttpContext.Current.Session("ValjanUser") = False Then   'If user is not logged in
             html.Append("<li><a href='/login' class='header-text'>Registriraj se</a></li>")
             html.Append("<li><a href='/login' class='header-text'>Prijavi se</a></li>")
         Else
-            'html.Append("<li><a href=""/MojRacun"">Moj račun</a></li>")
             html.Append("<li><a href='/login?a=logout'>Odjavi se</a></li>")
         End If
         html.Append("</ul>")
@@ -135,12 +122,10 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            'NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
         End If
-        'loop
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -156,10 +141,9 @@ Public Class Komponente
                             Dim NadGrupaID As Integer = Convert.ToInt32(citac("ID"))
                             html.Append("<li class='sf-with-ul kat-div'>")
                             html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='istaknute-kat kat-div'>{2}</a>", citac("ID"), SrediNaziv(citac("NadGrupa")), citac("NadGrupa"))
-                            'html.AppendFormat("<a href=""/grupa?id={1}"" class='istaknute-kat kat-div'>{0}</a>", citac("NadGrupa"), citac("ID")) 'Kategorije 'stari kod bez optimatizacije
                             html.Append("<ul>") 'menu
 
-                            'Ispis PodKategorija unutar Grupe
+                            'Ispis PodKategorija unutar Kategorija
                             Using konekcijaGrupe As New SqlConnection(putanja)
                                 konekcijaGrupe.Open()
                                 Using komandaGrupe As New SqlCommand()
@@ -172,7 +156,6 @@ Public Class Komponente
                                         If citacGrupe IsNot Nothing Then
                                             While citacGrupe.Read()
                                                 html.AppendFormat("<li class=''><a href=""/podgrupa/{0}/{1}/"" class=""istaknute-kat kat-div"">{2}</a></li>", citacGrupe("ID"), SrediNaziv(citacGrupe("Grupa")), citacGrupe("Grupa"))
-                                                'html.AppendFormat(" <li class=''><a href='/podgrupa?id={1}' class='istaknute-kat'>{0}</a></li>", citacGrupe("Grupa"), citacGrupe("ID")) 'stari kod bez optimatizacije
                                             End While
                                         End If
                                     End Using
@@ -201,8 +184,6 @@ Public Class Komponente
         html.Append("</form>")
         html.Append("</div>") ' header-search
         html.Append("<a href='/login' class='top-my-account'><i class='icon-user user-icons'></i></a>")
-
-        'html.Append("<a href=""/lista-zelja"" class=""porto-icon""><i class=""icon icon-wishlist-2""></i></a>")
 
         html.Append("<div class=""dropdown cart-dropdown kosarica-header"">")
         html.Append("<a href=""/kosarica"" class=""dropdown-toggle"" role=""button"" aria-haspopup=""true"" aria-expanded=""false"" data-display=""static"">")
@@ -249,97 +230,175 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
+    Public Shared Function Footer() As String   'Function for footer display
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
 
-    'Public Shared Function NivoLogiranogKorisnika() As String
-    '    Dim html As New StringBuilder()
-    '    Dim putanja As String = SQLKonekcija()
+        html.Append("<footer class='footer'>")
+        html.Append("<div class='footer-middle footer-middle-my'>")
+        html.Append("<div class='container'>")
+        html.Append("<div class='row row-sm'>")
+        'Logo
+        html.Append("<div class='col-md-6 col-lg-4'>")
+        html.Append("<a href='/'><img src='/Datoteke/Logo/RescueEquip-logoLight.png' id='footer-logo'/></a>")
+        html.Append("</div>") 'col-md-6 col-lg-4
+        'Kontakt
+        html.Append("<div class='col-md-6 col-lg-2'>")
+        html.Append("<div class='widget'>")
+        html.Append("<h3 class='widget-title naslov-footer'>Povežite se s nama</h3>")
+        html.Append("<div class='widget-content row row-sm'>")
+        html.Append("<ul class='col-xl-12'>")
+        html.Append("<li><i class='fa fa-envelope' style='font-size: 20px;'></i><a href='mailto:info@rescuequip.ba' class='element-footer' target='_blank'>&nbsp;&nbsp;info@rescuequip.ba</a></li>")
+        html.Append("<li><i class='fa fa-phone' style='font-size: 20px;'></i><a href='tel:+38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp; +38763100100</a></li>")
+        html.Append("<h3 class='widget-title naslov-footer'>Whatsapp i Viber</h3>")
+        html.Append("<li class='whatsapp-item'><img class='wp-vb-logo wp-viber' src='/Datoteke/Logo/WhatsAppLogo.png'/><a href='https://wa.me/38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp;+38763100100</a></li>")
+        html.Append("<li class='whatsapp-item'><img class='wp-vb-logo wp-viber' src='/Datoteke/Logo/ViberLogo.png'/><a href='viber://chat?number=%2B38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp;+38763100100</a></li>")
+        html.Append("</ul>") 'col-xl-12
+        html.Append("</div>") 'widget-content row row-sm
+        html.Append("</div>") 'widget
+        html.Append("</div>") 'col-md-6 col-lg-2
+        'Informacije
+        html.Append("<div class='col-md-6 col-lg-2'>")
+        html.Append("<div class='widget'>")
+        html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
+        html.Append("<div class='widget-content row row-sm'>")
+        html.Append("<ul class='col-xl-6'>")
+        html.Append("<li><a href='/onama' class='element-footer'>O Nama</a></li>")
+        html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
+        html.Append("</ul>") 'col-xl-6
+        html.Append("</div>") 'widget-content row row-sm
+        html.Append("</div>") 'widget
+        html.Append("</div>") 'col-md-6 col-lg-2
+        'Plaćanje i način dostave
+        html.Append("<div class='col-md-6 col-lg-2'>")
+        html.Append(" <div class='widget'>")
+        html.Append("<h3 class='widget-title naslov-footer'>Plaćanje i način dostave</h3>")
+        html.Append("<div class='widget-content row row-sm'>")
+        html.Append("<ul class='col-xl-12'>")
+        html.Append("<li><a href='/statika?id=2' class='element-footer'>Načini plaćanja</a></li>")
+        html.Append("<li><a href='/statika?id=3' class='element-footer'>Sigurnost plaćanja</a></li>")
+        html.Append("<li><a href='/statika?id=4' class='element-footer'>Brza i pouzdana dostava</a></li>")
+        html.Append("<li><a href='/statika?id=1' class='element-footer'>Opći uslovi poslovanja</a></li>")
+        html.Append("</ul>") 'col-xl-12
+        html.Append("</div>") 'widget-content row row-sm
+        html.Append("</div>") 'widget
+        html.Append("</div>") 'col-md-6 col-lg-2
 
-    '    Using konekcija As New SqlConnection(putanja)
-    '        konekcija.Open()
-    '        Using komanda As New SqlCommand()
-    '            komanda.Connection = konekcija
-    '            komanda.CommandType = CommandType.Text
-    '            komanda.CommandText = "SELECT AdminLevel FROM Korisnici WHERE ID=@ID"
-    '            komanda.Parameters.AddWithValue("@ID", LogiraniKorisnikID())
-    '            Using citac As SqlDataReader = komanda.ExecuteReader()
-    '                If citac IsNot Nothing Then
-    '                    While citac.Read()
-    '                        html.AppendFormat("{0}", citac("AdminLevel"))
-    '                    End While
-    '                End If
-    '            End Using
-    '        End Using
-    '    End Using
-
-    '    If html.ToString = "" Then
-    '        html.Append("10")
-    '    End If
-
-    '    Return html.ToString()
-    'End Function
-
-    'Returns ID of the logged-in user from cookies
-    Public Shared Function LogiraniKorisnikID() As Integer
-        If HttpContext.Current.Request.Cookies("logiraniKorisnikID") Is Nothing Then
-            HttpContext.Current.Response.Cookies("logiraniKorisnikID").Value = "0"
-        End If
-
-        Dim idStr As String = HttpContext.Current.Request.Cookies("logiraniKorisnikID").Value.ToString()
-        Dim idKorisnika As Integer
-
-        If Integer.TryParse(idStr, idKorisnika) Then
-            Return idKorisnika
-        Else
-            Return 0
-        End If
+        html.Append("<div class='footer-bottom container'>")
+        html.Append("<p>Copyright © <p href='/' style='color:  #D14B4A;'>Zvonimir Kožul & Leonardo Misir </p></p>")
+        html.Append("</div>") 'footer-bottom container
+        html.Append("</footer>")
+        html.Append("</footer>")
+        Return html.ToString()
     End Function
 
-    Public Shared Function SrediNaziv(Naziv As String) As String
+    Public Shared Function HeaderMobile() As String 'Mobile menu for header
+        Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
-        Naziv = Naziv.ToLower
+
+        html.Append("<div class='mobile-menu-wrapper'>")
+        html.Append("<div class='mobile-menu-wrapper'>")
+        html.Append("<span class='mobile-menu-close'><i class='icon-retweet'></i></span>")
+        html.Append("<nav class='mobile-nav'>")
+        html.Append("<ul class='mobile-menu'>")
+        html.Append("<li><a href='/' class='mobile-element'>Početna</a></li>")
+
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM Znakovi"
+                komanda.CommandText = "SELECT TOP 9 ID, NadGrupa FROM ArtikliNadGrupe WHERE Aktivno='1'"
+
+                'Ispis Kategorija u Header
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
-                            Naziv = Naziv.Replace(citac("Znak"), citac("NoviZnak"))
+                            Dim NadGrupaID As Integer = Convert.ToInt32(citac("ID"))
+
+                            html.Append("<li>")
+                            html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='mobile-element'>{2}</a>", citac("ID"), SrediNaziv(citac("NadGrupa")), citac("NadGrupa"))
+                            html.Append("<ul>")
+
+                            'Ispis PodKategorija unutar Grupe
+                            Using konekcijaGrupe As New SqlConnection(putanja)
+                                konekcijaGrupe.Open()
+                                Using komandaGrupe As New SqlCommand()
+                                    komandaGrupe.Connection = konekcijaGrupe
+                                    komandaGrupe.CommandType = CommandType.Text
+                                    komandaGrupe.CommandText = "SELECT * FROM ArtikliGrupe WHERE NadGrupaID=@ID AND Aktivno='1'"
+                                    komandaGrupe.Parameters.AddWithValue("@ID", citac("ID"))
+
+                                    Using citacGrupe As SqlDataReader = komandaGrupe.ExecuteReader()
+                                        If citacGrupe IsNot Nothing Then
+                                            While citacGrupe.Read()
+                                                html.AppendFormat("<li class=''><a href=""/podgrupa/{0}/{1}/"" class='mobile-element-podgrupa'>{2}</a></li>", citacGrupe("ID"), SrediNaziv(citacGrupe("Grupa")), citacGrupe("Grupa"))
+                                            End While
+                                        End If
+                                    End Using
+                                End Using
+                            End Using
+                            html.Append("</ul>")
+                            html.Append("</li>")
                         End While
                     End If
                 End Using
             End Using
         End Using
-        Naziv = Naziv.Replace(" ", "-")
-        Naziv = Naziv.Replace("/", "")
-        Naziv = Naziv.Replace("--", "-")
-        If Right(Naziv, "1") = "-" Then
-            Naziv = Naziv.Substring(0, Naziv.Length - 1)
-        End If
-        Return Naziv
-    End Function
 
-    Public Shared Function PrebrojiArtikle() As String
-        Dim html As New StringBuilder()
+        html.Append("<li><a href='/kontakt' class='mobile-element'>Kontakt</a></li>")
 
-        If IsNothing(HttpContext.Current.Session("IgreNarudzba")) = False Then
-            Dim n As Narudzba
-            n = CType(HttpContext.Current.Session("IgreNarudzba"), Narudzba)
-            Dim brojArtikala = n.BrojArtikala.ToString()
-            'html.Append("(" & brojArtikala & ")")
-            html.Append(brojArtikala)
-        Else
-            html.AppendFormat("{0}", "0")
-        End If
-
-        'html.AppendFormat("{0}", "0")
+        ' Zatvori ul i nav tagove
+        html.Append("</ul>") ' mobile-menu
+        html.Append("</nav>") ' mobile-nav
+        html.Append("</div>") ' mobile-menu-wrapper
+        html.Append("</div>") ' mobile-menu-wrapper
 
         Return html.ToString()
     End Function
 
-    Public Shared Function Slider() As String
+    Public Shared Function DodajUKosaricu() As String   'Modal for adding product to cart
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            html.Append("<div class='modal fade' id='addCartModal' tabindex='-1' role='dialog' aria-labelledby='addCartModal' aria-hidden='true'>")
+            html.Append("<div class='modal-dialog' role='document'>")
+            html.Append("<div class='modal-content'>")
+            html.Append("<div class='modal-body add-cart-box text-center'>")
+            html.Append("<p>Dodali ste ovaj proizvod u korpu!</p>")
+            html.Append("<h4 id='productTitle'></h4>")
+            html.Append("<img src='/' id='productImage' width='100' height='100' alt='adding cart image'/>")
+            html.Append("<div class='btn-actions'>")
+            html.Append("<a href='/kosarica'>")
+            html.Append("<button class='btn-primary'>Idite na košaricu!</button></a>")
+            html.Append("<a href=''>")
+            html.Append("<button class='btn-primary' data-dismiss='modal'>Nastavite!</button></a>")
+            html.Append("</div>") 'btn-actions
+            html.Append("</div>") 'modal-body add-cart-box text-center
+            html.Append("</div>") 'modal-content
+            html.Append("</div>") 'modal-dialog
+            html.Append("</div>") 'modal fade
+        End Using
+        Return html.ToString()
+    End Function
+
+    Public Shared Function FooterScript() As String 'Footer scripts and links
+        Dim html As New StringBuilder
+
+        html.Append("<script src='/assets/js/jquery.min.js'></script>")
+        html.Append("<script src='/assets/js/bootstrap.bundle.min.js'></script>")
+        html.Append("<script src='/assets/js/plugins.min.js'></script>")
+        html.Append("<script src='/assets/js/plugins/isotope-docs.min.js'></script>")
+        html.Append(" <script src='/assets/js/main.js'></script>")
+
+        html.Append("<script src='/JS/Script.js'></script>")
+        Return html.ToString()
+    End Function
+
+    '---------------------------------------------------------------------------------------------Default.aspx---------------------------------------------------------------------------------------------
+
+    Public Shared Function Slider() As String   'Banner slider on Default
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
         'loop
@@ -364,31 +423,7 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
-    Public Shared Function ZadanaSlikaArtikla(ArtikalID As Integer) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.StoredProcedure
-                komanda.CommandText = "ZadanaSlikaArtikla"
-                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat("{0}", citac("Datoteka"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString
-    End Function
-
-    Public Shared Function IstaknutiProizvodi() As String
+    Public Shared Function IstaknutiProizvodi() As String   'Istaknuti proizvodi na Default
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
@@ -396,7 +431,6 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -419,7 +453,6 @@ Public Class Komponente
 
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-                            'html.AppendFormat("<a href='/artikal/?id={0}'>", citac("ID"))
                             If slika.Contains("http") = False Then
                                 html.AppendFormat("<img class='product-image-photo istaknuto-img' src='http://igre.ba/Thumb2.ashx?i={0}' alt='{1}'>", slika, citac("Naziv"))
                             Else
@@ -470,18 +503,15 @@ Public Class Komponente
                             html.Append("</div>") 'product-details
                             html.Append("</div>") 'product-default inner-quickview inner-icon
                             html.Append("</div>") 'col-6 col-md-4 col-xl-5col
-
-
                         End While
                     End If
                 End Using
             End Using
         End Using
-
         Return html.ToString()
     End Function
 
-    Public Shared Function NajNovije() As String
+    Public Shared Function NajNovije() As String    'Novo iz ponude na Default
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
@@ -490,7 +520,6 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -507,9 +536,7 @@ Public Class Komponente
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                'komanda.CommandText = "SELECT TOP 20 * FROM Artikli WHERE Izdvojeno='0' AND Aktivno='1' AND Kolicina>'0' ORDER BY ID DESC"
                 komanda.CommandText = "SELECT * FROM (SELECT TOP 20 * FROM dbo.Artikli WHERE Aktivno='1' AND Kolicina>'0' ORDER BY ID DESC ) AS Last20 ORDER BY NEWID();"
-                'komanda.Parameters.AddWithValue("@NadGrupaID", NadGrupaID)
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
@@ -575,169 +602,102 @@ Public Class Komponente
                 End Using
             End Using
         End Using
-
         html.Append("</div>") 'section-title
         html.Append("</section>") 'product-panel
 
         Return html.ToString()
     End Function
 
-    'Function for footer display
-    Public Shared Function Footer() As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
+    Public Shared Function LogiraniKorisnikID() As Integer
+        If HttpContext.Current.Request.Cookies("logiraniKorisnikID") Is Nothing Then
+            HttpContext.Current.Response.Cookies("logiraniKorisnikID").Value = "0"
+        End If
 
-        html.Append("<footer class='footer'>")
-        html.Append("<div class='footer-middle footer-middle-my'>")
-        html.Append("<div class='container'>")
-        html.Append("<div class='row row-sm'>")
-        'Logo
-        html.Append("<div class='col-md-6 col-lg-4'>")
-        html.Append("<a href='/'><img src='/Datoteke/Logo/RescueEquip-logoLight.png' id='footer-logo'/></a>")
-        html.Append("</div>") 'col-md-6 col-lg-4
-        'Kontakt
-        html.Append("<div class='col-md-6 col-lg-2'>")
-        html.Append("<div class='widget'>")
-        html.Append("<h3 class='widget-title naslov-footer'>Povežite se s nama</h3>")
-        html.Append("<div class='widget-content row row-sm'>")
-        html.Append("<ul class='col-xl-12'>")
-        html.Append("<li><i class='fa fa-envelope' style='font-size: 20px;'></i><a href='mailto:info@rescuequip.ba' class='element-footer' target='_blank'>&nbsp;&nbsp;info@rescuequip.ba</a></li>")
-        html.Append("<li><i class='fa fa-phone' style='font-size: 20px;'></i><a href='tel:+38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp; +38763100100</a></li>")
-        html.Append("<h3 class='widget-title naslov-footer'>Whatsapp i Viber</h3>")
-        html.Append("<li class='whatsapp-item'><img class='wp-vb-logo wp-viber' src='/Datoteke/Logo/WhatsAppLogo.png'/><a href='https://wa.me/38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp;+38763100100</a></li>")
-        html.Append("<li class='whatsapp-item'><img class='wp-vb-logo wp-viber' src='/Datoteke/Logo/ViberLogo.png'/><a href='viber://chat?number=%2B38763100100' class='element-footer' target='_blank'>&nbsp;&nbsp;+38763100100</a></li>")
-        html.Append("</ul>") 'col-xl-12
-        html.Append("</div>") 'widget-content row row-sm
-        html.Append("</div>") 'widget
-        html.Append("</div>") 'col-md-6 col-lg-2
-        'Informacije
-        html.Append("<div class='col-md-6 col-lg-2'>")
-        html.Append("<div class='widget'>")
-        html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
-        html.Append("<div class='widget-content row row-sm'>")
-        html.Append("<ul class='col-xl-6'>")
-        html.Append("<li><a href='/onama' class='element-footer'>O Nama</a></li>")
-        html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
-        html.Append("</ul>") 'col-xl-6
-        html.Append("</div>") 'widget-content row row-sm
-        html.Append("</div>") 'widget
-        html.Append("</div>") 'col-md-6 col-lg-2
-        'Plaćanje i način dostave
-        html.Append("<div class='col-md-6 col-lg-2'>")
-        html.Append(" <div class='widget'>")
-        html.Append("<h3 class='widget-title naslov-footer'>Plaćanje i način dostave</h3>")
-        html.Append("<div class='widget-content row row-sm'>")
-        html.Append("<ul class='col-xl-12'>")
-        html.Append("<li><a href='/statika?id=2' class='element-footer'>Načini plaćanja</a></li>")
-        html.Append("<li><a href='/statika?id=3' class='element-footer'>Sigurnost plaćanja</a></li>")
-        html.Append("<li><a href='/statika?id=4' class='element-footer'>Brza i pouzdana dostava</a></li>")
-        html.Append("<li><a href='/statika?id=1' class='element-footer'>Opći uslovi poslovanja</a></li>")
-        html.Append("</ul>") 'col-xl-12
-        html.Append("</div>") 'widget-content row row-sm
-        html.Append("</div>") 'widget
-        html.Append("</div>") 'col-md-6 col-lg-2
+        Dim idStr As String = HttpContext.Current.Request.Cookies("logiraniKorisnikID").Value.ToString()
+        Dim idKorisnika As Integer
 
-        html.Append("<div class='footer-bottom container'>")
-        html.Append("<p>Copyright © <p href='/' style='color:  #D14B4A;'>Zvonimir Kožul & Leonardo Misir </p></p>")
-        html.Append("</div>") 'footer-bottom container
-        html.Append("</footer>")
-        html.Append("</footer>")
-        Return html.ToString()
+        If Integer.TryParse(idStr, idKorisnika) Then
+            Return idKorisnika
+        Else
+            Return 0
+        End If
     End Function
 
-    Public Shared Function DodajUKosaricu() As String
-        Dim html As New StringBuilder()
+    Public Shared Function SrediNaziv(Naziv As String) As String
         Dim putanja As String = SQLKonekcija()
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            html.Append("<div class='modal fade' id='addCartModal' tabindex='-1' role='dialog' aria-labelledby='addCartModal' aria-hidden='true'>")
-            html.Append("<div class='modal-dialog' role='document'>")
-            html.Append("<div class='modal-content'>")
-            html.Append("<div class='modal-body add-cart-box text-center'>")
-            html.Append("<p>Dodali ste ovaj proizvod u korpu!</p>")
-            html.Append("<h4 id='productTitle'></h4>")
-            html.Append("<img src='/' id='productImage' width='100' height='100' alt='adding cart image'/>")
-            html.Append("<div class='btn-actions'>")
-            html.Append("<a href='/kosarica'>")
-            html.Append("<button class='btn-primary'>Idite na košaricu!</button></a>")
-            html.Append("<a href=''>")
-            html.Append("<button class='btn-primary' data-dismiss='modal'>Nastavite!</button></a>")
-            html.Append("</div>") 'btn-actions
-            html.Append("</div>") 'modal-body add-cart-box text-center
-            html.Append("</div>") 'modal-content
-            html.Append("</div>") 'modal-dialog
-            html.Append("</div>") 'modal fade
-        End Using
-        Return html.ToString()
-    End Function
-
-    Public Shared Function HeaderMobile() As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        html.Append("<div class='mobile-menu-wrapper'>")
-        html.Append("<div class='mobile-menu-wrapper'>")
-        html.Append("<span class='mobile-menu-close'><i class='icon-retweet'></i></span>")
-        html.Append("<nav class='mobile-nav'>")
-        html.Append("<ul class='mobile-menu'>")
-        html.Append("<li><a href='/' class='mobile-element'>Početna</a></li>")
-
+        Naziv = Naziv.ToLower
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT TOP 9 ID, NadGrupa FROM ArtikliNadGrupe WHERE Aktivno='1'"
-
-                'Ispis Kategorija u Header
+                komanda.CommandText = "SELECT * FROM Znakovi"
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
-                            Dim NadGrupaID As Integer = Convert.ToInt32(citac("ID"))
+                            Naziv = Naziv.Replace(citac("Znak"), citac("NoviZnak"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+        Naziv = Naziv.Replace(" ", "-")
+        Naziv = Naziv.Replace("/", "")
+        Naziv = Naziv.Replace("--", "-")
+        If Right(Naziv, "1") = "-" Then
+            Naziv = Naziv.Substring(0, Naziv.Length - 1)
+        End If
+        Return Naziv
+    End Function
 
-                            html.Append("<li>")
-                            html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='mobile-element'>{2}</a>", citac("ID"), SrediNaziv(citac("NadGrupa")), citac("NadGrupa"))
-                            'html.AppendFormat("<a href='/grupa?id={1}' class='mobile-element'>{0}</a>", citac("NadGrupa"), citac("ID"))
-                            html.Append("<ul>")
+    Public Shared Function PrebrojiArtikle() As String
+        Dim html As New StringBuilder()
 
-                            'Ispis PodKategorija unutar Grupe
-                            Using konekcijaGrupe As New SqlConnection(putanja)
-                                konekcijaGrupe.Open()
-                                Using komandaGrupe As New SqlCommand()
-                                    komandaGrupe.Connection = konekcijaGrupe
-                                    komandaGrupe.CommandType = CommandType.Text
-                                    komandaGrupe.CommandText = "SELECT * FROM ArtikliGrupe WHERE NadGrupaID=@ID AND Aktivno='1'"
-                                    komandaGrupe.Parameters.AddWithValue("@ID", citac("ID"))
+        If IsNothing(HttpContext.Current.Session("IgreNarudzba")) = False Then
+            Dim n As Narudzba
+            n = CType(HttpContext.Current.Session("IgreNarudzba"), Narudzba)
+            Dim brojArtikala = n.BrojArtikala.ToString()
+            'html.Append("(" & brojArtikala & ")")
+            html.Append(brojArtikala)
+        Else
+            html.AppendFormat("{0}", "0")
+        End If
 
-                                    Using citacGrupe As SqlDataReader = komandaGrupe.ExecuteReader()
-                                        If citacGrupe IsNot Nothing Then
-                                            While citacGrupe.Read()
-                                                html.AppendFormat("<li class=''><a href=""/podgrupa/{0}/{1}/"" class='mobile-element-podgrupa'>{2}</a></li>", citacGrupe("ID"), SrediNaziv(citacGrupe("Grupa")), citacGrupe("Grupa"))
-                                                ' html.AppendFormat("<li><a href='/podgrupa?id={1}' class='mobile-element-podgrupa'>{0}</a></li>", citacGrupe("Grupa"), citacGrupe("ID"))
-                                            End While
-                                        End If
-                                    End Using
-                                End Using
-                            End Using
-                            html.Append("</ul>")
-                            html.Append("</li>")
+        'html.AppendFormat("{0}", "0")
+
+        Return html.ToString()
+    End Function
+
+
+
+    Public Shared Function ZadanaSlikaArtikla(ArtikalID As Integer) As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "ZadanaSlikaArtikla"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", citac("Datoteka"))
                         End While
                     End If
                 End Using
             End Using
         End Using
 
-        ' Dodaj "Kontakt" link izvan petlje
-        html.Append("<li><a href='/kontakt' class='mobile-element'>Kontakt</a></li>")
-
-        ' Zatvori ul i nav tagove
-        html.Append("</ul>") ' mobile-menu
-        html.Append("</nav>") ' mobile-nav
-        html.Append("</div>") ' mobile-menu-wrapper
-        html.Append("</div>") ' mobile-menu-wrapper
-
-        Return html.ToString()
+        Return html.ToString
     End Function
+
+
+
+
+
 
     Public Shared Function PronadjiNazivNadGrupe(NadGrupaID As Integer) As String
         Dim html As New StringBuilder
@@ -763,22 +723,7 @@ Public Class Komponente
         Return html.ToString
     End Function
 
-    Public Shared Function FooterScript() As String
-        Dim html As New StringBuilder
 
-        'Plugins JS File 
-        html.Append("<script src='/assets/js/jquery.min.js'></script>")
-        html.Append("<script src='/assets/js/bootstrap.bundle.min.js'></script>")
-        html.Append("<script src='/assets/js/plugins.min.js'></script>")
-        html.Append("<script src='/assets/js/plugins/isotope-docs.min.js'></script>")
-
-        'Main JS File
-        html.Append(" <script src='/assets/js/main.js'></script>")
-
-        'My JS File
-        html.Append("<script src='/JS/Script.js'></script>")
-        Return html.ToString()
-    End Function
 
     Public Shared Function ArtikliNadGrupe(KategorijaID As Integer) As String
         Return ArtikliNadGrupe(1, KategorijaID, "NazivAsc")
