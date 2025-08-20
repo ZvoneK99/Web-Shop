@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 
 <head>
-    <title>Bulk.ba</title>
+    <title>Prijava - RescueEquip | Rescue - Ready Gear</title>
 
     <script type="text/javascript">
         WebFontConfig = {
