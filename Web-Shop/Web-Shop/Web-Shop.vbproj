@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Ajax\Registracija.aspx" />
     <Content Include="ArtikliGrupe.aspx" />
     <Content Include="ArtikliPodGrupe.aspx" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -364,9 +365,17 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="JS\Script.js" />
+    <Content Include="Korisnik\Prijava.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\Registracija.aspx.designer.vb">
+      <DependentUpon>Registracija.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\Registracija.aspx.vb">
+      <DependentUpon>Registracija.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ArtikliGrupe.aspx.designer.vb">
       <DependentUpon>ArtikliGrupe.aspx</DependentUpon>
     </Compile>
@@ -393,6 +402,13 @@
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\Prijava.aspx.designer.vb">
+      <DependentUpon>Prijava.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\Prijava.aspx.vb">
+      <DependentUpon>Prijava.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

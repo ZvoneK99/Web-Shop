@@ -88,7 +88,7 @@ Public Class Komponente
         html.Append("<p class='header-kontakt header-text'>Kontaktirajte nas: <a href=""tel:+38763100100""><i class='fa fa-phone fa-2x fa-flip-horizontal wp-viber-header' aria-hidden='true'></i></a></p>")
         html.Append("<a href='https://wa.me/+38763100100' target='_blank'><img class='wp-vb-logo wp-viber wp-viber-header' src='/Datoteke/Logo/WhatsAppLogo.png' alt='WhatsApp' /></a>")
         html.Append("<a href='viber://chat?number=%2B+38763100100' target='_blank'><img class='wp-vb-logo wp-viber wp-viber-header' src='/Datoteke/Logo/ViberLogo.png' alt='Viber' /></a>")
-        html.Append("<a href='mailto:zvoimir.kozul@fsre.sum.ba' class='element-footer' target='_blank'><i class='fa fa-envelope fa-2x wp-viber-header' style='font-size: 20px; color: white;'></i></a>")
+        html.Append("<a href='mailto:info@rescuequip.ba' class='element-footer' target='_blank'><i class='fa fa-envelope fa-2x wp-viber-header' style='font-size: 20px; color: white;'></i></a>")
         html.Append("</div>") 'header-left
         html.Append("</div>") 'container
         html.Append("</div>") 'header-top
@@ -100,7 +100,7 @@ Public Class Komponente
         html.Append("<p class='header-kontakt header-text'>Imate pitanja? Kontaktirajte nas: <a href=""tel:+38763100100"">+38763100100</a></p>")
         html.Append("<a href='https://wa.me/+38763100100' target='_blank'><img class='wp-vb-logo wp-viber wp-viber-header' src='/Datoteke/Logo/WhatsAppLogo.png' alt='WhatsApp' /></a>")
         html.Append("<a href='viber://chat?number=%2B+38763100100' target='_blank'><img class='wp-vb-logo wp-viber wp-viber-header' src='/Datoteke/Logo/ViberLogo.png' alt='Viber' /></a>")
-        html.Append("<a href='mailto:zvoimir.kozul@fsre.sum.ba' class='element-footer' target='_blank'><i class='fa fa-envelope fa-2x wp-viber-header' style='font-size: 20px; color: white;'></i></a>")
+        html.Append("<a href='mailto:info@rescuequip.ba' class='element-footer' target='_blank'><i class='fa fa-envelope fa-2x wp-viber-header' style='font-size: 20px; color: white;'></i></a>")
         html.Append("</div>") 'header-left
 
         html.Append("<div class='header-right'>")
