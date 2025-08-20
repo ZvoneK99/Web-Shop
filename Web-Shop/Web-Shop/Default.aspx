@@ -11,13 +11,13 @@
     <meta name="description" content="Demo web shop za završni rad – planinarska i spasilačka oprema s količinskim popustima. Primjer funkcionalnosti web trgovine, prikaz akcija i popusta. Ovaj web shop služi isključivo kao projekt za završni rad." />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mojzavrsnirad.ba" />
-    <meta property="og:title" content="Demo Web Shop – Završni rad" />
+    <meta property="og:url" content="https://rescueequip.ba" />
+    <meta property="og:title" content="RescueEquip" />
     <meta property="og:description" content="Primjer web trgovine izrađene za završni rad. Fokus na planinarskoj i spasilačkoj opremi, s mogućnošću prikaza popusta i akcija." />
 
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://mojzavrsnirad.ba" />
-    <meta property="twitter:title" content="Demo Web Shop – Završni rad" />
+    <meta property="twitter:url" content="https://rescueequip.ba" />
+    <meta property="twitter:title" content="RescueEquip" />
     <meta property="twitter:description" content="Primjer web shop projekta za završni rad – planinarska i spasilačka oprema s količinskim popustima." />
 
 

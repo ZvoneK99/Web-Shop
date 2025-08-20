@@ -23,7 +23,14 @@
 
 <body>
     <%=Web_Shop.Komponente.GoogleTagManager() %>
-    <%Dim idNadGrupe As Integer = Request.QueryString("id")%>
+    <% Dim segments() As String = Request.Path.Split("/"c)
+        Dim idNadGrupe As Integer = 0
+
+        If segments.Length > 2 Then
+            Integer.TryParse(segments(2), idNadGrupe)
+        End If %>
+
+
 
     <script language='javascript'>
        <%-- window.onload = function () {
