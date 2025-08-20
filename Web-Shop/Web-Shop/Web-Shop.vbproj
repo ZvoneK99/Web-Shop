@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Ajax\KorisnikPrijava.aspx" />
     <Content Include="Ajax\Registracija.aspx" />
     <Content Include="ArtikliGrupe.aspx" />
     <Content Include="ArtikliPodGrupe.aspx" />
@@ -369,6 +370,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\KorisnikPrijava.aspx.designer.vb">
+      <DependentUpon>KorisnikPrijava.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\KorisnikPrijava.aspx.vb">
+      <DependentUpon>KorisnikPrijava.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Ajax\Registracija.aspx.designer.vb">
       <DependentUpon>Registracija.aspx</DependentUpon>
     </Compile>

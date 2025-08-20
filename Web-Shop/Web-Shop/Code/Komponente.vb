@@ -135,7 +135,7 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+            'NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -250,33 +250,33 @@ Public Class Komponente
     End Function
 
 
-    Public Shared Function NivoLogiranogKorisnika() As String
-        Dim html As New StringBuilder()
-        Dim putanja As String = SQLKonekcija()
+    'Public Shared Function NivoLogiranogKorisnika() As String
+    '    Dim html As New StringBuilder()
+    '    Dim putanja As String = SQLKonekcija()
 
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT AdminLevel FROM Korisnici WHERE ID=@ID"
-                komanda.Parameters.AddWithValue("@ID", LogiraniKorisnikID())
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat("{0}", citac("AdminLevel"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
+    '    Using konekcija As New SqlConnection(putanja)
+    '        konekcija.Open()
+    '        Using komanda As New SqlCommand()
+    '            komanda.Connection = konekcija
+    '            komanda.CommandType = CommandType.Text
+    '            komanda.CommandText = "SELECT AdminLevel FROM Korisnici WHERE ID=@ID"
+    '            komanda.Parameters.AddWithValue("@ID", LogiraniKorisnikID())
+    '            Using citac As SqlDataReader = komanda.ExecuteReader()
+    '                If citac IsNot Nothing Then
+    '                    While citac.Read()
+    '                        html.AppendFormat("{0}", citac("AdminLevel"))
+    '                    End While
+    '                End If
+    '            End Using
+    '        End Using
+    '    End Using
 
-        If html.ToString = "" Then
-            html.Append("10")
-        End If
+    '    If html.ToString = "" Then
+    '        html.Append("10")
+    '    End If
 
-        Return html.ToString()
-    End Function
+    '    Return html.ToString()
+    'End Function
 
     'Returns ID of the logged-in user from cookies
     Public Shared Function LogiraniKorisnikID() As Integer
@@ -396,7 +396,7 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -490,7 +490,7 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -856,7 +856,7 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") IsNot Nothing AndAlso HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = True
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -965,7 +965,7 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+            '  NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
