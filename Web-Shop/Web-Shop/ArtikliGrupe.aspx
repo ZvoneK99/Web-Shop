@@ -1,10 +1,17 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliGrupe.aspx.vb" Inherits="Web_Shop.ArtikliGrupe" %>
 
+<% Dim segments() As String = Request.Path.Split("/"c)
+    Dim idNadGrupe As Integer = 0
+
+    If segments.Length > 2 Then
+        Integer.TryParse(segments(2), idNadGrupe)
+    End If %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 
 <head>
-    <title>RescueEquip | Rescue - Ready Gear</title>
+    <title><%=Web_Shop.Komponente.PronadjiNazivNadGrupe(idNadGrupe)%> RescueEquip | Rescue - Ready Gear</title>
 
     <script type="text/javascript">
         WebFontConfig = {
@@ -18,32 +25,15 @@
         })(document);
     </script>
 
+    <!--Put all the css files in function ZajednickeMete-->
     <%=Web_Shop.Komponente.ZajednickeMete() %>
 </head>
 
 <body>
-    <%=Web_Shop.Komponente.GoogleTagManager() %>
-    <% Dim segments() As String = Request.Path.Split("/"c)
-        Dim idNadGrupe As Integer = 0
-
-        If segments.Length > 2 Then
-            Integer.TryParse(segments(2), idNadGrupe)
-        End If %>
-
-
-
-    <script language='javascript'>
-       <%-- window.onload = function () {
-            document.getElementById('a<%Response.Write(idNadGrupe)%>').classList.add("active");
-        };--%>
-    </script>
-
     <div class="page-wrapper">
-
         <header class="header">
             <%=Web_Shop.Komponente.Header() %>
         </header>
-        <!-- End .header -->
 
         <main class="main">
 
@@ -59,7 +49,6 @@
                 <div class="row row-sm">
                     <div class="col-lg-12 shop-inner kategorija">
 
-                        <!--Sortiranje-->
                         <nav class="toolbox">
                             <div class="toolbox-left">
                                 <div class="toolbox-item toolbox-sort">
@@ -77,6 +66,7 @@
                         </nav>
                         <!--Artikli-->
                         <div class="row row-sm product-intro divide-line up-effect products-grid">
+                            <!--Function for displaying articles in a group-->
                             <%=Web_Shop.Komponente.ArtikliNadGrupe(idNadGrupe) %>
                         </div>
 
@@ -93,13 +83,14 @@
                 </div>
             </div>
         </main>
+
+        <!--Function for footer display-->
         <%=Web_Shop.Komponente.Footer() %>
     </div>
-
     <div class="mobile-menu-overlay"></div>
 
     <div class="mobile-menu-container">
-
+        <!--Mobile menu for header-->
         <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
     <!-- Dodavanje u košaricu -->
@@ -107,6 +98,7 @@
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
+    <!--Footer scripts and links-->
     <%=Web_Shop.Komponente.FooterScript() %>
     <script src="/assets/js/nouislider.min.js"></script>
 </body>

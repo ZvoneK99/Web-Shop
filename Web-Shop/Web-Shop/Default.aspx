@@ -33,8 +33,8 @@
         })(document);
     </script>
 
-    <%=Web_Shop.Komponente.ZajednickeMete() %>
     <!--Put all the css files in function ZajednickeMete-->
+    <%=Web_Shop.Komponente.ZajednickeMete() %>
 
 </head>
 <body>
@@ -77,16 +77,15 @@
                 <!--Novo iz ponude na Default-->
             </div>
         </main>
-
-        <%=Web_Shop.Komponente.Footer() %>
         <!--Function for footer display-->
+        <%=Web_Shop.Komponente.Footer() %>
     </div>
     <div class="mobile-menu-overlay"></div>
 
 
     <div class="mobile-menu-container">
-        <%=Web_Shop.Komponente.HeaderMobile() %>
         <!--Mobile menu for header-->
+        <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
 
 
@@ -95,8 +94,8 @@
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
-    <%=Web_Shop.Komponente.FooterScript() %>
     <!--Footer scripts and links-->
+    <%=Web_Shop.Komponente.FooterScript() %>
     <script src="/assets/js/nouislider.min.js"></script>
 </body>
 </html>

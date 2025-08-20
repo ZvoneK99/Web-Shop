@@ -2,7 +2,7 @@
 
 Public Class Komponente
 
-    '--------------------------------------------------------------------------------------------General functions-----------------------------------------------------------------------------------------
+    '----------------------------------------------------------------------------------------------> General functions START <-------------------------------------------------------------------------------------------
 
     Public Shared Function SQLKonekcija() As String     'Connection string for the database
         Dim html As New StringBuilder()
@@ -396,7 +396,77 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
-    '---------------------------------------------------------------------------------------------Default.aspx---------------------------------------------------------------------------------------------
+    Public Shared Function SrediNaziv(Naziv As String) As String    'Function to format product names for URLs
+        Dim putanja As String = SQLKonekcija()
+        Naziv = Naziv.ToLower
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT * FROM Znakovi"
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            Naziv = Naziv.Replace(citac("Znak"), citac("NoviZnak"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+        Naziv = Naziv.Replace(" ", "-")
+        Naziv = Naziv.Replace("/", "")
+        Naziv = Naziv.Replace("--", "-")
+        If Right(Naziv, "1") = "-" Then
+            Naziv = Naziv.Substring(0, Naziv.Length - 1)
+        End If
+        Return Naziv
+    End Function
+
+    Public Shared Function ZadanaSlikaArtikla(ArtikalID As Integer) As String   'Function to get the default image of an article
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "ZadanaSlikaArtikla"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", citac("Datoteka"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
+    End Function
+
+    Public Shared Function PrebrojiArtikle() As String  'Function to count the number of articles in the cart
+        Dim html As New StringBuilder()
+
+        If IsNothing(HttpContext.Current.Session("IgreNarudzba")) = False Then
+            Dim n As Narudzba
+            n = CType(HttpContext.Current.Session("IgreNarudzba"), Narudzba)
+            Dim brojArtikala = n.BrojArtikala.ToString()
+            'html.Append("(" & brojArtikala & ")")
+            html.Append(brojArtikala)
+        Else
+            html.AppendFormat("{0}", "0")
+        End If
+
+        Return html.ToString()
+    End Function
+
+    '----------------------------------------------------------------------------------------------> General functions END <-------------------------------------------------------------------------------------------
+
+
+    '---------------------------------------------------------------------------------------------> Default.aspx START <------------------------------------------------------------------------------------------------
 
     Public Shared Function Slider() As String   'Banner slider on Default
         Dim html As New StringBuilder
@@ -608,301 +678,15 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
-    Public Shared Function LogiraniKorisnikID() As Integer
-        If HttpContext.Current.Request.Cookies("logiraniKorisnikID") Is Nothing Then
-            HttpContext.Current.Response.Cookies("logiraniKorisnikID").Value = "0"
-        End If
+    '----------------------------------------------------------------------------------------------> Default.aspx END <------------------------------------------------------------------------------------------------
 
-        Dim idStr As String = HttpContext.Current.Request.Cookies("logiraniKorisnikID").Value.ToString()
-        Dim idKorisnika As Integer
+    '---------------------------------------------------------------------------------------------> ArtikliGrupe.aspx START <---------------------------------------------------------------------------------------------
 
-        If Integer.TryParse(idStr, idKorisnika) Then
-            Return idKorisnika
-        Else
-            Return 0
-        End If
-    End Function
-
-    Public Shared Function SrediNaziv(Naziv As String) As String
-        Dim putanja As String = SQLKonekcija()
-        Naziv = Naziv.ToLower
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM Znakovi"
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            Naziv = Naziv.Replace(citac("Znak"), citac("NoviZnak"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-        Naziv = Naziv.Replace(" ", "-")
-        Naziv = Naziv.Replace("/", "")
-        Naziv = Naziv.Replace("--", "-")
-        If Right(Naziv, "1") = "-" Then
-            Naziv = Naziv.Substring(0, Naziv.Length - 1)
-        End If
-        Return Naziv
-    End Function
-
-    Public Shared Function PrebrojiArtikle() As String
-        Dim html As New StringBuilder()
-
-        If IsNothing(HttpContext.Current.Session("IgreNarudzba")) = False Then
-            Dim n As Narudzba
-            n = CType(HttpContext.Current.Session("IgreNarudzba"), Narudzba)
-            Dim brojArtikala = n.BrojArtikala.ToString()
-            'html.Append("(" & brojArtikala & ")")
-            html.Append(brojArtikala)
-        Else
-            html.AppendFormat("{0}", "0")
-        End If
-
-        'html.AppendFormat("{0}", "0")
-
-        Return html.ToString()
-    End Function
-
-
-
-    Public Shared Function ZadanaSlikaArtikla(ArtikalID As Integer) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.StoredProcedure
-                komanda.CommandText = "ZadanaSlikaArtikla"
-                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat("{0}", citac("Datoteka"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString
-    End Function
-
-
-
-
-
-
-    Public Shared Function PronadjiNazivNadGrupe(NadGrupaID As Integer) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT NadGrupa FROM ArtikliNadGrupe WHERE ID=@ID"
-                komanda.Parameters.AddWithValue("@ID", NadGrupaID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat(citac("NadGrupa"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString
-    End Function
-
-
-
-    Public Shared Function ArtikliNadGrupe(KategorijaID As Integer) As String
+    Public Shared Function ArtikliNadGrupe(KategorijaID As Integer) As String   'Function for displaying articles in a group
         Return ArtikliNadGrupe(1, KategorijaID, "NazivAsc")
     End Function
 
-    Public Shared Function PronadjiIdNadGrupe(GrupaID As Integer) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT NadGrupaID FROM ArtikliGrupe WHERE ID=@ID"
-                komanda.Parameters.AddWithValue("@ID", GrupaID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat(citac("NadGrupaID"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString
-    End Function
-
-    Public Shared Function PronadjiNazivGrupe(GrupaID As Integer) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT Grupa FROM ArtikliGrupe WHERE ID=@ID"
-                komanda.Parameters.AddWithValue("@ID", GrupaID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat(citac("Grupa"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString
-    End Function
-
-    Public Shared Function ArtikliGrupe(GrupaID As Integer) As String
-        Return ArtikliGrupe(1, GrupaID, "NazivAsc")
-    End Function
-
-    Public Shared Function ArtikliGrupe(stranica As Integer, GrupaID As Integer, raspored As String) As String
-        Dim html As New StringBuilder
-        Dim putanja As String = SQLKonekcija()
-
-        ' Provjera URL-a i parsiranje GrupaID iz path-a ako postoji
-        Dim segments() As String = HttpContext.Current.Request.Path.Split("/"c)
-        If segments.Length > 2 Then
-            Dim tempID As Integer
-            If Integer.TryParse(segments(2), tempID) Then
-                GrupaID = tempID
-            End If
-        End If
-
-        Dim NadGrupaID As Integer = PronadjiIdNadGrupe(GrupaID)
-
-        ' Provjera je li kupac logiran
-        Dim KupacLogiran As Boolean
-        Dim NivoTrenutnogKupca As String
-        If HttpContext.Current.Session("ValjanUser") IsNot Nothing AndAlso HttpContext.Current.Session("ValjanUser") = True Then
-            KupacLogiran = True
-            ' NivoTrenutnogKupca = NivoLogiranogKorisnika()
-        Else
-            KupacLogiran = False
-            NivoTrenutnogKupca = "0"
-        End If
-
-        ' Ograničenje pristupa određenim nadgrupama
-        If KupacLogiran = True And NivoTrenutnogKupca = "9" And (NadGrupaID = 7 Or NadGrupaID = 8) Then
-            HttpContext.Current.Response.Redirect("/")
-        End If
-
-        ' Dohvat podataka iz baze
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.StoredProcedure
-
-                ' Odabir Stored Procedure prema rasporedu
-                Select Case raspored
-                    Case "", "NazivAsc"
-                        komanda.CommandText = "OdaberiRasponGrupeNazivAsc"
-                    Case "NazivDesc"
-                        komanda.CommandText = "OdaberiRasponGrupeNazivDesc"
-                    Case "CijenaAsc"
-                        komanda.CommandText = "OdaberiRasponGrupeCijenaAsc"
-                    Case "CijenaDesc"
-                        komanda.CommandText = "OdaberiRasponGrupeCijenaDesc"
-                End Select
-
-                komanda.Parameters.AddWithValue("@Stranica", stranica)
-                komanda.Parameters.AddWithValue("@GrupaID", GrupaID)
-
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            'Proizvod
-                            html.AppendFormat("<div class='col-6 col-md-4 col-xl-3 div{0}'>", citac("ID"))
-                            If citac("BesplatnaDostava") = True Then
-                                html.AppendFormat("<div class=""free-shipping""></div>")
-                            End If
-                            html.Append("<div class='product-default inner-quickview inner-icon'>")
-                            html.Append("<figure>")
-                            html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-
-                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
-                            If Not slika.Contains("http") Then
-                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", slika, citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", slika, citac("Naziv"))
-                            End If
-                            html.Append("</a>")
-                            html.Append("<div class='btn-icon-group'>")
-                            html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
-                            html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
-                            html.Append("</div>") 'btn-icon-group
-                            html.Append("</figure>")
-
-                            Dim NazivGrupe As String = Komponente.PronadjiNazivGrupe(citac("GrupaID"))
-
-                            html.Append("<div class='product-details'>")
-                            html.Append("<div class='category-wrap'>")
-                            html.Append("<div class='category-list'>")
-                            html.Append("</div>") 'category-list
-                            html.Append("</div>") 'category-wrap
-
-                            'Naziv proizvoda
-                            html.Append("<h2 class='product-title'>")
-                            html.AppendFormat("<a href='/artikal/{1}/{0}/' title='{2}'>{2}</a>", SrediNaziv(citac("Naziv")), citac("ID"), citac("Naziv"))
-                            html.Append("</h2>") 'product-title
-
-                            'Cijena proizvoda
-                            html.Append("<div class='price-box'>")
-                            Dim cijenaSaKalkulacijom As Decimal = citac("Cijena") * (100 + citac("Procenat")) / 100
-                            Dim akcijskaCijena As Decimal = citac("AkcijaCijena")
-
-                            If citac("Cijena") < 1 Then
-                                html.Append("<span class='product-price'>Cijena na upit</span>")
-                            Else
-                                If akcijskaCijena > 0 Then
-                                    html.AppendFormat("<span class='old-price cijene-istaknuto'>{0} KM</span>", Format(akcijskaCijena, "N2"))
-                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
-                                Else
-                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
-                                End If
-                            End If
-
-                            html.Append("</div>") 'price-box
-                            html.Append("</div>") 'product-details
-                            html.Append("</div>") 'product-default inner-quickview inner-icon
-                            html.Append("</div>") 'col
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        Return html.ToString()
-    End Function
-
-
-    Public Shared Function ArtikliNadGrupe(stranica As Integer, NadGrupaID As Integer, raspored As String) As String
+    Public Shared Function ArtikliNadGrupe(stranica As Integer, NadGrupaID As Integer, raspored As String) As String    'Function for displaying articles in a group with pagination and sorting
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
@@ -910,7 +694,6 @@ Public Class Komponente
         Dim NivoTrenutnogKupca As String
         If HttpContext.Current.Session("ValjanUser") = True Then
             KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            '  NivoTrenutnogKupca = NivoLogiranogKorisnika()
         Else
             KupacLogiran = False
             NivoTrenutnogKupca = "0"
@@ -963,7 +746,6 @@ Public Class Komponente
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
                             html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
                             html.Append("</div>") 'btn-icon-group
-                            'html.AppendFormat("<a href='/artikal/{0}' class='btn-quickview' title='Vidi proizvod'>Vidi proizvod</a>", citac("ID"))
                             html.Append("</figure>")
 
                             Dim NazivNadGrupe As String = Komponente.PronadjiNazivNadGrupe(citac("NadGrupaID"))
@@ -971,14 +753,11 @@ Public Class Komponente
                             html.Append("<div class='product-details'>")
                             html.Append("<div class='category-wrap'>")
                             html.Append(" <div class='category-list'>")
-                            'html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='product-category nadgrupa'>{2}</a>", citac("NadgrupaId"), SrediNaziv(NazivNadGrupe), NazivNadGrupe)
                             html.Append("</div>") 'category-list
-                            'html.Append("<a href='#' class='btn-icon-wish'><i class='icon-heart'></i></a>")
                             html.Append("</div>") 'category-wrap
 
                             'Naziv proizvoda
                             html.Append("<h2 class='product-title'>")
-                            'html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
 
                             html.AppendFormat("<a href='/artikal/{1}/{0}/' title='{2}'>{2}</a>", SrediNaziv(citac("Naziv")), citac("ID"), citac("Naziv"))
                             html.Append("</h2>") 'product-title
@@ -1014,5 +793,242 @@ Public Class Komponente
 
         Return html.ToString()
     End Function
+
+    Public Shared Function PronadjiNazivNadGrupe(NadGrupaID As Integer) As String   'Function to find the name of the main group
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT NadGrupa FROM ArtikliNadGrupe WHERE ID=@ID"
+                komanda.Parameters.AddWithValue("@ID", NadGrupaID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat(citac("NadGrupa"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
+    End Function
+
+    '---------------------------------------------------------------------------------------------> ArtikliGrupe.aspx END <---------------------------------------------------------------------------------------------
+
+
+    '---------------------------------------------------------------------------------------------> ArtikliPodGrupe.aspx START <---------------------------------------------------------------------------------------------
+
+    Public Shared Function PronadjiIdNadGrupe(GrupaID As Integer) As String 'Function to find the ID of the main group based on the subgroup ID
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT NadGrupaID FROM ArtikliGrupe WHERE ID=@ID"
+                komanda.Parameters.AddWithValue("@ID", GrupaID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat(citac("NadGrupaID"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
+    End Function
+
+    Public Shared Function PronadjiNazivGrupe(GrupaID As Integer) As String 'Function to find the name of the subgroup based on its ID
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT Grupa FROM ArtikliGrupe WHERE ID=@ID"
+                komanda.Parameters.AddWithValue("@ID", GrupaID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat(citac("Grupa"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
+    End Function
+
+
+    Public Shared Function ArtikliGrupe(GrupaID As Integer) As String
+        Return ArtikliGrupe(1, GrupaID, "NazivAsc")
+    End Function
+
+    Public Shared Function ArtikliGrupe(stranica As Integer, GrupaID As Integer, raspored As String) As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        ' Provjera URL-a i parsiranje GrupaID iz path-a ako postoji
+        Dim segments() As String = HttpContext.Current.Request.Path.Split("/"c)
+        If segments.Length > 2 Then
+            Dim tempID As Integer
+            If Integer.TryParse(segments(2), tempID) Then
+                GrupaID = tempID
+            End If
+        End If
+
+        Dim NadGrupaID As Integer = PronadjiIdNadGrupe(GrupaID)
+
+        ' Provjera je li kupac logiran
+        Dim KupacLogiran As Boolean
+        Dim NivoTrenutnogKupca As String
+        If HttpContext.Current.Session("ValjanUser") IsNot Nothing AndAlso HttpContext.Current.Session("ValjanUser") = True Then
+            KupacLogiran = True
+        Else
+            KupacLogiran = False
+            NivoTrenutnogKupca = "0"
+        End If
+
+        '' Ograničenje pristupa određenim nadgrupama
+        'If KupacLogiran = True And NivoTrenutnogKupca = "9" And (NadGrupaID = 7 Or NadGrupaID = 8) Then
+        '    HttpContext.Current.Response.Redirect("/")
+        'End If
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+
+                ' Odabir Stored Procedure prema rasporedu
+                Select Case raspored
+                    Case "", "NazivAsc"
+                        komanda.CommandText = "OdaberiRasponGrupeNazivAsc"
+                    Case "NazivDesc"
+                        komanda.CommandText = "OdaberiRasponGrupeNazivDesc"
+                    Case "CijenaAsc"
+                        komanda.CommandText = "OdaberiRasponGrupeCijenaAsc"
+                    Case "CijenaDesc"
+                        komanda.CommandText = "OdaberiRasponGrupeCijenaDesc"
+                End Select
+
+                komanda.Parameters.AddWithValue("@Stranica", stranica)
+                komanda.Parameters.AddWithValue("@GrupaID", GrupaID)
+
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            'Proizvod
+                            html.AppendFormat("<div class='col-6 col-md-4 col-xl-3 div{0}'>", citac("ID"))
+                            If citac("BesplatnaDostava") = True Then
+                                html.AppendFormat("<div class=""free-shipping""></div>")
+                            End If
+                            html.Append("<div class='product-default inner-quickview inner-icon'>")
+                            html.Append("<figure>")
+                            html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
+
+                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
+                            If Not slika.Contains("http") Then
+                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", slika, citac("Naziv"))
+                            Else
+                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", slika, citac("Naziv"))
+                            End If
+                            html.Append("</a>")
+                            html.Append("<div class='btn-icon-group'>")
+                            html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
+                            html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
+                            html.Append("</div>") 'btn-icon-group
+                            html.Append("</figure>")
+                            Dim NazivGrupe As String = Komponente.PronadjiNazivGrupe(citac("GrupaID"))
+                            html.Append("<div class='product-details'>")
+                            html.Append("<div class='category-wrap'>")
+                            html.Append("<div class='category-list'>")
+                            html.Append("</div>") 'category-list
+                            html.Append("</div>") 'category-wrap
+                            'Naziv proizvoda
+                            html.Append("<h2 class='product-title'>")
+                            html.AppendFormat("<a href='/artikal/{1}/{0}/' title='{2}'>{2}</a>", SrediNaziv(citac("Naziv")), citac("ID"), citac("Naziv"))
+                            html.Append("</h2>") 'product-title
+                            'Cijena proizvoda
+                            html.Append("<div class='price-box'>")
+                            Dim cijenaSaKalkulacijom As Decimal = citac("Cijena") * (100 + citac("Procenat")) / 100
+                            Dim akcijskaCijena As Decimal = citac("AkcijaCijena")
+
+                            If citac("Cijena") < 1 Then
+                                html.Append("<span class='product-price'>Cijena na upit</span>")
+                            Else
+                                If akcijskaCijena > 0 Then
+                                    html.AppendFormat("<span class='old-price cijene-istaknuto'>{0} KM</span>", Format(akcijskaCijena, "N2"))
+                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
+                                Else
+                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
+                                End If
+                            End If
+                            html.Append("</div>") 'price-box
+                            html.Append("</div>") 'product-details
+                            html.Append("</div>") 'product-default inner-quickview inner-icon
+                            html.Append("</div>") 'col
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+    '---------------------------------------------------------------------------------------------> ArtikliPodGrupe.aspx END <---------------------------------------------------------------------------------------------
+
+
+    Public Shared Function LogiraniKorisnikID() As Integer
+        If HttpContext.Current.Request.Cookies("logiraniKorisnikID") Is Nothing Then
+            HttpContext.Current.Response.Cookies("logiraniKorisnikID").Value = "0"
+        End If
+
+        Dim idStr As String = HttpContext.Current.Request.Cookies("logiraniKorisnikID").Value.ToString()
+        Dim idKorisnika As Integer
+
+        If Integer.TryParse(idStr, idKorisnika) Then
+            Return idKorisnika
+        Else
+            Return 0
+        End If
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 End Class

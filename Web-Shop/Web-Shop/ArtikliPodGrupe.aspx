@@ -1,10 +1,19 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliPodGrupe.aspx.vb" Inherits="Web_Shop.ArtikliPodGrupe" %>
 
+<%Dim idGrupe As Integer = Request.QueryString("id")%>
+<%Dim segments() As String = Request.Path.Split("/"c)
+    Dim idPodGrupe As Integer = 0
+    If segments.Length > 2 Then
+        Integer.TryParse(segments(2), idPodGrupe)
+    End If
+    Dim idNadGrupe As Integer = Web_Shop.Komponente.PronadjiIdNadGrupe(idPodGrupe)%>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 
 <head>
-    <title>Bulk.ba</title>
+    <title><%=Web_Shop.Komponente.PronadjiNazivGrupe(idPodGrupe)%> RescueEquip | Rescue - Ready Gear</title>
 
     <script type="text/javascript">
         WebFontConfig = {
@@ -20,30 +29,12 @@
 
     <%=Web_Shop.Komponente.ZajednickeMete() %>
 </head>
-
 <body>
-    <%=Web_Shop.Komponente.GoogleTagManager() %>
-    <%Dim idGrupe As Integer = Request.QueryString("id")%>
-    <%' Podijeli path po "/"
-        Dim segments() As String = Request.Path.Split("/"c)
-        Dim idPodGrupe As Integer = 0
-
-        ' Provjeri da li path ima dovoljno segmenata
-        If segments.Length > 2 Then
-            ' segments(2) je ID podgrupe (43)
-            Integer.TryParse(segments(2), idPodGrupe)
-        End If
-
-        ' Dobavi ID nadgrupe
-        Dim idNadGrupe As Integer = Web_Shop.Komponente.PronadjiIdNadGrupe(idPodGrupe)
-%>
-
     <div class="page-wrapper">
-
         <header class="header">
             <%=Web_Shop.Komponente.Header() %>
         </header>
-        <!-- End .header -->
+
         <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <div class="container">
@@ -51,10 +42,9 @@
                         <li class="home"><a title="Idi na početnu" href="/">Početna</a><span>&raquo;</span> </li>
                         <li><a title="Idi na kategoriju" href="/grupa/<%= idNadGrupe %>/<%=Web_Shop.Komponente.SrediNaziv(Web_Shop.Komponente.PronadjiNazivNadGrupe(idNadGrupe)) %>/"><%= Web_Shop.Komponente.PronadjiNazivNadGrupe(idNadGrupe) %> </a><span>&raquo;</span></li>
                         <li>
-                            <strong><%= Web_Shop.Komponente.PronadjiNazivGrupe(idGrupe) %></strong>
+                            <strong><%= Web_Shop.Komponente.PronadjiNazivGrupe(idPodGrupe) %></strong>
                         </li>
                     </ol>
-
                 </div>
             </nav>
             <div class="container">
@@ -86,18 +76,14 @@
             </div>
             <div class="mb-5"></div>
         </main>
-        <!-- End .main -->
 
         <%=Web_Shop.Komponente.Footer() %>
     </div>
-    <!-- End .page-wrapper -->
     <div class="mobile-menu-overlay"></div>
     <div class="mobile-menu-container">
         <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
-    <!-- End .mobile-menu-container -->
 
-    <!-- Add Cart Modal -->
     <%=Web_Shop.Komponente.DodajUKosaricu() %>
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
