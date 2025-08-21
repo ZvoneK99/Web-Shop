@@ -93,8 +93,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Ajax\ArtikliDodajKolicinu.aspx" />
+    <Content Include="Ajax\ArtikliDodajStavku.aspx" />
+    <Content Include="Ajax\ArtikliGrupe.aspx" />
+    <Content Include="Ajax\ArtikliGrupeTablica.aspx" />
+    <Content Include="Ajax\ArtikliNadGrupe.aspx" />
     <Content Include="Ajax\KorisnikPrijava.aspx" />
     <Content Include="Ajax\Registracija.aspx" />
+    <Content Include="Artikal.aspx" />
     <Content Include="ArtikliGrupe.aspx" />
     <Content Include="ArtikliPodGrupe.aspx" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -370,6 +376,41 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\ArtikliDodajKolicinu.aspx.designer.vb">
+      <DependentUpon>ArtikliDodajKolicinu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliDodajKolicinu.aspx.vb">
+      <DependentUpon>ArtikliDodajKolicinu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ArtikliDodajStavku.aspx.designer.vb">
+      <DependentUpon>ArtikliDodajStavku.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliDodajStavku.aspx.vb">
+      <DependentUpon>ArtikliDodajStavku.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ArtikliGrupe.aspx.designer.vb">
+      <DependentUpon>ArtikliGrupe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliGrupe.aspx.vb">
+      <DependentUpon>ArtikliGrupe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ArtikliGrupeTablica.aspx.designer.vb">
+      <DependentUpon>ArtikliGrupeTablica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliGrupeTablica.aspx.vb">
+      <DependentUpon>ArtikliGrupeTablica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ArtikliNadGrupe.aspx.designer.vb">
+      <DependentUpon>ArtikliNadGrupe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliNadGrupe.aspx.vb">
+      <DependentUpon>ArtikliNadGrupe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Ajax\KorisnikPrijava.aspx.designer.vb">
       <DependentUpon>KorisnikPrijava.aspx</DependentUpon>
     </Compile>
@@ -383,6 +424,13 @@
     <Compile Include="Ajax\Registracija.aspx.vb">
       <DependentUpon>Registracija.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Artikal.aspx.designer.vb">
+      <DependentUpon>Artikal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Artikal.aspx.vb">
+      <DependentUpon>Artikal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ArtikliGrupe.aspx.designer.vb">
       <DependentUpon>ArtikliGrupe.aspx</DependentUpon>

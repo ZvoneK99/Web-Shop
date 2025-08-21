@@ -26,9 +26,9 @@ Public Class Global_asax
         If URL_path.Contains("/podgrupa") Then
             Context.RewritePath(URL_path.Replace("/podgrupa", "/ArtikliPodGrupe.aspx"))
         End If
-        If URL_path.Contains("/artikal") Then
-            Context.RewritePath(URL_path.Replace("/artikal", "/Artikal.aspx"))
-        End If
+        'If URL_path.Contains("/artikal") Then
+        '    Context.RewritePath(URL_path.Replace("/artikal", "/Artikal.aspx"))
+        'End If
         If URL_path.Contains("/registracija") Then
             Context.RewritePath(URL_path.Replace("/registracija", "/Korisnik/Prijava.aspx"))
         End If

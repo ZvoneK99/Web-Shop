@@ -104,7 +104,7 @@
         End Get
     End Property
 
-    Public Sub New(ByVal id As String, ByVal naziv As String, ByVal jedCijena As Decimal, ByVal kolicina As Int16, ByVal jedCijenaKartica As Decimal, ByVal jedCijenaRate As Decimal, ByVal jedCijenaB2B As Decimal, ByVal besplatnadostava As Boolean)
+    Public Sub New(ByVal id As String, ByVal naziv As String, ByVal jedCijena As Decimal, ByVal kolicina As Int16, ByVal jedCijenaKartica As Decimal, ByVal jedCijenaRate As Decimal, ByVal jedCijenaB2B As Decimal)
         _id = id
         _naziv = naziv
         _jedCijena = jedCijena
@@ -112,7 +112,6 @@
         _jedCijenaRate = jedCijenaRate
         _jedCijenaB2B = jedCijenaB2B
         _kolicina = kolicina
-        _besplatnadostava = besplatnadostava
     End Sub
 
 End Class

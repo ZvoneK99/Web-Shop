@@ -681,7 +681,9 @@ Public Class Komponente
     '----------------------------------------------------------------------------------------------> Default.aspx END <------------------------------------------------------------------------------------------------
 
     '---------------------------------------------------------------------------------------------> ArtikliGrupe.aspx START <---------------------------------------------------------------------------------------------
-
+    Public Shared Function ArtikliGrupee(GrupaID As Integer) As String
+        Return ArtikliGrupe(1, GrupaID, "NazivAsc")
+    End Function
     Public Shared Function ArtikliNadGrupe(KategorijaID As Integer) As String   'Function for displaying articles in a group
         Return ArtikliNadGrupe(1, KategorijaID, "NazivAsc")
     End Function
@@ -735,6 +737,7 @@ Public Class Komponente
                             html.Append("<div class='product-default inner-quickview inner-icon'>")
                             html.Append("<figure>")
                             html.AppendFormat("<a href='/artikal/{1}/{0}/'>", SrediNaziv(citac("Naziv")), citac("ID"))
+
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
                             If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
                                 html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
@@ -1011,13 +1014,440 @@ Public Class Komponente
 
 
 
+    Public Shared Function NazivArtikal(ArtikalID As Integer) As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT Naziv FROM Artikli WHERE ID=@ArtikalID"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.Append(citac("Naziv"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+    Public Shared Function CijenaArtika(ArtikalID As Integer) As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+        Dim KupacLogiran As Boolean = HttpContext.Current.Session("ValjanUser")
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT Cijena, AkcijaCijena, Procenat FROM Artikli WHERE ID=@ArtikalID"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+
+                            html.Append(Format(citac("Cijena"), "N2"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+    Public Shared Function MojaKosaricaSession(n As Narudzba) As String 'moj originalnii
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+        Dim CijenaDostava As Decimal = 8
+        Dim Valuta As String = "KM"
+        Dim KupacLogiran As Boolean = HttpContext.Current.Session("ValjanUser")
 
 
 
+        'html.Append("<tbody>")
+        For Each a As ArtikalSession In n.Artikli
+            'Dim cijanaTempGotovinski As Decimal = CijenaArtiklaAkcija(a.id)
+            'Dim cijanaTempVirman As Decimal = CijenaArtikla(a.id)
+            'Dim cijanaTempRate As Decimal = CijenaArtiklaRate(a.id)
+            'Dim cijanaB2B As Decimal = CijenaArtiklaB2B(a.id)
+
+            html.AppendFormat("<tr class='product-row' data-id='{0}' data-jedcijena='{1}'>", a.id, a.JedCijena)
+            html.Append("<td class='product-col'>")
+            html.Append("<figure class='product-image-container'>")
+
+
+            'Slika
+            Dim slika As String = ZadanaSlikaArtikla(a.id)
+            If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
+                html.AppendFormat("<img src='http://igre.ba/Thumb2.ashx?i={0}' alt='{1}'>", ZadanaSlikaArtikla(a.id), a.naziv)
+            Else
+                html.AppendFormat("<img src='{0}' alt='{1}'>", ZadanaSlikaArtikla(a.id), a.naziv)
+            End If
+            html.Append("</figure>") 'product-image-container
+
+            'Naslov
+            html.Append("<h2 class='product-title'>")
+            html.AppendFormat("<a href='/artikal/{1}/{0}/'>{2}</a>", SrediNaziv(a.naziv), a.id, a.naziv)
+            html.Append("</h2>") 'product-title
+
+            html.Append("</td>") 'product-col
+
+            'Cijena
+            html.AppendFormat("<td>{0} {1}</td>", a.JedCijena, Valuta)
+            html.Append("<td class='input-box select-dropdown'>")
+            html.AppendFormat("<input type='text' name='qty' id=""qty{1}"" maxlength=""2"" value=""{1}"" title=""Količina"" class='items-field vertical-quantity form-control input-text qty {1}'>", a.id, a.Kolicina)
+            html.Append("</td>")
+            html.AppendFormat("<td class='ukupna-cijena'>{0} {1}</td>", a.Kolicina * a.JedCijena, Valuta)
+            html.Append("</tr>") 'product-row
+
+
+            html.Append("<tr class='product-action-row'>")
+            html.Append("<td colspan='4' class='clearfix'>")
+            html.Append("<div class='float-right'>")
+            html.AppendFormat("<i title=""Uklonite artikal iz košarice"" class=""btn-remove btnBrisiArtikal fa fa-trash cart-remove-item"" data-id=""{0}"" style=""cursor:pointer;""></i>", a.id)
+            'html.Append("<a href='#' title='Izbrisi proizvod' class='btn-remove btnBrisiArtikal cart-remove-item' data-id=""{0}""><span class='sr-only'>Remove</span></a>", a.id)
+            html.Append("</div>") 'float-right
+            html.Append("</td>") 'clearfix
+            html.Append("</tr>") 'product-action-row
+        Next
 
 
 
+        Return html.ToString()
+    End Function
 
+
+    '---------------------------------------------------------------------------------------------> Artikal.aspx START <---------------------------------------------------------------------------------------------
+
+    Public Shared Function Domena() As String
+        Dim html As New StringBuilder
+
+        html.Append(HttpContext.Current.Request.Url.Host)
+
+        Return html.ToString()
+    End Function
+
+    Public Shared Function ProductSingleGallery() As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+        Dim ArtikalID As Integer = 0
+        If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
+            Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
+        End If
+
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "OdabraniArtikal"
+                komanda.Parameters.AddWithValue("ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+
+                            html.Append("<div class='col-lg-6 col-xl-4 product-single-gallery'>")
+                            html.Append("<div class='sticky-slider'>")
+                            html.Append("<div class='product-slider-container product-item'>")
+
+                            'Velike slike
+                            'Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
+                            html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
+                            html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
+                            html.Append("</div>") 'product-single-carousel owl-carousel owl-theme
+
+                            html.Append("</div>") 'product-slider-container product-item
+
+                            'Male slike
+                            html.Append("<div class='prod-thumbnail row owl-dots transparent-dots' id='carousel-custom-dots'>")
+                            html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
+                            html.Append("</div>") 'prod-thumbnail row owl-dots transparent-dots
+
+                            html.Append("</div>") 'sticky-slider
+                            html.Append("</div>") 'col-lg-6 col-xl-4 product-single-gallery
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+        Return html.ToString()
+    End Function
+
+    Public Shared Function ProductSingleDescription() As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+        Dim ArtikalID As Integer = 0
+        If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
+            Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
+        End If
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "OdabraniArtikal"
+                komanda.Parameters.AddWithValue("ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+
+                            html.Append("<div class='col-lg-6 col-xl-8'>")
+                            html.Append("<div class='product-single-details'>")
+                            html.AppendFormat("<h1 class='product-title naziv-artikla' title='{0}'>{0}</h1>", citac("Naziv"))
+
+                            html.Append("<div class='price-box'>")
+                            Dim cijenaMPC As Decimal = citac("Cijena")
+                            Dim cijenaSaKalkulacijom As Decimal = citac("Cijena") * (100 + citac("Procenat")) / 100
+                            Dim akcijskaCijena As Decimal = citac("AkcijaCijena")
+
+                            If citac("Cijena") < 1 Then
+                                html.Append("<span class='product-price'>Cijena na upit</span>")
+                            Else
+                                ' Prikaz samo redovne cijene
+                                html.AppendFormat("<span class='product-price'>{0} KM</span>", Format(cijenaMPC, "N2"))
+                                'End If
+                            End If
+                            html.Append("</div>") 'price-box
+
+                            html.Append("<div class='product-single-share mb-4 podjeli-proizvod'>")
+                            html.Append("<label>Podijeli:</label><br />")
+                            html.Append("<div class='addthis_inline_share_toolbox'>")
+                            html.Append("<div class='share'>")
+                            html.Append("<div class='a2a_kit a2a_kit_size_32 a2a_default_style'>")
+                            html.Append("<a class='a2a_button_whatsapp'></a>")
+                            html.Append("<a class='a2a_button_viber'></a>")
+                            html.Append("<a class='a2a_button_facebook'></a>")
+                            html.Append("<a class='a2a_button_facebook_messenger'></a>")
+                            html.Append("<a class='a2a_button_sms'></a>")
+                            html.Append("<a class='a2a_button_telegram'></a>")
+                            html.Append("<a class='a2a_button_twitter'></a>")
+                            html.Append("<a class='a2a_button_email'></a>")
+                            html.Append("<a class='a2a_button_copy_link'></a>")
+                            html.Append("<a class='a2a_dd' href='https://www.addtoany.com/share'></a>")
+                            html.Append("</div>") 'a2a_kit a2a_kit_size_32 a2a_default_style
+                            html.Append("<script>")
+                            html.Append("var a2a_config = a2a_config || {};")
+                            html.Append("a2a_config.locale = 'hr';")
+                            html.Append("</script>")
+                            html.Append("<script async src='https://static.addtoany.com/menu/page.js'></script>")
+                            html.Append("</div>") 'share
+                            html.Append("</div>") 'addthis_inline_share_toolbox
+                            html.Append("</div>") 'product-single-share mb-4 podjeli-proizvod
+
+                            html.AppendFormat("<div class='product-action div{0}'>", citac("ID"))
+                            html.Append("<div class='product-single-qty'>")
+                            html.AppendFormat("<input class='horizontal-quantity form-control qty {0}' type='text'/>", citac("ID"))
+                            html.Append("</div>") 'product-single-qty
+                            html.AppendFormat("<a href='#' class='paction add-cart dugmicDodaj dugmicDodaj-artikal' data-id='{0}' data-toggle='modal'data-target='#addCartModal' title='Dodaj u košaricu'>Dodaj u košaricu</a>", citac("ID"))
+                            html.Append("</a>") 'paction add-wishlist
+                            html.Append("</div>") 'product-action
+                            html.Append("</div>") 'product-single-details
+
+
+                            html.Append("<div class='product-single-tabs'>")
+
+                            ' ----- NAV TABOVI -----
+                            html.Append("<ul class='nav nav-tabs' role='tablist'>")
+
+                            'Cijene na rate
+                            html.Append("<li class='nav-item'>")
+                            html.Append("<a class='nav-link active' id='product-tab-desc' data-toggle='tab' href='#product-desc-content' role='tab' aria-controls='product-desc-content' aria-selected='true'>Cijena na rate</a>")
+                            html.Append("</li>")
+
+                            'Detaljni opis
+                            html.Append("<li class='nav-item'>")
+                            html.Append("<a class='nav-link' id='product-tab-tags' data-toggle='tab' href='#product-tags-content' role='tab' aria-controls='product-tags-content' aria-selected='false'>Detaljni opis</a>")
+                            html.Append("</li>")
+
+                            'Recenzije
+                            html.Append("<li class='nav-item'>")
+                            html.Append("<a class='nav-link' id='product-tab-reviews' data-toggle='tab' href='#product-reviews-content' role='tab' aria-controls='product-reviews-content' aria-selected='false'>Komentari</a>")
+                            html.Append("</li>")
+
+                            html.Append("</ul>") ' Kraj nav-tabs
+
+
+                            html.Append("<div class='tab-content'>")
+
+                            'Cijena na rate
+                            'html.Append("<div class='tab-pane fade show active' id='product-desc-content' role='tabpanel' aria-labelledby='product-tab-desc'>")
+                            'html.Append("<div class='product-tags-content'>")
+                            'html.Append("<table class='ratings-table tablica-rata'>")
+                            'html.AppendFormat("<tr><td>2 - 3 rate:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(3)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(3)) / 100) / 3), "N2"))
+                            'html.AppendFormat("<tr><td>4 - 6 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(6)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(6)) / 100) / 6), "N2"))
+                            'html.AppendFormat("<tr><td>7 - 12 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(12)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(12)) / 100) / 12), "N2"))
+                            'html.AppendFormat("<tr><td>18 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(18)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(18)) / 100) / 18), "N2"))
+                            'html.Append("</table>")
+                            'html.Append("</div>") ' Kraj product-tags-content
+                            'html.Append("</div>") ' Kraj tab-pane (Cijena na rate)
+
+                            'Detaljni opis
+                            html.Append("<div class='tab-pane fade' id='product-tags-content' role='tabpanel' aria-labelledby='product-tab-tags'>")
+                            html.Append("<div class='product-desc-content'>")
+                            html.AppendFormat("<p>{0}</p>", citac("Opis"))
+                            html.Append("</div>") ' Kraj product-desc-content
+                            html.Append("</div>") ' Kraj tab-pane (Detaljni opis)
+
+                            'Komentari
+                            html.Append("<div class='tab-pane fade' id='product-reviews-content' role='tabpanel' aria-labelledby='product-tab-reviews'>")
+                            html.Append("<div class='product-reviews-content'>")
+                            html.Append("<div class='add-product-review'>")
+
+                            Using konekcijaKomentara As New SqlConnection(putanja)
+                                konekcijaKomentara.Open()
+                                Using komandaKomentara As New SqlCommand()
+                                    komandaKomentara.Connection = konekcijaKomentara
+                                    komandaKomentara.CommandType = CommandType.Text
+                                    komandaKomentara.CommandText = "SELECT * FROM Komentari WHERE NarudzbaID IN (SELECT NarudzbaID FROM NarudzbeStavke WHERE ArtikalID=@ArtikalID) AND Odobreno=1 ORDER BY Date DESC;"
+                                    komandaKomentara.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                                    Using citacKomentara As SqlDataReader = komandaKomentara.ExecuteReader()
+                                        If citacKomentara IsNot Nothing Then
+                                            While citacKomentara.Read()
+                                                Dim ocjena As Integer = Convert.ToInt32(citacKomentara("Ocjena"))
+
+                                                html.Append("<div class='comment-box'>")
+                                                ' Ime + zvjezdice
+                                                html.Append("<div class='comment-name-date'>")
+                                                html.Append(citacKomentara("Ime"))
+
+                                                ' Zvjezdice
+                                                html.Append("<span class='comment-stars'>")
+                                                For i As Integer = 1 To 5
+                                                    If i <= ocjena Then
+                                                        html.Append("<span class='star active'>&#9733;</span>")
+                                                    Else
+                                                        html.Append("<span class='star'>&#9733;</span>")
+                                                    End If
+                                                Next
+                                                html.Append("</span>")
+                                                html.Append("</div>") ' comment-name-date
+
+                                                ' Tekst komentara
+                                                html.Append("<div class='comment-text'>")
+                                                html.Append(citacKomentara("Komentar"))
+                                                html.Append("</div>")
+
+                                                html.Append("</div>") ' comment-box
+                                                html.Append("<hr class='comment-line-my'/>")
+                                            End While
+                                        End If
+                                    End Using
+                                End Using
+                            End Using
+
+                            html.Append("</div>") ' add-product-review
+                            html.Append("</div>") ' product-reviews-content
+                            html.Append("</div>") ' Kraj tab-pane (Recenzije)
+
+                            html.Append("</div>") ' Kraj tab-content
+                            html.Append("</div>") ' Kraj product-single-tabs
+                            html.Append("</div>") 'col-lg-6 col-xl-8
+
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+        Return html.ToString()
+    End Function
+
+    Public Shared Function OpisArtikal(ArtikalID As Integer) As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT Opis FROM Artikli WHERE ID=@ArtikalID"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.Append(citac("Opis"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+    Public Shared Function PronadjiIdGrupe(ArtikalID As Integer) As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT GrupaID FROM Artikli WHERE ID=@ID"
+                komanda.Parameters.AddWithValue("@ID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat(citac("GrupaID"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
+    End Function
+
+
+    Public Shared Function SlikeArtikla(ArtikalID As Integer, Klasa As String, Velika As String) As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT * FROM ArtikliSlike WHERE ArtikalID=@ArtikalID ORDER BY Zadana DESC;"
+                komanda.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            Dim slika As String = citac("Datoteka")
+                            html.AppendFormat("<div class='{0}'>", Klasa)
+                            If slika.Contains("http") = False Then
+                                html.AppendFormat("<img src='http://igre.ba/Thumb2.ashx?i={0}' class='{2}' alt='{1}'/>", slika, citac("Datoteka"), Velika)
+                            Else
+                                html.AppendFormat("<img src='{0}' class='{2}' alt='{1}'/>", slika, citac("Datoteka"), Velika)
+                            End If
+                            html.Append("</div>") 'Klasa
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+
+    '---------------------------------------------------------------------------------------------> Artikal.aspx END <---------------------------------------------------------------------------------------------
 
 
 
