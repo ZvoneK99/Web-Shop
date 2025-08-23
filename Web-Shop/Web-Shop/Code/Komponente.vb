@@ -450,9 +450,9 @@ Public Class Komponente
     Public Shared Function PrebrojiArtikle() As String  'Function to count the number of articles in the cart
         Dim html As New StringBuilder()
 
-        If IsNothing(HttpContext.Current.Session("IgreNarudzba")) = False Then
+        If IsNothing(HttpContext.Current.Session("Narudzba")) = False Then
             Dim n As Narudzba
-            n = CType(HttpContext.Current.Session("IgreNarudzba"), Narudzba)
+            n = CType(HttpContext.Current.Session("Narudzba"), Narudzba)
             Dim brojArtikala = n.BrojArtikala.ToString()
             'html.Append("(" & brojArtikala & ")")
             html.Append(brojArtikala)
@@ -461,6 +461,30 @@ Public Class Komponente
         End If
 
         Return html.ToString()
+    End Function
+
+    Public Shared Function Postavke(Naziv As String) As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT * FROM Postavke WHERE Naziv=@Naziv"
+                komanda.Parameters.AddWithValue("@Naziv", Naziv)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", citac("Vrijednost"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString
     End Function
 
     '----------------------------------------------------------------------------------------------> General functions END <-------------------------------------------------------------------------------------------
@@ -1012,8 +1036,6 @@ Public Class Komponente
     End Function
 
 
-
-
     Public Shared Function NazivArtikal(ArtikalID As Integer) As String
         Dim html As New StringBuilder()
         Dim putanja As String = SQLKonekcija()
@@ -1183,54 +1205,6 @@ Public Class Komponente
         End Using
         Return html.ToString()
     End Function
-
-
-    'Public Shared Function ProductSingleGallery() As String
-    '    Dim html As New StringBuilder
-    '    Dim putanja As String = SQLKonekcija()
-    '    Dim ArtikalID As Integer = 0
-    '    If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
-    '        Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
-    '    End If
-
-
-    '    Using konekcija As New SqlConnection(putanja)
-    '        konekcija.Open()
-    '        Using komanda As New SqlCommand()
-    '            komanda.Connection = konekcija
-    '            komanda.CommandType = CommandType.StoredProcedure
-    '            komanda.CommandText = "OdabraniArtikal"
-    '            komanda.Parameters.AddWithValue("ArtikalID", ArtikalID)
-    '            Using citac As SqlDataReader = komanda.ExecuteReader()
-    '                If citac IsNot Nothing Then
-    '                    While citac.Read()
-
-    '                        html.Append("<div class='col-lg-6 col-xl-4 product-single-gallery'>")
-    '                        html.Append("<div class='sticky-slider'>")
-    '                        html.Append("<div class='product-slider-container product-item'>")
-
-    '                        'Velike slike
-    '                        'Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
-    '                        html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
-    '                        html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
-    '                        html.Append("</div>") 'product-single-carousel owl-carousel owl-theme
-
-    '                        html.Append("</div>") 'product-slider-container product-item
-
-    '                        'Male slike
-    '                        html.Append("<div class='prod-thumbnail row owl-dots transparent-dots' id='carousel-custom-dots'>")
-    '                        html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
-    '                        html.Append("</div>") 'prod-thumbnail row owl-dots transparent-dots
-
-    '                        html.Append("</div>") 'sticky-slider
-    '                        html.Append("</div>") 'col-lg-6 col-xl-4 product-single-gallery
-    '                    End While
-    '                End If
-    '            End Using
-    '        End Using
-    '    End Using
-    '    Return html.ToString()
-    'End Function
 
     Public Shared Function ProductSingleDescription() As String
         Dim html As New StringBuilder
@@ -1505,8 +1479,88 @@ Public Class Komponente
     '---------------------------------------------------------------------------------------------> Artikal.aspx END <---------------------------------------------------------------------------------------------
 
 
+    '---------------------------------------------------------------------------------------------> Kosarica.aspx START <---------------------------------------------------------------------------------------------
 
+    Public Shared Function Kosarica() As String
+        Dim html As New StringBuilder
+        Dim n As Narudzba
+        If IsNothing(HttpContext.Current.Session("Narudzba")) = True Then
+            n = New Narudzba
+            HttpContext.Current.Session("Narudzba") = n
+        Else
+            n = CType(HttpContext.Current.Session("Narudzba"), Narudzba)
+        End If
 
+        Dim cijenaDostave As Decimal = Postavke("CijenaDostava")
+
+        'html.Append("<section class=""main-container col1-layout"">")
+        'html.Append("<div class=""main container"">")
+        'html.Append("<div class=""col-main"">")
+        'html.Append("<div class=""cart"">")
+        'html.Append("<div class=""page-content page-order tabela"">")
+        'html.Append("<div class=""page-title""><h2>Vaša košarica</h2></div>")
+        'html.Append("<div class=""order-detail-content tjelo kosarica"">")
+        'html.Append("<div class=""maska"" id=""maska"">")
+        'html.Append("<div class=""loader""></div>")
+        'html.Append("</div>")
+        'html.Append("<div class=""tabelaRefresh"">")
+        'html.Append("<table class=""table table-bordered cart_summary"">")
+        html.Append("<div class='col-lg-8 tjelo kosarica'>")
+        html.Append("<div class='cart-table-container'>")
+        html.Append("<table class='table-cart table stavke'>")
+        html.Append("<thead>")
+        html.Append("<tr>")
+        html.Append("<th class='product-col'> Proizvod</th>")
+        html.Append("<th class='price-col'>Cijena</th>")
+        html.Append("<th class='qty-col'>Količina</th>")
+        html.Append("<th>Ukupno</th>")
+        html.Append("</tr>")
+        html.Append("</thead>")
+        html.Append("<tbody class='tbStavkelBody'>")
+        html.Append(MojaKosaricaSession(n))
+        html.Append("</tbody>")
+        html.Append("<tfoot>")
+        html.Append("<tr>")
+        html.Append("<td colspan='4' class='clearfix'>")
+        html.Append("<div class='float-left'>")
+        html.Append("<a href='/' class='btn btn-outline-secondary'>Vratite se na kupovinu</a>")
+        html.Append("</div>") 'float-left
+        html.Append("</td>")
+        html.Append("</tr>")
+        html.Append("</tfoot>")
+        html.Append("</table>") 'table table-cart tjelo kosarica
+        html.Append("</div>") 'cart-table-container
+        html.Append("</div>") 'col-lg-8
+
+        html.Append("<div class='col-lg-4'>")
+        html.Append("<div class='cart-summary'>")
+        html.Append("<h3>Narudžba</h3>")
+        html.Append("<table class='table table-totals'>")
+        html.Append("<tbody>")
+        html.Append("<tr>")
+        html.Append("<td>Cijena narudžbe</td>")
+        html.AppendFormat("<td class='ukupna-cijena'>{0} KM</td>", n.Ukupno)
+        html.Append("</tr>")
+        html.Append("<tr>")
+        html.Append("<td>Dostava</td>")
+        html.AppendFormat("<td>{0} KM</td>", cijenaDostave)
+        html.Append("</tr>")
+        html.Append("</tbody>")
+        html.Append("<tfoot>")
+        html.Append("<tr>")
+        html.Append("<td>Ukupna cijena:</td>")
+        html.AppendFormat("<td>{0} KM</td>", n.Ukupno + cijenaDostave)
+        html.Append("</tr>")
+        html.Append("</tfoot>")
+        html.Append("</table>") 'table table-totals
+        html.Append("<div class='checkout-methods'>")
+        html.Append("<a href='/adresa-dostave' class='btn btn-block btn-sm btn-primary'>Nastavi dalje</a>")
+        html.Append("</div>") 'checkout-methods
+        html.Append("</div>") 'cart-summary
+        html.Append("</div>") 'col-lg-4
+
+        Return html.ToString()
+    End Function
 
 
 

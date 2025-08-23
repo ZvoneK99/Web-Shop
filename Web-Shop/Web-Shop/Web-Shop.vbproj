@@ -100,6 +100,7 @@
     <Content Include="Ajax\ArtikliNadGrupe.aspx" />
     <Content Include="Ajax\KorisnikPrijava.aspx" />
     <Content Include="Ajax\Registracija.aspx" />
+    <Content Include="Ajax\ResetLozinke.aspx" />
     <Content Include="Artikal.aspx" />
     <Content Include="ArtikliGrupe.aspx" />
     <Content Include="ArtikliPodGrupe.aspx" />
@@ -372,7 +373,10 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="JS\Script.js" />
+    <Content Include="Korisnik\IzgubljenaLozinka.aspx" />
     <Content Include="Korisnik\Prijava.aspx" />
+    <Content Include="Kosarica\AdresaDostave.aspx" />
+    <Content Include="Kosarica\Kosarica.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +429,13 @@
       <DependentUpon>Registracija.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Ajax\ResetLozinke.aspx.designer.vb">
+      <DependentUpon>ResetLozinke.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ResetLozinke.aspx.vb">
+      <DependentUpon>ResetLozinke.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Artikal.aspx.designer.vb">
       <DependentUpon>Artikal.aspx</DependentUpon>
     </Compile>
@@ -459,11 +470,32 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Korisnik\IzgubljenaLozinka.aspx.designer.vb">
+      <DependentUpon>IzgubljenaLozinka.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\IzgubljenaLozinka.aspx.vb">
+      <DependentUpon>IzgubljenaLozinka.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Korisnik\Prijava.aspx.designer.vb">
       <DependentUpon>Prijava.aspx</DependentUpon>
     </Compile>
     <Compile Include="Korisnik\Prijava.aspx.vb">
       <DependentUpon>Prijava.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Kosarica\AdresaDostave.aspx.designer.vb">
+      <DependentUpon>AdresaDostave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kosarica\AdresaDostave.aspx.vb">
+      <DependentUpon>AdresaDostave.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Kosarica\Kosarica.aspx.designer.vb">
+      <DependentUpon>Kosarica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kosarica\Kosarica.aspx.vb">
+      <DependentUpon>Kosarica.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
