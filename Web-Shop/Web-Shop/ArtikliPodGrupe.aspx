@@ -36,6 +36,7 @@
         </header>
 
         <main class="main">
+            <p>ID je <%= idPodGrupe%></p>
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <div class="container">
                     <ol class="breadcrumb">

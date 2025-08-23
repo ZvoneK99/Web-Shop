@@ -1142,10 +1142,17 @@ Public Class Komponente
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
         Dim ArtikalID As Integer = 0
-        If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
-            Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
-        End If
 
+        ' Get ID from query string or path
+        If Not String.IsNullOrEmpty(HttpContext.Current.Request.QueryString("id")) Then
+            Integer.TryParse(HttpContext.Current.Request.QueryString("id"), ArtikalID)
+        End If
+        If ArtikalID = 0 Then
+            Dim segments() As String = HttpContext.Current.Request.Path.Split("/"c)
+            If segments.Length > 2 Then
+                Integer.TryParse(segments(2), ArtikalID)
+            End If
+        End If
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1157,26 +1164,18 @@ Public Class Komponente
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
-
                             html.Append("<div class='col-lg-6 col-xl-4 product-single-gallery'>")
                             html.Append("<div class='sticky-slider'>")
                             html.Append("<div class='product-slider-container product-item'>")
-
-                            'Velike slike
-                            'Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
                             html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
-                            html.Append("</div>") 'product-single-carousel owl-carousel owl-theme
-
-                            html.Append("</div>") 'product-slider-container product-item
-
-                            'Male slike
+                            html.Append("</div>")
+                            html.Append("</div>")
                             html.Append("<div class='prod-thumbnail row owl-dots transparent-dots' id='carousel-custom-dots'>")
                             html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
-                            html.Append("</div>") 'prod-thumbnail row owl-dots transparent-dots
-
-                            html.Append("</div>") 'sticky-slider
-                            html.Append("</div>") 'col-lg-6 col-xl-4 product-single-gallery
+                            html.Append("</div>")
+                            html.Append("</div>")
+                            html.Append("</div>")
                         End While
                     End If
                 End Using
@@ -1185,12 +1184,68 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
+
+    'Public Shared Function ProductSingleGallery() As String
+    '    Dim html As New StringBuilder
+    '    Dim putanja As String = SQLKonekcija()
+    '    Dim ArtikalID As Integer = 0
+    '    If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
+    '        Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
+    '    End If
+
+
+    '    Using konekcija As New SqlConnection(putanja)
+    '        konekcija.Open()
+    '        Using komanda As New SqlCommand()
+    '            komanda.Connection = konekcija
+    '            komanda.CommandType = CommandType.StoredProcedure
+    '            komanda.CommandText = "OdabraniArtikal"
+    '            komanda.Parameters.AddWithValue("ArtikalID", ArtikalID)
+    '            Using citac As SqlDataReader = komanda.ExecuteReader()
+    '                If citac IsNot Nothing Then
+    '                    While citac.Read()
+
+    '                        html.Append("<div class='col-lg-6 col-xl-4 product-single-gallery'>")
+    '                        html.Append("<div class='sticky-slider'>")
+    '                        html.Append("<div class='product-slider-container product-item'>")
+
+    '                        'Velike slike
+    '                        'Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
+    '                        html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
+    '                        html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
+    '                        html.Append("</div>") 'product-single-carousel owl-carousel owl-theme
+
+    '                        html.Append("</div>") 'product-slider-container product-item
+
+    '                        'Male slike
+    '                        html.Append("<div class='prod-thumbnail row owl-dots transparent-dots' id='carousel-custom-dots'>")
+    '                        html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
+    '                        html.Append("</div>") 'prod-thumbnail row owl-dots transparent-dots
+
+    '                        html.Append("</div>") 'sticky-slider
+    '                        html.Append("</div>") 'col-lg-6 col-xl-4 product-single-gallery
+    '                    End While
+    '                End If
+    '            End Using
+    '        End Using
+    '    End Using
+    '    Return html.ToString()
+    'End Function
+
     Public Shared Function ProductSingleDescription() As String
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
         Dim ArtikalID As Integer = 0
-        If HttpContext.Current.Request.RequestContext.RouteData.Values("id") IsNot Nothing Then
-            Integer.TryParse(HttpContext.Current.Request.RequestContext.RouteData.Values("id").ToString(), ArtikalID)
+
+        ' Get ID from query string or path
+        If Not String.IsNullOrEmpty(HttpContext.Current.Request.QueryString("id")) Then
+            Integer.TryParse(HttpContext.Current.Request.QueryString("id"), ArtikalID)
+        End If
+        If ArtikalID = 0 Then
+            Dim segments() As String = HttpContext.Current.Request.Path.Split("/"c)
+            If segments.Length > 2 Then
+                Integer.TryParse(segments(2), ArtikalID)
+            End If
         End If
 
         Using konekcija As New SqlConnection(putanja)
@@ -1306,47 +1361,47 @@ Public Class Komponente
                             html.Append("<div class='product-reviews-content'>")
                             html.Append("<div class='add-product-review'>")
 
-                            Using konekcijaKomentara As New SqlConnection(putanja)
-                                konekcijaKomentara.Open()
-                                Using komandaKomentara As New SqlCommand()
-                                    komandaKomentara.Connection = konekcijaKomentara
-                                    komandaKomentara.CommandType = CommandType.Text
-                                    komandaKomentara.CommandText = "SELECT * FROM Komentari WHERE NarudzbaID IN (SELECT NarudzbaID FROM NarudzbeStavke WHERE ArtikalID=@ArtikalID) AND Odobreno=1 ORDER BY Date DESC;"
-                                    komandaKomentara.Parameters.AddWithValue("@ArtikalID", ArtikalID)
-                                    Using citacKomentara As SqlDataReader = komandaKomentara.ExecuteReader()
-                                        If citacKomentara IsNot Nothing Then
-                                            While citacKomentara.Read()
-                                                Dim ocjena As Integer = Convert.ToInt32(citacKomentara("Ocjena"))
+                            'Using konekcijaKomentara As New SqlConnection(putanja)
+                            '    konekcijaKomentara.Open()
+                            '    Using komandaKomentara As New SqlCommand()
+                            '        komandaKomentara.Connection = konekcijaKomentara
+                            '        komandaKomentara.CommandType = CommandType.Text
+                            '        komandaKomentara.CommandText = "SELECT * FROM Komentari WHERE NarudzbaID IN (SELECT NarudzbaID FROM NarudzbeStavke WHERE ArtikalID=@ArtikalID) AND Odobreno=1 ORDER BY Date DESC;"
+                            '        komandaKomentara.Parameters.AddWithValue("@ArtikalID", ArtikalID)
+                            '        Using citacKomentara As SqlDataReader = komandaKomentara.ExecuteReader()
+                            '            If citacKomentara IsNot Nothing Then
+                            '                While citacKomentara.Read()
+                            '                    Dim ocjena As Integer = Convert.ToInt32(citacKomentara("Ocjena"))
 
-                                                html.Append("<div class='comment-box'>")
-                                                ' Ime + zvjezdice
-                                                html.Append("<div class='comment-name-date'>")
-                                                html.Append(citacKomentara("Ime"))
+                            '                    html.Append("<div class='comment-box'>")
+                            '                    ' Ime + zvjezdice
+                            '                    html.Append("<div class='comment-name-date'>")
+                            '                    html.Append(citacKomentara("Ime"))
 
-                                                ' Zvjezdice
-                                                html.Append("<span class='comment-stars'>")
-                                                For i As Integer = 1 To 5
-                                                    If i <= ocjena Then
-                                                        html.Append("<span class='star active'>&#9733;</span>")
-                                                    Else
-                                                        html.Append("<span class='star'>&#9733;</span>")
-                                                    End If
-                                                Next
-                                                html.Append("</span>")
-                                                html.Append("</div>") ' comment-name-date
+                            '                    ' Zvjezdice
+                            '                    html.Append("<span class='comment-stars'>")
+                            '                    For i As Integer = 1 To 5
+                            '                        If i <= ocjena Then
+                            '                            html.Append("<span class='star active'>&#9733;</span>")
+                            '                        Else
+                            '                            html.Append("<span class='star'>&#9733;</span>")
+                            '                        End If
+                            '                    Next
+                            '                    html.Append("</span>")
+                            '                    html.Append("</div>") ' comment-name-date
 
-                                                ' Tekst komentara
-                                                html.Append("<div class='comment-text'>")
-                                                html.Append(citacKomentara("Komentar"))
-                                                html.Append("</div>")
+                            '                    ' Tekst komentara
+                            '                    html.Append("<div class='comment-text'>")
+                            '                    html.Append(citacKomentara("Komentar"))
+                            '                    html.Append("</div>")
 
-                                                html.Append("</div>") ' comment-box
-                                                html.Append("<hr class='comment-line-my'/>")
-                                            End While
-                                        End If
-                                    End Using
-                                End Using
-                            End Using
+                            '                    html.Append("</div>") ' comment-box
+                            '                    html.Append("<hr class='comment-line-my'/>")
+                            '                End While
+                            '            End If
+                            '        End Using
+                            '    End Using
+                            'End Using
 
                             html.Append("</div>") ' add-product-review
                             html.Append("</div>") ' product-reviews-content

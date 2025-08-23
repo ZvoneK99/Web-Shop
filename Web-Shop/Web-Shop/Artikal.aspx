@@ -1,34 +1,30 @@
 ﻿    <%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Artikal.aspx.vb" Inherits="Web_Shop.Artikal" %>
 
 <%
-Dim domena As String = Web_Shop.Komponente.Domena()
 Dim idArtikla As Integer = 0
 
-' Get ID from query string
+' Try query string first
 If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
     Integer.TryParse(Request.QueryString("id"), idArtikla)
 End If
 
-' Initialize variables
-Dim OpisArtikla As String = ""
-Dim idGrupe As Integer = 0
-Dim idNadGrupe As Integer = 0
-Dim NazivNadGrupe As String = ""
-Dim NazivGrupe As String = ""
-Dim NazivArtikla As String = ""
-
-' Only if valid ID
-If idArtikla > 0 Then
-    OpisArtikla = Regex.Replace(Web_Shop.Komponente.OpisArtikal(idArtikla), "<.*?>", "")
-    idGrupe = Web_Shop.Komponente.PronadjiIdGrupe(idArtikla)
-    If idGrupe > 0 Then
-        idNadGrupe = Web_Shop.Komponente.PronadjiIdNadGrupe(idGrupe)
+' If still zero, try path segments
+If idArtikla = 0 Then
+    Dim segments() As String = Request.Path.Split("/"c)
+    If segments.Length > 2 Then
+        Integer.TryParse(segments(2), idArtikla)
     End If
-    NazivNadGrupe = Web_Shop.Komponente.PronadjiNazivNadGrupe(idNadGrupe)
-    NazivGrupe = Web_Shop.Komponente.PronadjiNazivGrupe(idGrupe)
-    NazivArtikla = Web_Shop.Komponente.NazivArtikal(idArtikla)
 End If
 %>
+
+
+<%Dim domena As String = Web_Shop.Komponente.Domena()%>
+<%Dim OpisArtikla As String = Regex.Replace(Web_Shop.Komponente.OpisArtikal(idArtikla), "<.*?>", "")%>
+<%Dim idGrupe As Integer = Web_Shop.Komponente.PronadjiIdGrupe(idArtikla)%>
+<%Dim idNadGrupe As Integer = Web_Shop.Komponente.PronadjiIdNadGrupe(idGrupe)%>
+<%Dim NazivNadGrupe As String = Web_Shop.Komponente.PronadjiNazivNadGrupe(idNadGrupe)%>
+<%Dim NazivGrupe As String = Web_Shop.Komponente.PronadjiNazivGrupe(idGrupe)%>
+<%Dim NazivArtikla As String = Web_Shop.Komponente.NazivArtikal(idArtikla)%>
 
     
 <!DOCTYPE html>
@@ -73,7 +69,6 @@ End If
 
         <main class="main">
 
-            <p>id je: <%=idArtikla%></p>
             <nav aria-label="breadcrumb" class="breadcrumb-nav container">
                 <div class="container">
                     <ol class="breadcrumb">

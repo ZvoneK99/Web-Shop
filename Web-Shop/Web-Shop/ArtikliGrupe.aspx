@@ -36,7 +36,7 @@
         </header>
 
         <main class="main">
-
+            <%--<p>ID je <%= idNadGrupe%></p>--%>
             <nav aria-label="breadcrumb" class="breadcrumb-nav" id="breadcrumbs">
                 <div class="container">
                     <ol class="breadcrumb">

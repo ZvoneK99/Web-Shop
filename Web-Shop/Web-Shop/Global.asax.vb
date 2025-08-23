@@ -119,8 +119,15 @@ Public Class Global_asax
                     If citac IsNot Nothing Then
                         While citac.Read()
                             If URL_path.Contains("/artikal/" & citac("ID")) Then
-                                Context.RewritePath(URL_path.Replace("/artikal/" & citac("ID"), "/Artikal.aspx?id=" & citac("ID")))
-                                'Context.RewritePath(URL_path.Replace("/artikal/" & Komponente.SrediNaziv(citac("Naziv")), "/Default.aspx"))
+
+                                If URL_path.Contains("/artikal/") Then
+                                    Dim segments() As String = URL_path.Split("/"c)
+                                    If segments.Length > 2 AndAlso IsNumeric(segments(2)) Then
+                                        Context.RewritePath("/Artikal.aspx?id=" & segments(2))
+                                    End If
+                                End If
+
+
                             End If
                         End While
                     End If
