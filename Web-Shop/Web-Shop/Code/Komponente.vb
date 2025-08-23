@@ -487,6 +487,49 @@ Public Class Komponente
         Return html.ToString
     End Function
 
+    Public Shared Function ProvjeriKosaricuDaLiImaBesplatneDostave(n As Narudzba) As Boolean
+        Dim html As New StringBuilder
+
+        For Each a As ArtikalSession In n.Artikli
+            If a.besplatnadostava = False Then
+                html.Append(False)
+                Exit For
+            End If
+        Next
+
+        If html.ToString = "" Then
+            html.Append(True)
+        End If
+
+        Return html.ToString()
+    End Function
+
+    Public Shared Function Suma(NarudzbaID As Integer) As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        On Error Resume Next
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "SumaNarudzbe"
+                komanda.Parameters.AddWithValue("@Narudzba", NarudzbaID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", Format(citac("Iznos"), "N2"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
     '----------------------------------------------------------------------------------------------> General functions END <-------------------------------------------------------------------------------------------
 
 
@@ -1493,18 +1536,6 @@ Public Class Komponente
 
         Dim cijenaDostave As Decimal = Postavke("CijenaDostava")
 
-        'html.Append("<section class=""main-container col1-layout"">")
-        'html.Append("<div class=""main container"">")
-        'html.Append("<div class=""col-main"">")
-        'html.Append("<div class=""cart"">")
-        'html.Append("<div class=""page-content page-order tabela"">")
-        'html.Append("<div class=""page-title""><h2>Vaša košarica</h2></div>")
-        'html.Append("<div class=""order-detail-content tjelo kosarica"">")
-        'html.Append("<div class=""maska"" id=""maska"">")
-        'html.Append("<div class=""loader""></div>")
-        'html.Append("</div>")
-        'html.Append("<div class=""tabelaRefresh"">")
-        'html.Append("<table class=""table table-bordered cart_summary"">")
         html.Append("<div class='col-lg-8 tjelo kosarica'>")
         html.Append("<div class='cart-table-container'>")
         html.Append("<table class='table-cart table stavke'>")

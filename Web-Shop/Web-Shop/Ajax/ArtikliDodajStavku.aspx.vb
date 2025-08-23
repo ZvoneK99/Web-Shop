@@ -3,11 +3,11 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim n As Narudzba
-        If IsNothing(Session("IgreNarudzba")) = True Then
+        If IsNothing(Session("Narudzba")) = True Then
             n = New Narudzba
-            Session("IgreNarudzba") = n
+            Session("Narudzba") = n
         Else
-            n = CType(Session("IgreNarudzba"), Narudzba)
+            n = CType(Session("Narudzba"), Narudzba)
         End If
         'Nađi kontrole
         Dim ID As Integer = Request.Form("id")

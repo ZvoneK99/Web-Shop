@@ -8,7 +8,7 @@
         'Dim putanja As String = Conti.conekcijaVibar
 
         Dim n As Narudzba
-        n = CType(Session("IgreNarudzba"), Narudzba)
+        n = CType(Session("Narudzba"), Narudzba)
         If formKolicina = "1" Then
             Dim postojeciArtikal As ArtikalSession = n.Artikli.Find(Function(a As ArtikalSession) a.id = id.ToString)
             postojeciArtikal.Kolicina += 1

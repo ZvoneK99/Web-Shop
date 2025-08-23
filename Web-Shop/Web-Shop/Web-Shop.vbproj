@@ -98,9 +98,17 @@
     <Content Include="Ajax\ArtikliGrupe.aspx" />
     <Content Include="Ajax\ArtikliGrupeTablica.aspx" />
     <Content Include="Ajax\ArtikliNadGrupe.aspx" />
+    <Content Include="Ajax\ArtikliPromjeniKolicinu.aspx" />
+    <Content Include="Ajax\BlogTablica.aspx" />
     <Content Include="Ajax\KorisnikPrijava.aspx" />
+    <Content Include="Ajax\PopuniKupcaSession.aspx" />
+    <Content Include="Ajax\PosaljiMail.aspx" />
+    <Content Include="Ajax\PosaljiNarudzbuSession.aspx" />
+    <Content Include="Ajax\PosaljiRecenziju.aspx" />
+    <Content Include="Ajax\predlozak2.htm" />
     <Content Include="Ajax\Registracija.aspx" />
     <Content Include="Ajax\ResetLozinke.aspx" />
+    <Content Include="Ajax\ZapisiLog.aspx" />
     <Content Include="Artikal.aspx" />
     <Content Include="ArtikliGrupe.aspx" />
     <Content Include="ArtikliPodGrupe.aspx" />
@@ -415,12 +423,54 @@
       <DependentUpon>ArtikliNadGrupe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Ajax\ArtikliPromjeniKolicinu.aspx.designer.vb">
+      <DependentUpon>ArtikliPromjeniKolicinu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ArtikliPromjeniKolicinu.aspx.vb">
+      <DependentUpon>ArtikliPromjeniKolicinu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\BlogTablica.aspx.designer.vb">
+      <DependentUpon>BlogTablica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\BlogTablica.aspx.vb">
+      <DependentUpon>BlogTablica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Ajax\KorisnikPrijava.aspx.designer.vb">
       <DependentUpon>KorisnikPrijava.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ajax\KorisnikPrijava.aspx.vb">
       <DependentUpon>KorisnikPrijava.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\PopuniKupcaSession.aspx.designer.vb">
+      <DependentUpon>PopuniKupcaSession.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\PopuniKupcaSession.aspx.vb">
+      <DependentUpon>PopuniKupcaSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\PosaljiMail.aspx.designer.vb">
+      <DependentUpon>PosaljiMail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\PosaljiMail.aspx.vb">
+      <DependentUpon>PosaljiMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\PosaljiNarudzbuSession.aspx.designer.vb">
+      <DependentUpon>PosaljiNarudzbuSession.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\PosaljiNarudzbuSession.aspx.vb">
+      <DependentUpon>PosaljiNarudzbuSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\PosaljiRecenziju.aspx.designer.vb">
+      <DependentUpon>PosaljiRecenziju.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\PosaljiRecenziju.aspx.vb">
+      <DependentUpon>PosaljiRecenziju.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Ajax\Registracija.aspx.designer.vb">
       <DependentUpon>Registracija.aspx</DependentUpon>
@@ -435,6 +485,13 @@
     <Compile Include="Ajax\ResetLozinke.aspx.vb">
       <DependentUpon>ResetLozinke.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ZapisiLog.aspx.designer.vb">
+      <DependentUpon>ZapisiLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ZapisiLog.aspx.vb">
+      <DependentUpon>ZapisiLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Artikal.aspx.designer.vb">
       <DependentUpon>Artikal.aspx</DependentUpon>
