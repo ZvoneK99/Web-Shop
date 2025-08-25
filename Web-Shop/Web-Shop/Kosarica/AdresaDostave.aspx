@@ -83,12 +83,6 @@
                         <label>Ime i Prezime/Naziv tvrtke:</label>
                         <input type="text" runat="server" id="imePrezime" name="imePrezime" class="form-control" required />
 
-                        <label>ID Broj</label>
-                        <input type="text" runat="server" id="IdBroj" name="IdBroj" class="form-control"/>
-
-                        <label>PDV Broj</label>
-                        <input type="text" runat="server" id="PdvBroj" name="PdvBroj" class="form-control"/>
-
                         <label>Vaš email</label>
                         <input type="email" runat="server" name="email" id="email" class="form-control" required />
 
@@ -106,9 +100,9 @@
 
                         <label for="nacin-placanja">Način plaćanja</label>
                         <select name="nacin-placanja" class="form-control">
-                        <option value="Virman">Virman</option>
+                        <%--<option value="Virman">Virman</option>--%>
                         <option value="poduzecem">Poduzećem</option>
-                        <option value="karticno">Kartično</option>
+                        <%--<option value="karticno">Kartično</option>--%>
                         <%--<option value="mikrofin">MKD Mikrofin</option>--%>
                         </select>
 

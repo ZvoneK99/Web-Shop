@@ -23,24 +23,6 @@ Partial Public Class AdresaDostave
     Protected WithEvents imePrezime As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
-    '''IdBroj control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents IdBroj As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
-    '''PdvBroj control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PdvBroj As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
     '''email control.
     '''</summary>
     '''<remarks>

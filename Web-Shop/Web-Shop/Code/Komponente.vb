@@ -112,11 +112,11 @@ Public Class Komponente
         html.Append("<i class=""icon-menu""></i>")
         html.Append("</button>")
         html.Append("<a href=""/"" class=""logo logo-rescue"">")
-        html.Append("<img src=""/Datoteke/Logo/RescueEquip-logoLight.png"" alt=""SafeEquip""/>")
+        html.Append("<img src=""/Datoteke/Logo/RescueEquip-logoDark.png"" alt=""SafeEquip""/>")
         html.Append("</a>")
         html.Append("<nav class=""main-nav"">")
         html.Append("<ul class=""menu"">")
-        html.Append("<li class='kat-div'><a href=""/"" class='istaknute-kat'>Početna</a></li>") 'Početna
+        html.Append("<li class='kat-div'><a href=""/"" class='istaknute-kat istaknute-kat-header'>Početna</a></li>") 'Početna
 
         Dim KupacLogiran As Boolean
         Dim NivoTrenutnogKupca As String
@@ -140,7 +140,7 @@ Public Class Komponente
                         While citac.Read()
                             Dim NadGrupaID As Integer = Convert.ToInt32(citac("ID"))
                             html.Append("<li class='sf-with-ul kat-div'>")
-                            html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='istaknute-kat kat-div'>{2}</a>", citac("ID"), SrediNaziv(citac("NadGrupa")), citac("NadGrupa"))
+                            html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='istaknute-kat kat-div istaknute-kat-header'>{2}</a>", citac("ID"), SrediNaziv(citac("NadGrupa")), citac("NadGrupa"))
                             html.Append("<ul>") 'menu
 
                             'Ispis PodKategorija unutar Kategorija
@@ -240,7 +240,7 @@ Public Class Komponente
         html.Append("<div class='row row-sm'>")
         'Logo
         html.Append("<div class='col-md-6 col-lg-4'>")
-        html.Append("<a href='/'><img src='/Datoteke/Logo/RescueEquip-logoLight.png' id='footer-logo'/></a>")
+        html.Append("<a href='/'><img src='/Datoteke/Logo/RescueEquip-logoDark.png' id='footer-logo'/></a>")
         html.Append("</div>") 'col-md-6 col-lg-4
         'Kontakt
         html.Append("<div class='col-md-6 col-lg-2'>")
@@ -258,34 +258,34 @@ Public Class Komponente
         html.Append("</div>") 'widget
         html.Append("</div>") 'col-md-6 col-lg-2
         'Informacije
-        html.Append("<div class='col-md-6 col-lg-2'>")
-        html.Append("<div class='widget'>")
-        html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
-        html.Append("<div class='widget-content row row-sm'>")
-        html.Append("<ul class='col-xl-6'>")
-        html.Append("<li><a href='/onama' class='element-footer'>O Nama</a></li>")
-        html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
-        html.Append("</ul>") 'col-xl-6
-        html.Append("</div>") 'widget-content row row-sm
-        html.Append("</div>") 'widget
-        html.Append("</div>") 'col-md-6 col-lg-2
-        'Plaćanje i način dostave
-        html.Append("<div class='col-md-6 col-lg-2'>")
-        html.Append(" <div class='widget'>")
-        html.Append("<h3 class='widget-title naslov-footer'>Plaćanje i način dostave</h3>")
-        html.Append("<div class='widget-content row row-sm'>")
-        html.Append("<ul class='col-xl-12'>")
-        html.Append("<li><a href='/statika?id=2' class='element-footer'>Načini plaćanja</a></li>")
-        html.Append("<li><a href='/statika?id=3' class='element-footer'>Sigurnost plaćanja</a></li>")
-        html.Append("<li><a href='/statika?id=4' class='element-footer'>Brza i pouzdana dostava</a></li>")
-        html.Append("<li><a href='/statika?id=1' class='element-footer'>Opći uslovi poslovanja</a></li>")
-        html.Append("</ul>") 'col-xl-12
-        html.Append("</div>") 'widget-content row row-sm
-        html.Append("</div>") 'widget
-        html.Append("</div>") 'col-md-6 col-lg-2
+        'html.Append("<div class='col-md-6 col-lg-2'>")
+        'html.Append("<div class='widget'>")
+        'html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
+        'html.Append("<div class='widget-content row row-sm'>")
+        'html.Append("<ul class='col-xl-6'>")
+        'html.Append("<li><a href='/onama' class='element-footer'>O Nama</a></li>")
+        'html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
+        'html.Append("</ul>") 'col-xl-6
+        'html.Append("</div>") 'widget-content row row-sm
+        'html.Append("</div>") 'widget
+        'html.Append("</div>") 'col-md-6 col-lg-2
+        ''Plaćanje i način dostave
+        'html.Append("<div class='col-md-6 col-lg-2'>")
+        'html.Append(" <div class='widget'>")
+        'html.Append("<h3 class='widget-title naslov-footer'>Plaćanje i način dostave</h3>")
+        'html.Append("<div class='widget-content row row-sm'>")
+        'html.Append("<ul class='col-xl-12'>")
+        'html.Append("<li><a href='/statika?id=2' class='element-footer'>Načini plaćanja</a></li>")
+        'html.Append("<li><a href='/statika?id=3' class='element-footer'>Sigurnost plaćanja</a></li>")
+        'html.Append("<li><a href='/statika?id=4' class='element-footer'>Brza i pouzdana dostava</a></li>")
+        'html.Append("<li><a href='/statika?id=1' class='element-footer'>Opći uslovi poslovanja</a></li>")
+        'html.Append("</ul>") 'col-xl-12
+        'html.Append("</div>") 'widget-content row row-sm
+        'html.Append("</div>") 'widget
+        'html.Append("</div>") 'col-md-6 col-lg-2
 
         html.Append("<div class='footer-bottom container'>")
-        html.Append("<p>Copyright © <p href='/' style='color:  #D14B4A;'>Zvonimir Kožul & Leonardo Misir </p></p>")
+        html.Append("<p>Copyright © <p href='/' style='color:  #4b643b;'>Zvonimir Kožul & Leonardo Misir </p></p>")
         html.Append("</div>") 'footer-bottom container
         html.Append("</footer>")
         html.Append("</footer>")

@@ -16,15 +16,16 @@
 }
 
 .header-middle.sticky-header {
-    background-color: #f4c542 !important;
+    /*background-color: #5C7782 !important;*/
+    background-color: #5C7782 !important;
 }
 
 .header-middle .menu > li > a:hover {
-    color: #D14B4A;
+    color: #4b643b;
 }
 
 .header-top .header-right ul a:hover {
-    color: #D14B4A;
+    color: #4b643b;
 }
 
 .header-kontakt {
@@ -35,13 +36,18 @@
     margin-left: 6px !important;
     margin-right: 3px !important;
 }
+.istaknute-kat-header {
+    color: #fff !important;
+}
 
 .main-nav .menu .istaknute-kat:hover {
-    background-color: #f4c542;
+    /*background-color: #5C7782;*/
+    background-color: #5C7782 !important;
 }
 
 .kat-div:hover {
-    background-color: #f4c542 !important;
+    /*background-color: #5C7782 !important;*/
+    background-color: #5C7782 !important;
 }
 .logo-rescue img {
     width: 100px !important;
@@ -49,7 +55,7 @@
 
 /*Header bottom*/
 .bottom-header, .bottom-header > div:nth-child(2) {
-    background-color: #D14B4A;
+    background-color: #4b643b;
 }
 
 .user-icons {
@@ -137,7 +143,7 @@
 }
 
 .nova-cijena-istaknuto {
-    color: #d14b4a;
+    color: #4b643b;
 }
 /*-------------SLIDER ISTAKNUTI PROIZVODI*/
 .naslov-istaknuto {
@@ -225,7 +231,8 @@ textarea.form-control {
 }
 
 .footer-middle-my {
-    background-color: #f4c542 !important;
+    /*background-color: #5C7782 !important;*/
+    background-color: #5C7782 !important;
 }
 
 .naslov-footer {
@@ -296,7 +303,7 @@ textarea.form-control {
 
 .dugmic.prethodna, .dugmic.slijedeca {
     padding: 3px;
-    background: #d14b4a;
+    background: #4b643b;
     border: none;
     color: #fff;
 }
@@ -331,7 +338,7 @@ textarea.form-control {
         display: block;
         margin-top: 20px;
         text-decoration: underline;
-        color: #D14B4A;
+        color: #4b643b;
         margin-top: 50px;
     }
 
@@ -358,7 +365,7 @@ textarea.form-control {
 
     #error-div > h5 {
         text-transform: uppercase;
-        color: #d14b4a;
+        color: #4b643b;
         font-size: 50px;
         font-weight: 900;
         letter-spacing: 6px;
@@ -367,7 +374,7 @@ textarea.form-control {
 
 #unutarnji-error > a {
     text-decoration: underline;
-    color: #d14b4a;
+    color: #4b643b;
 }
 /*---------------REGISTRACIJA---------------*/
 .registration-div {

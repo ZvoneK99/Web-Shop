@@ -188,7 +188,6 @@ Public Class PosaljiNarudzbuSession
                             poruka.Append("<td style=""vertical-align:top; text-align:left;"">")
                             poruka.Append("<b>Kupac:</b><br/> ")
                             poruka.Append(citac("ImePrezime") & "<br/>")
-                            poruka.AppendFormat("ID: {0}, PDV: {1} <br/> ", citac("IdBroj"), citac("PdvBroj"))
                             poruka.Append(citac("Adresa") & "<br/>")
                             poruka.Append(citac("ZIP") & " - " & citac("Grad") & " <br/>")
                             poruka.Append("Tel:  " & citac("Telefon") & " <br/>")
