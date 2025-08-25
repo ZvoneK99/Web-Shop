@@ -402,19 +402,10 @@ textarea.form-control {
     font-size: 30px;
     margin-top: 10px;
 }
-/*Komentari ispod artikla*/
-.comment-line-my {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 
-.comment-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px 20px 20px 20px;
-    max-width: 600px;
-    position: relative;
-    background: #fff;
+.dugmicDodaj {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .comment-name-date {
@@ -538,6 +529,8 @@ textarea.form-control {
     .mob {
         display: block !important;
     }
+
+
 
     .dugmicDodaj-artikal {
         /*display: block !important;*/

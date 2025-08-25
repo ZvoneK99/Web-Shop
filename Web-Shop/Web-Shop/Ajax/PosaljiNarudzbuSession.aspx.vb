@@ -16,8 +16,8 @@ Public Class PosaljiNarudzbuSession
             UnesiKorisnikaUSesiju()
             'MsgBox(nacin)
             UnesiKorisnikaSQL(n, nacin, "1", napomena, NacinDostave)
-            Response.Redirect("/hvala")
             Session.Clear()
+            Response.Redirect("/hvala")
         End If
     End Sub
 
@@ -57,8 +57,8 @@ Public Class PosaljiNarudzbuSession
                 'komanda.Parameters.AddWithValue("@ID", formID)
                 komanda.Parameters.AddWithValue("@ImePrezime", n.Ime)
                 komanda.Parameters.AddWithValue("@Adresa", n.Adresa)
-                komanda.Parameters.AddWithValue("@IdBroj", "")
-                komanda.Parameters.AddWithValue("@PdvBroj", "")
+                'komanda.Parameters.AddWithValue("@IdBroj", "")
+                'komanda.Parameters.AddWithValue("@PdvBroj", "")
                 komanda.Parameters.AddWithValue("@Grad", n.Mjesto)
                 komanda.Parameters.AddWithValue("@ZIP", n.zip)
                 komanda.Parameters.AddWithValue("@Telefon", n.Telefon)
@@ -102,7 +102,7 @@ Public Class PosaljiNarudzbuSession
                 komanda.Parameters.AddWithValue("@BrojRata", "1")
                 ' komanda.Parameters.AddWithValue("@IpAdresa", Komponente.IpAdresa())
                 komanda.Parameters.AddWithValue("@BesplatnaDostava", BesplatnaDostavaZaArtikal)
-                komanda.Parameters.AddWithValue("@Domena", "www.igre.ba")
+                'komanda.Parameters.AddWithValue("@Domena", "www.igre.ba")
                 komanda.Parameters.Add("@NoviID", SqlDbType.Int)
                 komanda.Parameters("@NoviID").Direction = ParameterDirection.Output
                 komanda.ExecuteNonQuery()

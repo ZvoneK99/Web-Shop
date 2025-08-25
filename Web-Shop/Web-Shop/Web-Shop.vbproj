@@ -385,6 +385,7 @@
     <Content Include="Korisnik\Prijava.aspx" />
     <Content Include="Kosarica\AdresaDostave.aspx" />
     <Content Include="Kosarica\Kosarica.aspx" />
+    <Content Include="Pretraga.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -573,6 +574,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Pretraga.aspx.designer.vb">
+      <DependentUpon>Pretraga.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pretraga.aspx.vb">
+      <DependentUpon>Pretraga.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -530,6 +530,35 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
+    Public Shared Function NivoLogiranogKorisnika() As String
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.Text
+                komanda.CommandText = "SELECT AdminLevel FROM Korisnici WHERE ID=@ID"
+                komanda.Parameters.AddWithValue("@ID", LogiraniKorisnikID())
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", citac("AdminLevel"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        If html.ToString = "" Then
+            html.Append("10")
+        End If
+
+        Return html.ToString()
+    End Function
+
+
     '----------------------------------------------------------------------------------------------> General functions END <-------------------------------------------------------------------------------------------
 
 
@@ -597,9 +626,9 @@ Public Class Komponente
                             End If
                             html.Append("</a>")
 
-                            html.Append("<div class='btn-icon-group'>")
+                            html.Append("<div class='btn-icon-group dugmicDodaj-artikal'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
-                            html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
+                            html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj ' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
                             html.Append("</div>") 'btn-icon-group
                             html.Append("</figure>")
                             html.Append("<div class='product-details'>")
@@ -1594,8 +1623,114 @@ Public Class Komponente
     End Function
 
 
+    '---------------------------------------------------------------------------------------------> Pretraga.aspx START <---------------------------------------------------------------------------------------------
+
+    Public Shared Function Pretraga(pojam As String) As String
+        Return ArtikliPretraga(1, pojam)
+    End Function
 
 
+    Public Shared Function ArtikliPretraga(stranica As Integer, pojam As String) As String
+        Dim html As New StringBuilder
+        Dim putanja As String = SQLKonekcija()
+
+        Dim KupacLogiran As Boolean
+        Dim NivoTrenutnogKupca As String
+        If HttpContext.Current.Session("ValjanUser") = True Then
+            KupacLogiran = HttpContext.Current.Session("ValjanUser")
+            NivoTrenutnogKupca = NivoLogiranogKorisnika()
+        Else
+            KupacLogiran = False
+            NivoTrenutnogKupca = "0"
+        End If
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "OdaberiPretragu"
+                komanda.Parameters.AddWithValue("@Pojam", pojam)
+                komanda.Parameters.AddWithValue("@Stranica", stranica)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+
+                            'Proizvod
+                            html.AppendFormat("<div class='col-6 col-md-4 col-xl-3 div{0}'>", citac("ID"))
+                            If citac("BesplatnaDostava") = True Then
+                                html.AppendFormat("<div class=""free-shipping""></div>")
+                            End If
+                            html.Append("<div class='product-default inner-quickview inner-icon'>")
+                            html.Append("<figure>")
+                            html.AppendFormat("<a href='/artikal/{0}'>", citac("ID"))
+                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
+                            If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
+                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
+                            Else
+                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
+                            End If
+                            html.Append("</a>") '/artikal/{0}
+                            html.Append("<div class='btn-icon-group'>")
+                            html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
+                            html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
+                            html.Append("</div>") 'btn-icon-group
+                            'html.AppendFormat("<a href='/artikal/{0}' class='btn-quickview' title='Vidi proizvod'>Vidi proizvod</a>", citac("ID"))
+
+                            Dim NazivNadGrupe As String = Komponente.PronadjiNazivNadGrupe(citac("NadGrupaID"))
+                            Dim NazivGrupe As String = Komponente.PronadjiNazivGrupe(citac("GrupaID"))
+
+                            html.Append("</figure>")
+                            html.Append("<div class='product-details'>")
+                            html.Append("<div class='category-wrap'>")
+                            html.Append(" <div class='category-list'>")
+                            html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='product-category nadgrupa'>{2}</a>", citac("NadgrupaId"), SrediNaziv(NazivNadGrupe), NazivNadGrupe)
+                            'html.AppendFormat("<a href='/grupa?id={1}' class='product-category'>{0}</a>", NazivGrupe, citac("GrupaId"))
+                            html.Append("</div>") 'category-list
+                            'html.Append("<a href='#' class='btn-icon-wish'><i class='icon-heart'></i></a>")
+                            html.Append("</div>") 'category-wrap
+
+
+
+                            'Naziv proizvoda
+                            html.Append("<h2 class='product-title naslov-istaknuto'>")
+                            html.AppendFormat("<a href='/artikal/{0}' title='{1}'>{1}</a>", citac("ID"), citac("Naziv"))
+                            html.Append("</h2>") 'product-title
+
+                            'Cijena
+                            html.Append("<div class='price-box'>")
+                            Dim cijenaSaKalkulacijom As Decimal = citac("Cijena") * (100 + citac("Procenat")) / 100
+                            Dim akcijskaCijena As Decimal = citac("AkcijaCijena")
+
+                            If citac("Cijena") < 1 Then
+                                html.Append("<span class='product-price'>Cijena na upit</span>")
+                            Else
+                                If akcijskaCijena > 0 Then
+                                    ' Prikaz akcijske i stare cijene
+                                    html.AppendFormat("<span class='old-price'>{0} KM</span>", Format(akcijskaCijena, "N2"))
+                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
+                                Else
+                                    ' Prikaz samo redovne cijene
+                                    html.AppendFormat("<span class='product-price nova-cijena-istaknuto'>{0} KM</span>", Format(cijenaSaKalkulacijom, "N2"))
+                                End If
+                            End If
+                            html.Append("</div>") 'price-box
+
+                            html.Append("</div>") 'product-details
+                            html.Append("</div>") 'product-default inner-quickview inner-icon
+                            html.Append("</div>") 'col-6 col-md-4 col-xl-3
+
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return html.ToString()
+    End Function
+
+
+    '---------------------------------------------------------------------------------------------> Pretraga.aspx END <---------------------------------------------------------------------------------------------
 
 
 
