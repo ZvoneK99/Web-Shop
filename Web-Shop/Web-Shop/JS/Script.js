@@ -619,7 +619,7 @@ jQuery(document).ready(function () {
             tablica = komponenta.find(".products-grid");
             var top = document.getElementById("breadcrumbs");
             //Dodaj u kosaricu
-            alert("OK");
+            //alert("OK");
             //dugmicDodaj1.live("click", function () {
             dugmicDodaj1.click(function () {
                 //alert("OK");
