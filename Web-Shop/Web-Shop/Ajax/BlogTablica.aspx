@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BlogTablica.aspx.vb" Inherits="igre_ba.BlogTablica" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BlogTablica.aspx.vb" Inherits="Web_Shop.BlogTablica" %>

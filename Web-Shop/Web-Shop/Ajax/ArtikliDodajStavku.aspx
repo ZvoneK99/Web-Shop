@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliDodajStavku.aspx.vb" Inherits="igre_ba.ArtikliDodajStavku" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliDodajStavku.aspx.vb" Inherits="Web_Shop.ArtikliDodajStavku" %>

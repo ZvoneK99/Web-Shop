@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PosaljiNarudzbuSession.aspx.vb" Inherits="igre_ba.PosaljiNarudzbuSession" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PosaljiNarudzbuSession.aspx.vb" Inherits="Web_Shop.PosaljiNarudzbuSession" %>

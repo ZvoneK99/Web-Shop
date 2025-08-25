@@ -10,8 +10,15 @@
             n = CType(Session("Narudzba"), Narudzba)
         End If
         'Nađi kontrole
-        Dim ID As Integer = Request.Form("id")
+        Dim ID As Integer = 0
+        If Not Integer.TryParse(Request.Form("id"), ID) Then
+            ' ako nema ID-a ili nije broj, prekini s radom
+            Exit Sub
+        End If
+
         Dim kolicina As Integer = 1
+        Integer.TryParse(Request.Form("kolicina"), kolicina)
+
         kolicina = Request.Form("kolicina")
         ' Dim besplatnadostava As Boolean = Komponente.ProvjeraNaplateDostave(ID)
         If kolicina > 0 Then

@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliGrupe.aspx.vb" Inherits="igre_ba.ArtikliGrupe2" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ArtikliGrupe.aspx.vb" Inherits="Web_Shop.ArtikliGrupe2" %>

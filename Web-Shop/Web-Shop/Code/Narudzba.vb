@@ -15,7 +15,7 @@
             Return _ime
         End Get
         Set(ByVal value As String)
-            _ime = value.Trim
+            _ime = If(value, "").Trim()
         End Set
     End Property
 
@@ -24,7 +24,7 @@
             Return _mail
         End Get
         Set(ByVal value As String)
-            _mail = value.Trim
+            _mail = If(value, "").Trim()
         End Set
     End Property
 
@@ -42,7 +42,7 @@
             Return _adresa
         End Get
         Set(ByVal value As String)
-            _adresa = value.Trim
+            _adresa = If(value, "").Trim()
         End Set
     End Property
 
@@ -51,16 +51,16 @@
             Return _mjesto
         End Get
         Set(ByVal value As String)
-            _mjesto = value.Trim
+            _mjesto = If(value, "").Trim()
         End Set
     End Property
 
-    Public Property zip() As String
+    Public Property Zip() As String
         Get
             Return _zip
         End Get
         Set(ByVal value As String)
-            _zip = value
+            _zip = If(value, "").Trim()
         End Set
     End Property
 
@@ -69,7 +69,7 @@
             Return _telefon
         End Get
         Set(ByVal value As String)
-            _telefon = value
+            _telefon = If(value, "").Trim()
         End Set
     End Property
 
@@ -78,7 +78,7 @@
             Return _napomena
         End Get
         Set(ByVal value As String)
-            _napomena = value
+            _napomena = If(value, "").Trim()
         End Set
     End Property
 
@@ -93,25 +93,30 @@
 
     Public ReadOnly Property Ukupno() As Decimal
         Get
-            For Each Artikal In Me.Artikli
-                Ukupno += Artikal.Iznos
+            Dim suma As Decimal = 0
+            For Each artikal In Me.Artikli
+                suma += artikal.Iznos
             Next
+            Return suma
         End Get
     End Property
 
-    Public ReadOnly Property BrojArtikala() As Decimal
+    Public ReadOnly Property BrojArtikala() As Integer
         Get
-            For Each Artikal In Me.Artikli
-                BrojArtikala += Artikal.Kolicina
+            Dim broj As Integer = 0
+            For Each artikal In Me.Artikli
+                broj += artikal.Kolicina
             Next
+            Return broj
         End Get
     End Property
 
     Public Sub New()
-        _artikli = New List(Of ArtikalSession)
+        _artikli = New List(Of ArtikalSession)()
+        _napomena = String.Empty
     End Sub
 
-    Public Sub New(ByVal ime As String, ByVal mail As String, ByVal datum As DateTime, ByVal mjesto As String, ByVal zip As String, ByVal adresa As String, ByVal telefon As String)
+    Public Sub New(ByVal ime As String, ByVal mail As String, ByVal datum As DateTime, ByVal mjesto As String, ByVal zip As String, ByVal adresa As String, ByVal telefon As String, Optional ByVal napomena As String = "")
         _ime = ime
         _mail = mail
         _datum = datum
@@ -119,8 +124,8 @@
         _zip = zip
         _adresa = adresa
         _telefon = telefon
-        _napomena = Napomena
-        _artikli = New List(Of ArtikalSession)
+        _napomena = napomena
+        _artikli = New List(Of ArtikalSession)()
     End Sub
 
 End Class

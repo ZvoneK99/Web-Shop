@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PosaljiMail.aspx.vb" Inherits="igre_ba.PosaljiMail" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PosaljiMail.aspx.vb" Inherits="Web_Shop.PosaljiMail" %>
 
