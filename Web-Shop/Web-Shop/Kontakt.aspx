@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 
 <head>
-    <title>Bulk.ba</title>
+    <title>Kontakt | RescueEquip</title>
     <script type="text/javascript">
         WebFontConfig = {
             google: { families: ['Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Segoe Script:300,400,500,600,700'] }
