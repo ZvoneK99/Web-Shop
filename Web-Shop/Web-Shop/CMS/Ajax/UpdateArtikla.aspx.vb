@@ -222,7 +222,7 @@ Public Class UpdateArtikla
                 komanda.Parameters.AddWithValue("@Garancija", txtGarancija)
                 komanda.Parameters.AddWithValue("@Isporuka", txtIsporuka)
                 komanda.Parameters.AddWithValue("@ZadnjeAzuriranje", DateAndTime.Now())
-                komanda.Parameters.AddWithValue("@ZadnjiAzurirao", igre_ba.Komponente.LogiraniKorisnikID)
+                komanda.Parameters.AddWithValue("@ZadnjiAzurirao", Web_Shop.Komponente.LogiraniKorisnikID)
                 komanda.Parameters.AddWithValue("@NadGrupaID", ddlKategorija)
                 komanda.Parameters.AddWithValue("@GrupaID", ddlPodKategorija)
                 komanda.Parameters.AddWithValue("@NadGrupaIDBulk", ddlKategorijaBulk)

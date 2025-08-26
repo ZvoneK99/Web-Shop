@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="KategorijaStatusDigitalis.aspx.vb" Inherits="igre_ba.KategorijaStatusDigitalis" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="KategorijaStatusDigitalis.aspx.vb" Inherits="Web_Shop.KategorijaStatusDigitalis" %>

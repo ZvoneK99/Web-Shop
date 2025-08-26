@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="IsnertClanka.aspx.vb" Inherits="igre_ba.IsnertClanka"  ValidateRequest="false"%>
-<%=igre_ba.CMS.ChekAuth %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="IsnertClanka.aspx.vb" Inherits="Web_Shop.IsnertClanka"  ValidateRequest="false"%>
+<%=Web_Shop.CMS.ChekAuth %>

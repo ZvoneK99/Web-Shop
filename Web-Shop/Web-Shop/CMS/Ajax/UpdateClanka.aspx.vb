@@ -39,7 +39,7 @@ Public Class UpdateClanka
                 komanda.Parameters.AddWithValue("@Clanak", txtClanak)
                 komanda.Parameters.AddWithValue("@VideoLink", txtVideoLink)
                 'komanda.Parameters.AddWithValue("@ZadnjeAzuriranje", DateAndTime.Now())
-                'komanda.Parameters.AddWithValue("@ZadnjiAzurirao", igre_ba.Komponente.LogiraniKorisnikID)
+                'komanda.Parameters.AddWithValue("@ZadnjiAzurirao", Web_Shop.Komponente.LogiraniKorisnikID)
                 komanda.ExecuteNonQuery()
             End Using
         End Using

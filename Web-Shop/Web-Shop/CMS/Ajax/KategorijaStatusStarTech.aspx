@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="KategorijaStatusStarTech.aspx.vb" Inherits="igre_ba.KategorijaStatusStarTech" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="KategorijaStatusStarTech.aspx.vb" Inherits="Web_Shop.KategorijaStatusStarTech" %>

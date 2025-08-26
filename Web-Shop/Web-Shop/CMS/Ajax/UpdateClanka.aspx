@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateClanka.aspx.vb" Inherits="igre_ba.UpdateClanka" ValidateRequest="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateClanka.aspx.vb" Inherits="Web_Shop.UpdateClanka" ValidateRequest="false" %>
 

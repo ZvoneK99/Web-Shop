@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateBrojRata.aspx.vb" Inherits="igre_ba.UpdateBrojRata" ValidateRequest="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateBrojRata.aspx.vb" Inherits="Web_Shop.UpdateBrojRata" ValidateRequest="false" %>
 

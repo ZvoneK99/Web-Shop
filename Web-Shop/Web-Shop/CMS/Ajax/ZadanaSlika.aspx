@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ZadanaSlika.aspx.vb" Inherits="igre_ba.ZadanaSlika" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ZadanaSlika.aspx.vb" Inherits="Web_Shop.ZadanaSlika" %>

@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="IzbrisiClanak.aspx.vb" Inherits="igre_ba.IzbrisiClanak" %>
-<%=igre_ba.CMS.ChekAuth %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="IzbrisiClanak.aspx.vb" Inherits="Web_Shop.IzbrisiClanak" %>
+<%=Web_Shop.CMS.ChekAuth %>

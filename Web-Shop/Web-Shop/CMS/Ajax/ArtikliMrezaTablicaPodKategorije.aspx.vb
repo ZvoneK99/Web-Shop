@@ -11,7 +11,7 @@
 
         PodKategorijaID = Request.QueryString("PodKategorijaID")
 
-        Dim tablica As String = igre_ba.CMS.MrezaArtikliPodKategorije(stranica, PodKategorijaID)
+        Dim tablica As String = Web_Shop.CMS.MrezaArtikliPodKategorije(stranica, PodKategorijaID)
         Response.Write(tablica)
     End Sub
 

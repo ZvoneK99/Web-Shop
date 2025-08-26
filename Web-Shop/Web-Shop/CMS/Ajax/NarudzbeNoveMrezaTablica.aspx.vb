@@ -11,7 +11,7 @@
 
         'slovo = Request.QueryString("slovo")
 
-        Dim tablica As String = igre_ba.CMS.NoveNarudzbeMrezaTablica(stranica)
+        Dim tablica As String = Web_Shop.CMS.NoveNarudzbeMrezaTablica(stranica)
         Response.Write(tablica)
     End Sub
 

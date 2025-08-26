@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateStatika.aspx.vb" Inherits="igre_ba.UpdateStatika" ValidateRequest="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UpdateStatika.aspx.vb" Inherits="Web_Shop.UpdateStatika" ValidateRequest="false" %>
 

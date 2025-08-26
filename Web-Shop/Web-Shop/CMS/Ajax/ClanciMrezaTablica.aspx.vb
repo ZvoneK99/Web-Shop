@@ -10,7 +10,7 @@
 
         'slovo = Request.QueryString("slovo")
 
-        Dim tablica As String = igre_ba.CMS.ClanciMrezaTablica(stranica)
+        Dim tablica As String = Web_Shop.CMS.ClanciMrezaTablica(stranica)
         Response.Write(tablica)
     End Sub
 

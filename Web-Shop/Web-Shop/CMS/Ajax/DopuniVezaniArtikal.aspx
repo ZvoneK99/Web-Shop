@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DopuniVezaniArtikal.aspx.vb" Inherits="igre_ba.DopuniVezaniArtikal" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DopuniVezaniArtikal.aspx.vb" Inherits="Web_Shop.DopuniVezaniArtikal" %>

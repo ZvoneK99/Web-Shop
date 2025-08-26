@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UploadMobilnogSlidera.aspx.vb" Inherits="igre_ba.UploadMobilnogSlidera" %>
-<%=igre_ba.CMS.ChekAuth %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UploadMobilnogSlidera.aspx.vb" Inherits="Web_Shop.UploadMobilnogSlidera" %>
+<%=Web_Shop.CMS.ChekAuth %>

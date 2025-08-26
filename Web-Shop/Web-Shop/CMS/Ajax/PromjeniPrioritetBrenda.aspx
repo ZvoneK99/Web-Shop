@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PromjeniPrioritetBrenda.aspx.vb" Inherits="igre_ba.PromjeniPrioritetBrenda" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PromjeniPrioritetBrenda.aspx.vb" Inherits="Web_Shop.PromjeniPrioritetBrenda" %>

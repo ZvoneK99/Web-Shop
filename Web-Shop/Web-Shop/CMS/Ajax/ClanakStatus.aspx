@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ClanakStatus.aspx.vb" Inherits="igre_ba.ClanakStatus" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ClanakStatus.aspx.vb" Inherits="Web_Shop.ClanakStatus" %>

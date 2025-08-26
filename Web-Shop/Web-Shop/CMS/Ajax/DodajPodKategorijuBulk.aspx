@@ -1,2 +1,2 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DodajPodKategorijuBulk.aspx.vb" Inherits="igre_ba.DodajPodKategorijuBulk" %>
-<%=igre_ba.CMS.ChekAuth %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DodajPodKategorijuBulk.aspx.vb" Inherits="Web_Shop.DodajPodKategorijuBulk" %>
+<%=Web_Shop.CMS.ChekAuth %>

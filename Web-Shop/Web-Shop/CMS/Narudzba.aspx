@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Narudzba.aspx.vb" Inherits="igre_ba.Narudzba" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Narudzba.aspx.vb" Inherits="Web_Shop.Narudzba" %>
 
 <!DOCTYPE html>
 

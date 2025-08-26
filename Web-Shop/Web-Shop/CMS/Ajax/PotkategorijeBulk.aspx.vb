@@ -6,7 +6,7 @@
 
         Dim KategorijaID As Integer = Request.Params("KategorijaID")
         Dim DisEna As String = Request.Params("DisEna")
-        Dim opcije As String = igre_ba.CMS.ddlOdabranaPodKategorijaBulk(0, KategorijaID, DisEna)
+        Dim opcije As String = Web_Shop.CMS.ddlOdabranaPodKategorijaBulk(0, KategorijaID, DisEna)
 
         Response.Write(opcije)
         Response.End()

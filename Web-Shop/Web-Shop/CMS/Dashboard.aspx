@@ -1,23 +1,23 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Dashboard.aspx.vb" Inherits="igre_ba.Dashboard" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Dashboard.aspx.vb" Inherits="Web_Shop.Dashboard" %>
 
-<%=igre_ba.CMS.ChekAuth %>
+<%=Web_Shop.CMS.ChekAuth %>
 <!doctype html>
-<%=igre_ba.CMS.Uvjeti() %>
+<%=Web_Shop.CMS.Uvjeti() %>
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
     <title>AVE CMS - AVE Content Management System</title>
     <meta name="description" content="AVE CMS - Dashboard">
-    <%=igre_ba.CMS.ZajednickeMete() %>
+    <%=Web_Shop.CMS.ZajednickeMete() %>
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
 <body>
-    <%=igre_ba.CMS.LeftPanel() %>
+    <%=Web_Shop.CMS.LeftPanel() %>
 
     <div id="right-panel" class="right-panel">
-        <%=igre_ba.CMS.HeaderString() %>
+        <%=Web_Shop.CMS.HeaderString() %>
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -37,20 +37,20 @@
             </div>
         </div>
         <div class="content mt-3">
-            <%=igre_ba.CMS.StatistikaArtikala() %>
+            <%=Web_Shop.CMS.StatistikaArtikala() %>
 
-            <%--<%=igre_ba.CMS.ArtikliAktivniStats() %>
-            <%=igre_ba.CMS.ArtikliNeAktivniStats() %>
-            <%=igre_ba.CMS.ArtikliNaMinimumuStats() %>
-            <%=igre_ba.CMS.ArtikliBezKolicineStats()%>--%>
+            <%--<%=Web_Shop.CMS.ArtikliAktivniStats() %>
+            <%=Web_Shop.CMS.ArtikliNeAktivniStats() %>
+            <%=Web_Shop.CMS.ArtikliNaMinimumuStats() %>
+            <%=Web_Shop.CMS.ArtikliBezKolicineStats()%>--%>
 
-            <%=igre_ba.CMS.Statistika2()%>
+            <%=Web_Shop.CMS.Statistika2()%>
         </div>
         <!-- .content -->
     </div>
     <!-- /#right-panel -->
 
-    <%=igre_ba.CMS.FootScript() %>
+    <%=Web_Shop.CMS.FootScript() %>
 
     <%--<script src="/CMS/assets/js/vendor/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>

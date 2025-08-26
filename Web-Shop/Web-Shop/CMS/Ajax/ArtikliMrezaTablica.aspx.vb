@@ -12,7 +12,7 @@
 
         'slovo = Request.QueryString("slovo")
 
-        Dim tablica As String = igre_ba.CMS.ArtikliMrezaTablica(stranica, naziv)
+        Dim tablica As String = Web_Shop.CMS.ArtikliMrezaTablica(stranica, naziv)
         Response.Write(tablica)
     End Sub
 

@@ -1,20 +1,20 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Slideri.aspx.vb" Inherits="igre_ba.Slideri" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Slideri.aspx.vb" Inherits="Web_Shop.Slideri" %>
 
-<%=igre_ba.CMS.ChekAuth %>
+<%=Web_Shop.CMS.ChekAuth %>
 <!doctype html>
-<%=igre_ba.CMS.Uvjeti() %>
+<%=Web_Shop.CMS.Uvjeti() %>
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
     <title>AVE CMS - AVE Content Management System</title>
     <meta name="description" content="AVE CMS - Dashboard">
-    <%=igre_ba.CMS.ZajednickeMete() %>
+    <%=Web_Shop.CMS.ZajednickeMete() %>
 </head>
 <body>
-    <%=igre_ba.CMS.LeftPanel() %>
+    <%=Web_Shop.CMS.LeftPanel() %>
 
     <div id="right-panel" class="right-panel">
-        <%=igre_ba.CMS.HeaderString() %>
+        <%=Web_Shop.CMS.HeaderString() %>
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -36,11 +36,11 @@
         </div>
         <div class="content mt-3">
             <div class="animated">
-                <%=igre_ba.CMS.Slideri() %>
+                <%=Web_Shop.CMS.Slideri() %>
             </div>
         </div>
     </div>
-    <%=igre_ba.CMS.FootScript() %>
+    <%=Web_Shop.CMS.FootScript() %>
 
     <script src="assets/js/lib/data-table/datatables.min.js"></script>
     <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>

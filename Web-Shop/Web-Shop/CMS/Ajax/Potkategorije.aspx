@@ -1,1 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Potkategorije.aspx.vb" Inherits="igre_ba.Potkategorije" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Potkategorije.aspx.vb" Inherits="Web_Shop.Potkategorije" %>

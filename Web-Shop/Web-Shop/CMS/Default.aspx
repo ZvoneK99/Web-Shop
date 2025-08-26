@@ -1,13 +1,13 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Default.aspx.vb" Inherits="igre_ba._Default1" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Default.aspx.vb" Inherits="Web_Shop._Default1" %>
 
 <!doctype html>
-<%=igre_ba.CMS.Uvjeti() %>
+<%=Web_Shop.CMS.Uvjeti() %>
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
     <title>AVE CMS - AVE Content Management System</title>
     <meta name="description" content="AVE CMS - AVE Content Management System">
-    <%=igre_ba.CMS.ZajednickeMete() %>
+    <%=Web_Shop.CMS.ZajednickeMete() %>
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
