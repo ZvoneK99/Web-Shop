@@ -43,7 +43,7 @@ Public Class ResetLozinke
                             srv.EnableSsl = True
                             srv.UseDefaultCredentials = False
                             srv.Credentials = New System.Net.NetworkCredential(Komponente.Postavke("SmtpUser"), Komponente.Postavke("SmtpLozinka"))
-                            Dim mailFrom As New MailAddress("zvone.kozull1999@gmail.com", Komponente.Postavke("Tvrtka"))
+                            Dim mailFrom As New MailAddress(Komponente.Postavke("SmtpUser"), Komponente.Postavke("Tvrtka"))
                             Dim MailPrimatelja As String = citac("Email").ToString().Trim()
                             Dim mailToFirma As New MailAddress(MailPrimatelja)
                             Dim mlFirma As New MailMessage(mailFrom, mailToFirma)

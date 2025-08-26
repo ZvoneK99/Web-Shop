@@ -31,7 +31,7 @@ Public Class PosaljiMail
                 srv.EnableSsl = False
                 srv.UseDefaultCredentials = False
                 srv.Credentials = New System.Net.NetworkCredential(Komponente.Postavke("SmtpUser"), Komponente.Postavke("SmtpLozinka"))
-                Dim mailFrom As New MailAddress("web@bulk.ba", Komponente.Postavke("Tvrtka"))
+                Dim mailFrom As New MailAddress(Komponente.Postavke("SmtpUser"), Komponente.Postavke("Tvrtka"))
 
                 Using konekcija As New SqlConnection(Komponente.SQLKonekcija())
                     konekcija.Open()

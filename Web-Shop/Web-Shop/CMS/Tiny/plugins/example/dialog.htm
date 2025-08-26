@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{#example_dlg.title}</title>
+    <script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+    <script type="text/javascript" src="/cms/Scripts/JQuery.js"></script>
+    <script type="text/javascript" src="/cms/Scripts/JQuery.Form.js"></script>
+    <script type="text/javascript" src="js/dialog.js"></script>
+</head>
+<body>
+    <form id="upload" method="post" action="/cms/upload.aspx" enctype="multipart/form-data">
+    <input id="files" name="files" type="file" multiple />
+    <div class="mceActionPanel">
+        <input type="submit" id="insert" name="insert" value="{#insert}" />
+        <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+    </div>
+    </form>
+</body>
+</html>
