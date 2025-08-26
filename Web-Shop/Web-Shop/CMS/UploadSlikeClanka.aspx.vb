@@ -73,7 +73,7 @@ Public Class UploadSlikeClanka
 
     Private Sub SpremuuBazu(naziv As String, ClanakID As Integer, Tag As String)
         Dim konekcija As SqlConnection
-        konekcija = New SqlConnection(Komponente.conekcija())
+        konekcija = New SqlConnection(Komponente.SQLKonekcija())
         Dim InsertKomanda As New SqlCommand
         'Dim MetaTag = naziv
         InsertKomanda.Connection = konekcija

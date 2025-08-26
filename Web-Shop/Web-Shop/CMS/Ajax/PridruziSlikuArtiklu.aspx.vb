@@ -4,7 +4,7 @@ Public Class PridruziSlikuArtiklu
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Response.Clear()
         Dim slika As String = Request.Params("slika")
         Dim artikalid As Integer = Request.Params("artikalid")

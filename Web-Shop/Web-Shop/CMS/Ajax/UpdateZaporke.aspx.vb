@@ -4,7 +4,7 @@ Public Class UpdateZaporke
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim hidId As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("hidId"))
         Dim txtLozinka1 As String = HttpContext.Current.Request.Params("txtPassword1")
         Dim txtLozinka2 As String = HttpContext.Current.Request.Params("txtPassword2")

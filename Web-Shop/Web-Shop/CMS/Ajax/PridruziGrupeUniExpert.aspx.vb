@@ -6,7 +6,7 @@ Public Class PridruziGrupeUniExpert
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim unigrupa As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("unigrupa"))
         Dim comgrupa As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("comgrupa"))
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

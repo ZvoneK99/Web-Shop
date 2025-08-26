@@ -17,7 +17,7 @@ Public Class DodajVezaniArtikalBulk
         If Not Integer.TryParse(artikalIDStr, artikalID) Then Exit Sub
         If Not Integer.TryParse(vezaniIDStr, vezaniID) Then Exit Sub
 
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand("INSERT INTO ArtikliVezaniBulk (ArtikalID, VezaniArtikalID) VALUES (@ArtikalID, @VezaniID)", konekcija)

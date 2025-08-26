@@ -6,7 +6,7 @@ Public Class KorisnikStatus
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim id As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("id"))
         Dim status As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("status"))
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

@@ -7,7 +7,7 @@ Public Class KategorijaStatusComTradeBulk
         Dim id As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("id"))
         Dim status As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("status"))
         Dim grpuni As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("grpuni"))
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

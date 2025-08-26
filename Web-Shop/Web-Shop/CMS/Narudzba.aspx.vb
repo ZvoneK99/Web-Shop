@@ -9,7 +9,7 @@ Public Class Narudzba
 
     Public Function PrukaziPodatke() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim NarudzbaID = HttpContext.Current.Request.QueryString("id")
 
         Using konekcija As New SqlConnection(putanja)

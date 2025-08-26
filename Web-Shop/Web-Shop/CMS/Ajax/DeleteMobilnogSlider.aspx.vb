@@ -21,7 +21,7 @@ Public Class DeleteMobilnogSlider
     End Sub
 
     Private Sub IzbrisiIzBaze(BanerID As Integer, file As String)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

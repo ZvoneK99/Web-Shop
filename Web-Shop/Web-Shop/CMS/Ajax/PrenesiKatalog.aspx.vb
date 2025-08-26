@@ -43,7 +43,7 @@ Public Class PrenesiKatalog
 
     Private Sub ZapisiUBazu(FilePath As String, OrgNazivDatoteke As String)
 
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

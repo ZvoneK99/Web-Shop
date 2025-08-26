@@ -21,7 +21,7 @@ Public Class IzbrisiBrand
     End Sub
 
     Private Sub IzbrisiSlikuuBazi(SlikaID As Integer)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

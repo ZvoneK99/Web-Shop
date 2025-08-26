@@ -6,7 +6,7 @@ Public Class IzbrisiSliku
     Private FileDeleted As Boolean = False
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Dim putanja As String = Komponente.conekcija()
+        'Dim putanja As String = Komponente.SQLKonekcija()
         Dim SlikaID As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("SlikaID"))
         Dim ArtikalID As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("ArtikalID"))
         Dim file As String = HttpContext.Current.Request.Params("file")
@@ -25,7 +25,7 @@ Public Class IzbrisiSliku
     End Sub
 
     Private Sub IzbrisiSlikuuBazi(SlikaID As Integer)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

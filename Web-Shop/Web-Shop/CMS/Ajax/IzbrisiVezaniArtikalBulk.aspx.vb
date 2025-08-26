@@ -16,7 +16,7 @@ Public Class IzbrisiVezaniArtikalBulk
         Dim VezaniArtikalID As Integer
         If Not Integer.TryParse(idStr, VezaniArtikalID) Then Exit Sub
 
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand("DELETE FROM ArtikliVezaniBulk WHERE ID=@ID", konekcija)

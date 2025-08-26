@@ -74,7 +74,7 @@ Public Class PrenesiSlider
 
     Private Sub SpremuuBazu(naziv As String, orginalNaziv As String)
         Dim konekcija As SqlConnection
-        konekcija = New SqlConnection(Komponente.conekcija())
+        konekcija = New SqlConnection(Komponente.SQLKonekcija())
         Dim InsertKomanda As New SqlCommand
         InsertKomanda.Connection = konekcija
         InsertKomanda.CommandText = "UPDATE Slider SET Prioritet=Prioritet+1;INSERT INTO Slider (Slika, Prioritet, Aktivno, Link) Values ('" & naziv & "', '1', '1', '#')"

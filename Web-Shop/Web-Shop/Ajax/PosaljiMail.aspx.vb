@@ -28,7 +28,7 @@ Public Class PosaljiMail
                 ' SMTP konfiguracija
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
                 Dim srv As New SmtpClient(Komponente.Postavke("SmtpServer"), Komponente.Postavke("SmtpPort"))
-                srv.EnableSsl = False
+                srv.EnableSsl = True
                 srv.UseDefaultCredentials = False
                 srv.Credentials = New System.Net.NetworkCredential(Komponente.Postavke("SmtpUser"), Komponente.Postavke("SmtpLozinka"))
                 Dim mailFrom As New MailAddress(Komponente.Postavke("SmtpUser"), Komponente.Postavke("Tvrtka"))

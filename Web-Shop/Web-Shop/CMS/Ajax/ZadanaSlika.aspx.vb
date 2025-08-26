@@ -4,7 +4,7 @@ Public Class ZadanaSlika
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim SlikaID As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("SlikaID"))
         Dim ArtikalID As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("ArtikalID"))
         Using konekcija As New SqlConnection(putanja)

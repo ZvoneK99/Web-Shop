@@ -8,7 +8,7 @@ Public Class PromjeniPrioritetGrupeBulk
         Dim prioritet As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("prioritet"))
         Dim nadgrupa As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("nadgrupa"))
         Dim vrijednost As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("vrijednost"))
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

@@ -4,7 +4,7 @@ Public Class PromjeniArtikliNadGrupeBulk
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim stariNaziv As String = Request.Params("stariNaziv") ' "TL5787_new.jpg"
         Dim noviNaziv As String = Request.Params("noviNaziv") ' "TL5787.jpg"
         Dim slikaID As Integer = Request.Params("slikaID")

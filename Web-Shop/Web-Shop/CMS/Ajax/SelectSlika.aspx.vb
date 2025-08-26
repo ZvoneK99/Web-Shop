@@ -5,7 +5,7 @@ Public Class SelectSlika
 
     Public Shared Function SlikeHtml() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim Pojam As String = HttpContext.Current.Request.QueryString("Pojam")
 
         Using konekcija As New SqlConnection(putanja)

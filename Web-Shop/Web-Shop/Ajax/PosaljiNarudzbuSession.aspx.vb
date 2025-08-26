@@ -17,7 +17,7 @@ Public Class PosaljiNarudzbuSession
             'MsgBox(nacin)
             UnesiKorisnikaSQL(n, nacin, "1", napomena, NacinDostave)
             Session.Clear()
-            Response.Redirect("/hvala")
+            Response.Redirect("/pocetna")
         End If
     End Sub
 
@@ -311,29 +311,16 @@ Public Class PosaljiNarudzbuSession
             End Using
         End Using
 
-        'Mail.
-        'Dim srv As New SmtpClient
-        'Dim mailFrom As New MailAddress("info@igre.ba", "IGRE.BA WebShop")
 
-        'Dim mailToFirma As New MailAddress("univerzal.sb@gmail.com")
-        'Dim mlFirma As New MailMessage(mailFrom, mailToFirma)
-        'mlFirma.ReplyToList.Add("admin@igre.ba")
-        'mlFirma.SubjectEncoding = Encoding.UTF8
-        'mlFirma.Priority = MailPriority.Normal
-        'mlFirma.BodyEncoding = Encoding.UTF8
-        'mlFirma.IsBodyHtml = True
-        'mlFirma.Subject = HttpContext.Current.Server.HtmlEncode("Nova narudžba IGRE.BA WebShop " & NarudzbaID)
-        'mlFirma.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString)
-        'srv.Send(mlFirma)
-        'mlFirma.Dispose()
+
 
         ' SMTP konfiguracija
         System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
         Dim srv As New SmtpClient(Komponente.Postavke("SmtpServer"), Komponente.Postavke("SmtpPort"))
-        srv.EnableSsl = False
+        srv.EnableSsl = True
         srv.UseDefaultCredentials = False
         srv.Credentials = New System.Net.NetworkCredential(Komponente.Postavke("SmtpUser"), Komponente.Postavke("SmtpLozinka"))
-        Dim mailFrom As New MailAddress("web@bulk.ba", Komponente.Postavke("Tvrtka"))
+        Dim mailFrom As New MailAddress(Komponente.Postavke("SmtpUser"), Komponente.Postavke("Tvrtka"))
 
         Using konekcija As New SqlConnection(Komponente.SQLKonekcija())
             konekcija.Open()
@@ -381,7 +368,7 @@ Public Class PosaljiNarudzbuSession
             'Dim dodatniLink As String = "<br><br>Ako želite ocijeniti proizvod, kliknite <a href='https://bulk.ba/recenzija?narudzbaID=" & NarudzbaID & "'>OVDJE</a>."
             'mlKupac.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString & dodatniLink)
 
-            'mlKupac.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString)
+            mlKupac.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString)
             srv.Send(mlKupac)
             mlKupac.Dispose()
         End If

@@ -4,7 +4,7 @@ Public Class UpdateArtikla
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim hidId As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("hidId"))
         Dim hidSkladisteId As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("hidSkladisteId"))
         Dim txtNazivArtikla As String = HttpContext.Current.Request.Params("txtNazivArtikla")

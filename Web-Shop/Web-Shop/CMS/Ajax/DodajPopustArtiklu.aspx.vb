@@ -4,7 +4,7 @@ Public Class DodajPopustArtiklu
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Dim txtKolicina As String = HttpContext.Current.Request.Params("kolicina")
         Dim txtPopust As Decimal = HttpContext.Current.Request.Params("popust")

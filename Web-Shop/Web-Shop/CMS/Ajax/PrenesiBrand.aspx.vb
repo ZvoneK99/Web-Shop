@@ -74,7 +74,7 @@ Public Class PrenesiBrand
 
     Private Sub SpremuuBazu(naziv As String, orginalNaziv As String)
         Dim konekcija As SqlConnection
-        konekcija = New SqlConnection(Komponente.conekcija())
+        konekcija = New SqlConnection(Komponente.SQLKonekcija())
         Dim InsertKomanda As New SqlCommand
         InsertKomanda.Connection = konekcija
         InsertKomanda.CommandText = "UPDATE Brendovi SET Prioritet=Prioritet+1;INSERT INTO Brendovi (Brend, Datoteka, Prioritet, Aktivno, Link) Values ('0', '" & naziv & "', '1', '1', '#')"

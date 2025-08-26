@@ -4,7 +4,7 @@ Public Class UpdateBrojRata
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim hidId As Integer = HttpContext.Current.Request.Params("hidId")
         Dim txtMarza As Decimal = HttpContext.Current.Request.Params("txtMarza")
 

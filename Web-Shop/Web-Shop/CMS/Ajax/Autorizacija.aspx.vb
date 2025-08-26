@@ -7,7 +7,7 @@ Public Class CmsAutorizacija
         Dim username As String = HttpContext.Current.Request.Params("Email")
         Dim pwd As String = HttpContext.Current.Request.Params("Password")
         Dim strConn As String
-        strConn = Komponente.conekcija()
+        strConn = Komponente.SQLKonekcija()
         Dim Conn As New SqlConnection(strConn)
         Conn.Open()
         Dim sqlUserName As String
@@ -36,7 +36,7 @@ Public Class CmsAutorizacija
     End Sub
 
     Private Sub ZapisiCookie(username As String)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()
@@ -63,7 +63,7 @@ Public Class CmsAutorizacija
     End Sub
 
     Private Sub ZapisiZadnjiLogin(KorisnikID As Integer)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

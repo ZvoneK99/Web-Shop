@@ -41,7 +41,7 @@ Public Class UploadMobilnogSlidera
         Dim IdLogiranog As Integer = Komponente.LogiraniKorisnikID()
         'Dim logiraniKorisnik As String = Komponente.LogiraniKorisnikIme(IdLogiranog)
 
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

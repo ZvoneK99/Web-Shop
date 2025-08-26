@@ -4,7 +4,7 @@ Public Class DodajKategorijuBulk
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Dim txtKaregorija As String = HttpContext.Current.Request.Params("txtKaregorija")
         Dim txtSifraKaregorije As String = HttpContext.Current.Request.Params("txtKaregorija") ' HttpContext.Current.Request.Params("txtSifraKaregorije")
@@ -27,7 +27,7 @@ Public Class DodajKategorijuBulk
 
     Private Function ProvjeriPrioritetKategorije() As Integer
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()

@@ -4,7 +4,7 @@ Public Class PromjeniKatalog
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim opis As String = Request.Params("opis") ' "TL5787.jpg"
         Dim slikaID As Integer = Request.Params("slikaID")
 

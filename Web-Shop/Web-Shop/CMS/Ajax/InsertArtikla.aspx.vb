@@ -4,7 +4,7 @@ Public Class InsertArtikla
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim formID As Integer = 0
         Dim hidSkladisteId As Integer = HttpContext.Current.Request.Params("hidSkladisteId")
         Dim txtSifraArtikla As String = HttpContext.Current.Request.Params("txtSifraArtikla")

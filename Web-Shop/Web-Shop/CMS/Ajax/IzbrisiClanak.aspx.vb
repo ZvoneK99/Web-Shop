@@ -6,7 +6,7 @@ Public Class IzbrisiClanak
     Private Property FileDeleted As Boolean
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim ClanakID As Integer = Convert.ToInt32(HttpContext.Current.Request.Params("id"))
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -35,7 +35,7 @@ Public Class IzbrisiClanak
     End Sub
 
     Private Sub IzbrisiSlike(ClanakID As Integer)
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()

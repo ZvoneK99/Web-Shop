@@ -97,6 +97,7 @@ Public Class Komponente
             html.Append("<li><a href='/login' class='header-text'>Registriraj se</a></li>")
             html.Append("<li><a href='/login' class='header-text'>Prijavi se</a></li>")
         Else
+            'Ovdje prikazati korisnikovo ime
             html.Append("<li><a href='/login?a=logout'>Odjavi se</a></li>")
         End If
         html.Append("</ul>")
@@ -258,31 +259,17 @@ Public Class Komponente
         html.Append("</div>") 'widget
         html.Append("</div>") 'col-md-6 col-lg-2
         'Informacije
-        'html.Append("<div class='col-md-6 col-lg-2'>")
-        'html.Append("<div class='widget'>")
-        'html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
-        'html.Append("<div class='widget-content row row-sm'>")
-        'html.Append("<ul class='col-xl-6'>")
+        html.Append("<div class='col-md-6 col-lg-2'>")
+        html.Append("<div class='widget'>")
+        html.Append(" <h3 class='widget-title naslov-footer'>Informacije</h3>")
+        html.Append("<div class='widget-content row row-sm'>")
+        html.Append("<ul class='col-xl-6'>")
         'html.Append("<li><a href='/onama' class='element-footer'>O Nama</a></li>")
-        'html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
-        'html.Append("</ul>") 'col-xl-6
-        'html.Append("</div>") 'widget-content row row-sm
-        'html.Append("</div>") 'widget
-        'html.Append("</div>") 'col-md-6 col-lg-2
-        ''Plaćanje i način dostave
-        'html.Append("<div class='col-md-6 col-lg-2'>")
-        'html.Append(" <div class='widget'>")
-        'html.Append("<h3 class='widget-title naslov-footer'>Plaćanje i način dostave</h3>")
-        'html.Append("<div class='widget-content row row-sm'>")
-        'html.Append("<ul class='col-xl-12'>")
-        'html.Append("<li><a href='/statika?id=2' class='element-footer'>Načini plaćanja</a></li>")
-        'html.Append("<li><a href='/statika?id=3' class='element-footer'>Sigurnost plaćanja</a></li>")
-        'html.Append("<li><a href='/statika?id=4' class='element-footer'>Brza i pouzdana dostava</a></li>")
-        'html.Append("<li><a href='/statika?id=1' class='element-footer'>Opći uslovi poslovanja</a></li>")
-        'html.Append("</ul>") 'col-xl-12
-        'html.Append("</div>") 'widget-content row row-sm
-        'html.Append("</div>") 'widget
-        'html.Append("</div>") 'col-md-6 col-lg-2
+        html.Append("<li><a href='/kontakt' class='element-footer'>Kontakt</a></li>")
+        html.Append("</ul>") 'col-xl-6
+        html.Append("</div>") 'widget-content row row-sm
+        html.Append("</div>") 'widget
+        html.Append("</div>") 'col-md-6 col-lg-2
 
         html.Append("<div class='footer-bottom container'>")
         html.Append("<p>Copyright © <p href='/' style='color:  #4b643b;'>Zvonimir Kožul & Leonardo Misir </p></p>")

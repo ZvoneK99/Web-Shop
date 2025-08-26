@@ -5,7 +5,7 @@ Public Class CMS
 
     Public Shared Function Postavke(Naziv As String) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -82,7 +82,7 @@ Public Class CMS
 
     Public Shared Function LeftPanel() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<aside id=""left-panel"" class=""left-panel"">")
         html.Append("<nav class=""navbar navbar-expand-sm navbar-default"">")
@@ -117,7 +117,7 @@ Public Class CMS
 
     Private Shared Function CmsKomponente() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         'html.Append("<h3 class=""menu-title"">Upravljanje artiklima</h3>")
 
@@ -144,7 +144,7 @@ Public Class CMS
 
     Private Shared Function Grupe(KomponentaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -172,7 +172,7 @@ Public Class CMS
 
     Private Shared Function Elementi(GrupaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<ul class=""sub-menu children dropdown-menu"">")
         'html.Append("<li><i class=""fa fa-puzzle-piece""></i><a href=""ui-buttons.html"">Buttons</a></li>")
@@ -272,7 +272,7 @@ Public Class CMS
 
     Public Shared Function ImeKorisnika(KorisnikID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -376,7 +376,7 @@ Public Class CMS
 
     Private Shared Function BrojNeprocitanihObavjesti(idLogiranogKorisnika As Integer) As Object
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -562,7 +562,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikle(AktivanNeaktivan As Boolean) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -587,7 +587,7 @@ Public Class CMS
 
     Public Shared Function PrebrojiArtikleRaspon(minKolicina As Integer, maxKolicina As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -695,7 +695,7 @@ Public Class CMS
 
     Private Shared Function BrojKomitenata(AktivanNeaktivan As Boolean) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -720,7 +720,7 @@ Public Class CMS
 
     Private Shared Function UkupanPromet() As Decimal
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -749,7 +749,7 @@ Public Class CMS
 
     Private Shared Function BrojNarudzbi(Naruceno As Boolean, Poslano As Boolean) As Integer
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -778,7 +778,7 @@ Public Class CMS
 
     Public Shared Function NoviArtikla() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim ArtikalID As Integer = HttpContext.Current.Request.QueryString("id")
 
         html.Append("<div class=""col-lg-9"">")
@@ -1100,7 +1100,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikleStranice(Aktivno As Boolean) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1123,7 +1123,7 @@ Public Class CMS
 
     Public Shared Function tabelaArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviArtikli"">")
         html.Append("<div class=""col-md-12"">")
@@ -1200,7 +1200,7 @@ Public Class CMS
 
     Private Shared Function ProvjeriDostupnostSlike(ArtikalID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1237,7 +1237,7 @@ Public Class CMS
 
     Public Shared Function ArtikliMrezaTablica(stranica As Integer, naziv As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1289,7 +1289,7 @@ Public Class CMS
 
     Public Shared Function tabelaArtikalaNa() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviArtikliNa"">")
         html.Append("<div class=""col-md-12"">")
@@ -1394,7 +1394,7 @@ Public Class CMS
 
     Public Shared Function ArtikliMrezaTablicaNa(stranica As Integer, naziv As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1446,7 +1446,7 @@ Public Class CMS
 
     Public Shared Function IzmjenaArtikla() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim ArtikalID As Integer = HttpContext.Current.Request.QueryString("id")
 
         html.Append("<div class=""col-lg-9"">")
@@ -1868,7 +1868,7 @@ Public Class CMS
 
     Public Shared Function VezaniArtikliBulk() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim idArtikla As Integer = HttpContext.Current.Request.QueryString("id")
 
 
@@ -1918,7 +1918,7 @@ Public Class CMS
 
     Public Shared Function AutocompleteArtikala() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim Pojam As String = HttpContext.Current.Request.QueryString("Pojam")
         Dim artikalid As Integer = HttpContext.Current.Request.QueryString("artikalid")
 
@@ -1948,7 +1948,7 @@ Public Class CMS
 
     Public Shared Function boxPopusti(artikalID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""card-header""><strong>KOLIČINSKI POPUSTI</strong> artikla</div>")
         html.Append("<div class=""card-body card-block"">")
@@ -1985,7 +1985,7 @@ Public Class CMS
 
     Public Shared Function ddlOdabranaKategorija(KategorijaID As Integer, DisEna As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.AppendFormat("<select name=""ddlKategorija"" id=""ddlKategorija"" class=""form-control ddlKategorija"" data-dis=""{0}"" {0}>", DisEna)
         html.Append("<option value=""0"">Odaberite kategoriju</option>")
@@ -2012,7 +2012,7 @@ Public Class CMS
 
     Public Shared Function ddlOdabranaKategorijaBulk(KategorijaID As Integer, DisEna As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.AppendFormat("<select name=""ddlKategorijaBulk"" id=""ddlKategorijaBulk"" class=""form-control ddlKategorijaBulk"" data-dis=""{0}"" {0}>", DisEna)
         html.Append("<option value=""0"">Odaberite kategoriju</option>")
@@ -2039,7 +2039,7 @@ Public Class CMS
 
     Public Shared Function ddlOdabranaPodKategorija(PodKategorijaID As Integer, KategorijaID As Integer, DisEna As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.AppendFormat("<select name=""ddlPodKategorija"" id=""ddlPodKategorija"" class=""form-control ddlPodKategorija"" data-dis=""{0}"" {0}>", DisEna)
         html.Append("<option value=""0"">Odaberite podkategoriju</option>")
@@ -2066,7 +2066,7 @@ Public Class CMS
 
     Public Shared Function ddlOdabranaPodKategorijaBulk(PodKategorijaID As Integer, KategorijaID As Integer, DisEna As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.AppendFormat("<select name=""ddlPodKategorijaBulk"" id=""ddlPodKategorijaBulk"" class=""form-control ddlPodKategorijaBulk"" data-dis=""{0}"" {0}>", DisEna)
         html.Append("<option value=""0"">Odaberite podkategoriju</option>")
@@ -2093,7 +2093,7 @@ Public Class CMS
 
     Private Shared Function SlikeArtikla(ArtikalID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2142,7 +2142,7 @@ Public Class CMS
 
     Public Shared Function GrupeArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row GrupeArtikala"">")
         html.Append("<div class=""col-md-12"">")
@@ -2181,7 +2181,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikleGrupe(KategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2206,7 +2206,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikleGrupeDostupne(KategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2234,7 +2234,7 @@ Public Class CMS
 
     Public Shared Function KategorijeMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2274,7 +2274,7 @@ Public Class CMS
 
     Public Shared Function PodKategorijeArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row PodKategorijeArtikala"">")
         html.Append("<div class=""col-md-12"">")
@@ -2314,7 +2314,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtiklePodGrupe(PodKategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2339,7 +2339,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtiklePodGrupeDostupne(PodKategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2367,7 +2367,7 @@ Public Class CMS
 
     Public Shared Function PodKategorijeMrezaTablica(KategorijaID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -2412,7 +2412,7 @@ Public Class CMS
 
     Public Shared Function tabelaArtikliPodKategorije() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim PodKategorijaID As Integer = HttpContext.Current.Request.QueryString("PodKategorijaID")
 
         html.Append("<div class=""row sviArtikliPodKategorije"">")
@@ -2484,7 +2484,7 @@ Public Class CMS
 
     Public Shared Function MrezaArtikliPodKategorije(stranica As Integer, PodKategorijaID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim PodKategorijaID As Integer = HttpContext.Current.Request.QueryString("PodKategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -2538,7 +2538,7 @@ Public Class CMS
     'BULK Grupe
     Public Shared Function GrupeArtikalaBulk() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row GrupeArtikalaBulk"">")
         html.Append("<div class=""col-md-12"">")
@@ -2590,7 +2590,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikleGrupeBulk(KategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2615,7 +2615,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtikleGrupeDostupneBulk(KategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2643,7 +2643,7 @@ Public Class CMS
 
     Public Shared Function KategorijeMrezaTablicaBulk() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2711,7 +2711,7 @@ Public Class CMS
 
     Public Shared Function PodKategorijeArtikalaBulk() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row PodKategorijeArtikalaBulk"">")
         html.Append("<div class=""col-md-12"">")
@@ -2766,7 +2766,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtiklePodGrupeBulk(PodKategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2791,7 +2791,7 @@ Public Class CMS
 
     Private Shared Function PrebrojiArtiklePodGrupeDostupneBulk(PodKategorijaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -2819,7 +2819,7 @@ Public Class CMS
 
     Public Shared Function PodKategorijeMrezaTablicaBulk(KategorijaID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -2893,7 +2893,7 @@ Public Class CMS
 
     Public Shared Function tabelaArtikliPodKategorijeBulk() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim PodKategorijaID As Integer = HttpContext.Current.Request.QueryString("PodKategorijaID")
 
         html.Append("<div class=""row sviArtikliPodKategorijeBulk"">")
@@ -2965,7 +2965,7 @@ Public Class CMS
 
     Public Shared Function MrezaArtikliPodKategorijeBulk(stranica As Integer, PodKategorijaID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim PodKategorijaID As Integer = HttpContext.Current.Request.QueryString("PodKategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -3020,7 +3020,7 @@ Public Class CMS
 
     Public Shared Function NoviKorisnik() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""col-lg-6"">")
         html.Append("<div class=""card artikalDet"">")
@@ -3207,7 +3207,7 @@ Public Class CMS
 
     Public Shared Function Korisnici() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row Korisnici"">")
         html.Append("<div class=""col-md-12"">")
@@ -3249,7 +3249,7 @@ Public Class CMS
 
     Private Shared Function NivoKorisnika(AdminLevel As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -3274,7 +3274,7 @@ Public Class CMS
 
     Public Shared Function KorisniciMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -3318,7 +3318,7 @@ Public Class CMS
 
     Private Shared Function BrojNarudzbiKorisnika(KupacID As Integer) As Integer
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -3347,7 +3347,7 @@ Public Class CMS
 
     Public Shared Function IzmjenaKorisnika() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim KorisnikID As Integer = HttpContext.Current.Request.QueryString("KorisnikID")
 
         html.Append("<div class=""col-lg-6"">")
@@ -3582,7 +3582,7 @@ Public Class CMS
 
     Private Shared Function ddlAdminLevel(AdminLevel As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlAdminLevel"" id=""ddlAdminLevel"" class=""form-control ddlAdminLevel"">")
         html.Append("<option value=""0"">Odaberite kategoriju</option>")
@@ -3609,7 +3609,7 @@ Public Class CMS
 
     Private Shared Function NarudzbeKorisnika(KorisnikID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim valuta As String = Postavke("Valuta")
 
         Using konekcija As New SqlConnection(putanja)
@@ -3648,7 +3648,7 @@ Public Class CMS
 
     Public Shared Function SumaNarudzbe(NarudzbaID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         On Error Resume Next
 
@@ -3674,7 +3674,7 @@ Public Class CMS
 
     Public Shared Function tabelaPretragaArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviArtikli"">")
         html.Append("<div class=""col-md-12"">")
@@ -3767,7 +3767,7 @@ Public Class CMS
 
     Public Shared Function ArtikliPretragaMrezaTablica(stranica As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim pojam As String = HttpContext.Current.Request.QueryString("pojam")
 
         Using konekcija As New SqlConnection(putanja)
@@ -3818,7 +3818,7 @@ Public Class CMS
 
     Public Shared Function tabelaNoveNarudzbe() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row noveNarudzbe"">")
         html.Append("<div class=""col-md-12"">")
@@ -3888,7 +3888,7 @@ Public Class CMS
 
     Public Shared Function NoveNarudzbeMrezaTablica(stranica As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim valuta As String = Postavke("Valuta")
 
         Using konekcija As New SqlConnection(putanja)
@@ -3940,7 +3940,7 @@ Public Class CMS
 
     Public Shared Function tabelaZavrseneNarudzbe() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row noveZavrsene"">")
         html.Append("<div class=""col-md-12"">")
@@ -4010,7 +4010,7 @@ Public Class CMS
 
     Public Shared Function ZavrseneNarudzbeMrezaTablica(stranica As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim valuta As String = Postavke("Valuta")
 
         Using konekcija As New SqlConnection(putanja)
@@ -4064,7 +4064,7 @@ Public Class CMS
 
     Public Shared Function tabelaObavjesti() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sveObavjesti"">")
         html.Append("<div class=""col-md-12"">")
@@ -4136,7 +4136,7 @@ Public Class CMS
 
     Public Shared Function tabelaArtikalaBezSlike() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviArtikliBezSlike"">")
         html.Append("<div class=""col-md-12"">")
@@ -4215,7 +4215,7 @@ Public Class CMS
 
     Public Shared Function ArtikliMrezaTablicaBezSlike(stranica As Integer, kategorija As Integer, naziv As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -4266,7 +4266,7 @@ Public Class CMS
 
     Private Shared Function ddlKategorija() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""input-group mb-3"">")
         html.Append("<select id=""ddlKategorija"" class=""custom-select ddlKategorija"">")
@@ -4296,7 +4296,7 @@ Public Class CMS
 
     Public Shared Function tabelaIzdvojenihArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviArtikliIzdvojeni"">")
         html.Append("<div class=""col-md-12"">")
@@ -4373,7 +4373,7 @@ Public Class CMS
 
     Public Shared Function ArtikliMrezaTablicaIzdvojeni(stranica As Integer, naziv As String) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -4424,7 +4424,7 @@ Public Class CMS
 
     Private Shared Function NazivArtikla(ArtikalID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -4449,7 +4449,7 @@ Public Class CMS
 
     Public Shared Function BazaArtikala() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row bazaArtikala"">")
 
@@ -4550,7 +4550,7 @@ Public Class CMS
 
     Private Shared Function ProvjeriOsvjezavanje(SkladisteID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -4575,7 +4575,7 @@ Public Class CMS
 
     Public Shared Function PostavkeTvrtke() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim ArtikalID As Integer = HttpContext.Current.Request.QueryString("id")
 
         html.Append("<div class=""col-lg-9"">")
@@ -4754,7 +4754,7 @@ Public Class CMS
 
     Public Shared Function Slideri() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row Slideri"">")
         html.Append("<div class=""col-md-12"">")
@@ -4803,7 +4803,7 @@ Public Class CMS
 
     Public Shared Function SlideriLista() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -4903,7 +4903,7 @@ Public Class CMS
 
     Public Shared Function Partneri() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row Brendovi"">")
         html.Append("<div class=""col-md-12"">")
@@ -4949,7 +4949,7 @@ Public Class CMS
 
     Public Shared Function PartneriLista() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -4988,7 +4988,7 @@ Public Class CMS
 
     Public Shared Function tabelaNovosti() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row sviClanci"">")
         html.Append("<div class=""col-md-12"">")
@@ -5057,7 +5057,7 @@ Public Class CMS
 
     Public Shared Function ClanciMrezaTablica(stranica As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5103,7 +5103,7 @@ Public Class CMS
 
     Private Shared Function ProvjeriDostupnostSlikeClanka(ClanakID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5135,7 +5135,7 @@ Public Class CMS
 
     Public Shared Function IzmjenaClanka() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim ClanakID As Integer = HttpContext.Current.Request.QueryString("id")
 
         html.Append("<div class=""col-lg-9"">")
@@ -5258,7 +5258,7 @@ Public Class CMS
 
     Private Shared Function SlikeClanka(ClanakID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5302,7 +5302,7 @@ Public Class CMS
 
     Private Shared Function NaslovClanka(ClanakID As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5327,7 +5327,7 @@ Public Class CMS
 
     Public Shared Function NoviClanka() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim ClanakID As Integer = HttpContext.Current.Request.QueryString("id")
 
         html.Append("<div class=""col-lg-9"">")
@@ -5410,7 +5410,7 @@ Public Class CMS
 
     'Public Shared Function Statika() As String
     '    Dim html As New StringBuilder()
-    '    Dim putanja As String = Komponente.conekcija()
+    '    Dim putanja As String = Komponente.SQLKonekcija()
     '    Dim id As Integer = HttpContext.Current.Request.QueryString("id")
 
     '    Using konekcija As New SqlConnection(putanja)
@@ -5458,7 +5458,7 @@ Public Class CMS
 
     Public Shared Function OpcePostavke() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row bazaArtikala"">")
         html.Append("<div class=""col-md-12"">")
@@ -5487,7 +5487,7 @@ Public Class CMS
 
     Private Shared Function Rate() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
 
 
@@ -5547,7 +5547,7 @@ Public Class CMS
 
     Public Shared Function StatikaAll() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row Statika"">")
         html.Append("<div class=""col-md-12"">")
@@ -5585,7 +5585,7 @@ Public Class CMS
 
     Public Shared Function StatikaAllList() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5629,7 +5629,7 @@ Public Class CMS
 
     Public Shared Function Statika() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         Dim id As Integer = HttpContext.Current.Request.QueryString("id")
 
         Using konekcija As New SqlConnection(putanja)
@@ -5696,7 +5696,7 @@ Public Class CMS
 
     Private Shared Function Dostava() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5747,7 +5747,7 @@ Public Class CMS
     'ComTrade
     Public Shared Function ComTradeKategorije() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row ComTradeKategorije"">")
         html.Append("<div class=""col-md-12"">")
@@ -5787,7 +5787,7 @@ Public Class CMS
 
     Public Shared Function ComTradeKategorijeMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -5835,7 +5835,7 @@ Public Class CMS
 
     Private Shared Function UniverzalGrupeComTrade(GrupaUniverzalID As Integer, GrupaComTrade As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlUniverzalGrupeComTrade"" id=""ddlUniverzalGrupeComTrade"" class=""form-control ddlUniverzalGrupeComTrade"">")
         html.AppendFormat("<option value=""0"" data-id=""{0}"">Odaberite podkategoriju</option>", GrupaComTrade)
@@ -5862,7 +5862,7 @@ Public Class CMS
 
     Private Shared Function BulkGrupeComTrade(GrupaBulkID As Integer, GrupaComTrade As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlBulkGrupeComTrade"" id=""ddlBulkGrupeComTrade"" class=""form-control ddlBulkGrupeComTrade"">")
         html.AppendFormat("<option value=""0"" data-id=""{0}"">Odaberite podkategoriju</option>", GrupaComTrade)
@@ -5889,7 +5889,7 @@ Public Class CMS
 
     Private Shared Function NadGrupa(NadGrupaID As Integer) As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -5914,7 +5914,7 @@ Public Class CMS
     'UniExpert
     Public Shared Function UniExpertKategorije() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row UniExpertKategorije"">")
         html.Append("<div class=""col-md-12"">")
@@ -5953,7 +5953,7 @@ Public Class CMS
 
     Public Shared Function UniExpertKategorijeMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -5995,7 +5995,7 @@ Public Class CMS
 
     Private Shared Function UniverzalGrupeUniExpert(GrupaUniverzalID As Integer, GrupaComTrade As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlUniverzalGrupeUniExpert"" id=""ddlUniverzalGrupeUniExpert"" class=""form-control ddlUniverzalGrupeUniExpert"">")
         html.AppendFormat("<option value=""0"" data-id=""{0}"">Odaberite podkategoriju</option>", GrupaComTrade)
@@ -6023,7 +6023,7 @@ Public Class CMS
     'StarTech 
     Public Shared Function StarTechKategorije() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row StarTechKategorije"">")
         html.Append("<div class=""col-md-12"">")
@@ -6062,7 +6062,7 @@ Public Class CMS
 
     Public Shared Function StarTechKategorijeMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -6104,7 +6104,7 @@ Public Class CMS
 
     Private Shared Function UniverzalGrupeStarTech(GrupaUniverzalID As Integer, GrupaStarTech As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlUniverzalGrupeStarTech"" id=""ddlUniverzalGrupeStarTech"" class=""form-control ddlUniverzalGrupeStarTech"">")
         html.AppendFormat("<option value=""0"" data-id=""{0}"">Odaberite podkategoriju</option>", GrupaStarTech)
@@ -6132,7 +6132,7 @@ Public Class CMS
     'Digitalis 
     Public Shared Function DigitalisKategorije() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row DigitalisKategorije"">")
         html.Append("<div class=""col-md-12"">")
@@ -6171,7 +6171,7 @@ Public Class CMS
 
     Public Shared Function DigitalisKategorijeMrezaTablica() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
@@ -6213,7 +6213,7 @@ Public Class CMS
 
     Private Shared Function UniverzalGrupeDigitalis(GrupaUniverzalID As Integer, GrupaDigitalis As Integer) As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<select name=""ddlUniverzalGrupeDigitalis"" id=""ddlUniverzalGrupeDigitalis"" class=""form-control ddlUniverzalGrupeDigitalis"">")
         html.AppendFormat("<option value=""0"" data-id=""{0}"">Odaberite podkategoriju</option>", GrupaDigitalis)
@@ -6244,7 +6244,7 @@ Public Class CMS
 
     Public Shared Function Katalozi() As String
         Dim html As New StringBuilder
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
 
         html.Append("<div class=""row Katalozi"">")
         html.Append("<div class=""col-md-12"">")
@@ -6293,7 +6293,7 @@ Public Class CMS
 
     Public Shared Function KataloziLista() As String
         Dim html As New StringBuilder()
-        Dim putanja As String = Komponente.conekcija()
+        Dim putanja As String = Komponente.SQLKonekcija()
         'Dim KategorijaID As Integer = HttpContext.Current.Request.QueryString("KategorijaID")
 
         Using konekcija As New SqlConnection(putanja)
