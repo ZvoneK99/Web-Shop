@@ -377,7 +377,16 @@
     <Content Include="Datoteke\Slider\virman5slika2.jpg" />
     <Content Include="Datoteke\Slider\visual_5_posto.jpg" />
     <Content Include="Datoteke\Slider\xiaomi_redmi_9_b2b_desktop_–_kopija.jpg" />
-    <Content Include="Datoteke\UvjetiKoristenja.txt" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet G TREK 3 GTX.png" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet G TREK 4 GTX M.png" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet G TREK 5 GTX M.png" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet G TREK 5.png" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet SHIVA.png" />
+    <Content Include="Datoteke\SlikeArtikala\Gojzerice Millet SUPER TRIDENT GTX.png" />
+    <Content Include="Datoteke\SlikeArtikala\Millet FRICTION M.png" />
+    <Content Include="Datoteke\SlikeArtikala\Patike MILLET GRANITE CANVAS GTX.png" />
+    <Content Include="Datoteke\SlikeArtikala\Patike Millet LIGHT RUSH.png" />
+    <Content Include="Datoteke\SlikeArtikala\Planinarske cipele MILLET FRICTION GTX U NEW.png" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="JS\Script.js" />
@@ -518,9 +527,7 @@
     </Compile>
     <Compile Include="Code\ArtikalSession.vb" />
     <Compile Include="Code\Komponente.vb" />
-    <Compile Include="Code\Narudzba.vb">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Code\Narudzba.vb" />
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -700,9 +707,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Datoteke\SlikeArtikala\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

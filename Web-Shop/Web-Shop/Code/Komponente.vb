@@ -679,12 +679,8 @@ Public Class Komponente
 
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-                            If slika.Contains("http") = False Then
-                                html.AppendFormat("<img class='product-image-photo istaknuto-img' src='http://igre.ba/Thumb2.ashx?i={0}' alt='{1}'>", slika, citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img class='product-image-photo istaknuto-img' src='{0}' alt='{1}'>", slika, citac("Naziv"))
-                            End If
-                            html.Append("</a>")
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
 
                             html.Append("<div class='btn-icon-group dugmicDodaj-artikal'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
@@ -894,12 +890,9 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href='/artikal/{1}/{0}/'>", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
-                            If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
-                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            End If
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
+
                             html.Append("</a>") '/artikal/{0}
                             html.Append("<div class='btn-icon-group'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
@@ -1098,12 +1091,8 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
-                            If Not slika.Contains("http") Then
-                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", slika, citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", slika, citac("Naziv"))
-                            End If
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
                             html.Append("</a>")
                             html.Append("<div class='btn-icon-group'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
@@ -1227,19 +1216,12 @@ Public Class Komponente
         Dim Valuta As String = "KM"
         Dim KupacLogiran As Boolean = HttpContext.Current.Session("ValjanUser")
 
-
-
-        'html.Append("<tbody>")
         For Each a As ArtikalSession In n.Artikli
-            'Dim cijanaTempGotovinski As Decimal = CijenaArtiklaAkcija(a.id)
-            'Dim cijanaTempVirman As Decimal = CijenaArtikla(a.id)
-            'Dim cijanaTempRate As Decimal = CijenaArtiklaRate(a.id)
-            'Dim cijanaB2B As Decimal = CijenaArtiklaB2B(a.id)
+
 
             html.AppendFormat("<tr class='product-row' data-id='{0}' data-jedcijena='{1}'>", a.id, a.JedCijena)
             html.Append("<td class='product-col'>")
             html.Append("<figure class='product-image-container'>")
-
 
             'Slika
             Dim slika As String = ZadanaSlikaArtikla(a.id)
@@ -1264,7 +1246,6 @@ Public Class Komponente
             html.Append("</td>")
             html.AppendFormat("<td class='ukupna-cijena'>{0} {1}</td>", a.Kolicina * a.JedCijena, Valuta)
             html.Append("</tr>") 'product-row
-
 
             html.Append("<tr class='product-action-row'>")
             html.Append("<td colspan='4' class='clearfix'>")
@@ -1322,11 +1303,13 @@ Public Class Komponente
                             html.Append("<div class='sticky-slider'>")
                             html.Append("<div class='product-slider-container product-item'>")
                             html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
-                            html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
+                            'html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
                             html.Append("</div>")
                             html.Append("</div>")
                             html.Append("<div class='prod-thumbnail row owl-dots transparent-dots' id='carousel-custom-dots'>")
-                            html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
+                            'html.AppendFormat(SlikeArtikla(citac("ID"), "owl-dot", ""))
                             html.Append("</div>")
                             html.Append("</div>")
                             html.Append("</div>")
@@ -1368,6 +1351,9 @@ Public Class Komponente
                             html.Append("<div class='col-lg-6 col-xl-8'>")
                             html.Append("<div class='product-single-details'>")
                             html.AppendFormat("<h1 class='product-title naziv-artikla' title='{0}'>{0}</h1>", citac("Naziv"))
+                            html.Append("<div class='description'>")
+                            html.AppendFormat("<p>{0}</p>", citac("OpisKratki"))
+                            html.Append("</div>") 'description
 
                             html.Append("<div class='price-box'>")
                             Dim cijenaMPC As Decimal = citac("Cijena")
