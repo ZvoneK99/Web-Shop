@@ -19,7 +19,7 @@ Public Class UpdateZaporke
                                         & " Lozinka=@Lozinka" _
                                         & " WHERE ID=@ID;"
                     komanda.Parameters.AddWithValue("@ID", hidId)
-                    komanda.Parameters.AddWithValue("@Lozinka", Komponente.Encrypt(txtLozinka1))
+                    komanda.Parameters.AddWithValue("@Lozinka", txtLozinka1)
                     komanda.ExecuteNonQuery()
                 End Using
             End Using

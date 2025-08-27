@@ -6,8 +6,8 @@
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
-    <title>AVE CMS - AVE Content Management System</title>
-    <meta name="description" content="AVE CMS - Dashboard">
+    <title>CMS</title>
+    <meta name="description" content="CMS">
     <%=Web_Shop.CMS.ZajednickeMete() %>
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -29,9 +29,7 @@
             <div class="col-sm-8">
                 <div class="page-header float-right">
                     <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li class="active">Dashboard</li>
-                        </ol>
+                       
                     </div>
                 </div>
             </div>

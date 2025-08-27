@@ -518,7 +518,9 @@
     </Compile>
     <Compile Include="Code\ArtikalSession.vb" />
     <Compile Include="Code\Komponente.vb" />
-    <Compile Include="Code\Narudzba.vb" />
+    <Compile Include="Code\Narudzba.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>

@@ -5,8 +5,8 @@
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
-    <title>AVE CMS - AVE Content Management System</title>
-    <meta name="description" content="AVE CMS - AVE Content Management System">
+    <title>CMS</title>
+    <meta name="description" content="CMS">
     <%=Web_Shop.CMS.ZajednickeMete() %>
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -18,7 +18,6 @@
             <div class="login-content">
                 <div class="login-logo">
                     <%--<a href="index.html">--%>
-                        <img class="align-content" src="/CMS/images/logo.png" alt="">
                     <%--</a>--%>
                 </div>
                 <div class="login-form">
@@ -44,12 +43,7 @@
 
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Prijavi se</button>
-                        <%--<div class="social-login-content">
-                            <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Prijavite se putem facebooka</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Prijavite se s Twitterom</button>
-                            </div>
-                        </div>--%>
+                       
                         <div class="register-link m-t-15 text-center">
                             <p>Nemate račun? <a href="#">Prijavite se ovdje</a></p>
                         </div>

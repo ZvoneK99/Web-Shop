@@ -6,8 +6,6 @@ Public Class InsertArtikla
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim putanja As String = Komponente.SQLKonekcija()
         Dim formID As Integer = 0
-        Dim hidSkladisteId As Integer = HttpContext.Current.Request.Params("hidSkladisteId")
-        Dim txtSifraArtikla As String = HttpContext.Current.Request.Params("txtSifraArtikla")
         Dim txtBarCod As String = HttpContext.Current.Request.Params("txtBarCod")
         Dim txtkolicina As String = HttpContext.Current.Request.Params("txtkolicina")
         Dim txtNazivArtikla As String = HttpContext.Current.Request.Params("txtNazivArtikla")
@@ -133,8 +131,6 @@ Public Class InsertArtikla
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.StoredProcedure
                 komanda.Parameters.AddWithValue("@NoviID", formID)
-                komanda.Parameters.AddWithValue("@SkladisteID", hidSkladisteId)
-                komanda.Parameters.AddWithValue("@SifraRobe", txtSifraArtikla)
                 komanda.Parameters.AddWithValue("@Barcod", txtBarCod)
                 komanda.Parameters.AddWithValue("@Kolicina", txtkolicina)
                 komanda.Parameters.AddWithValue("@Naziv", txtNazivArtikla.Trim)

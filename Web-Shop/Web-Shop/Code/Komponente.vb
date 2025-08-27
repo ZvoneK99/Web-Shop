@@ -133,7 +133,7 @@ Public Class Komponente
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT TOP 9 ID, NadGrupa FROM ArtikliNadGrupe WHERE Aktivno='1' ORDER BY Prioritet"
+                komanda.CommandText = "SELECT ID, NadGrupa FROM ArtikliNadGrupe WHERE Aktivno='1' ORDER BY Prioritet"
 
                 'Ispis Kategorija u Header 
                 Using citac As SqlDataReader = komanda.ExecuteReader()
@@ -545,6 +545,79 @@ Public Class Komponente
         Return html.ToString()
     End Function
 
+    Public Shared Function ikonaDatoteke(Datoteka As String, OrgNazivDatoteke As String) As String
+        Dim html As New StringBuilder()
+
+        If Right(Datoteka, "3") = "pdf" Then
+            html.Append("<img src=""/Datoteke/Icone/pdf.png"" style=""width:50px;"" alt=""pdf"" title=""" & OrgNazivDatoteke & """/>")
+        Else
+            If Right(Datoteka, "3") = "avi" Then
+                html.Append("<img src=""/Datoteke/Icone/avi.png"" style=""width:50px;"" alt=""avi"" title=""" & OrgNazivDatoteke & """/>")
+            Else
+                If Right(Datoteka, "3") = "doc" Or Right(Datoteka, "4") = "docx" Then
+                    html.Append("<img src=""/Datoteke/Icone/doc.png"" style=""width:50px;"" alt=""doc"" title=""" & OrgNazivDatoteke & """/>")
+                Else
+                    If Right(Datoteka, "3") = "jpg" Or Right(Datoteka, "4") = "jpeg" Then
+                        html.Append("<img src=""/Datoteke/Icone/jpeg.png"" style=""width:50px;"" alt=""jpeg"" title=""" & OrgNazivDatoteke & """/>")
+                    Else
+                        If Right(Datoteka, "3") = "mp3" Then
+                            html.Append("<img src=""/Datoteke/Icone/mp3.png"" style=""width:50px;"" alt=""mp3"" title=""" & OrgNazivDatoteke & """/>")
+                        Else
+                            If Right(Datoteka, "3") = "png" Then
+                                html.Append("<img src=""/Datoteke/Icone/png.png"" style=""width:50px;"" alt=""png"" title=""" & OrgNazivDatoteke & """/>")
+                            Else
+                                If Right(Datoteka, "3") = "rar" Then
+                                    html.Append("<img src=""/Datoteke/Icone/rar.png"" style=""width:50px;"" alt=""rar"" title=""" & OrgNazivDatoteke & """/>")
+                                Else
+                                    If Right(Datoteka, "3") = "zip" Then
+                                        html.Append("<img src=""/Datoteke/Icone/zip.png"" style=""width:50px;"" alt=""zip"" title=""" & OrgNazivDatoteke & """/>")
+                                    Else
+                                        If Right(Datoteka, "3") = "xls" Or Right(Datoteka, "4") = "xlsx" Then
+                                            html.Append("<img src=""/Datoteke/Icone/xls.png"" style=""width:50px;"" alt=""xls"" title=""" & OrgNazivDatoteke & """/>")
+                                        Else
+                                            html.Append("<img src=""/Datoteke/Icone/file.png"" style=""width:50px;"" alt=""file"" title=""" & OrgNazivDatoteke & """/>")
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+        Return html.ToString()
+    End Function
+
+    Public Shared Function SumaNarudzbe(narudzbaID As Integer) As Decimal
+        Dim html As New StringBuilder()
+        Dim putanja As String = SQLKonekcija()
+
+        'On Error Resume Next
+
+        Using konekcija As New SqlConnection(putanja)
+            konekcija.Open()
+            Using komanda As New SqlCommand()
+                komanda.Connection = konekcija
+                komanda.CommandType = CommandType.StoredProcedure
+                komanda.CommandText = "SumaNarudzbe"
+                komanda.Parameters.AddWithValue("@Narudzba", narudzbaID)
+                Using citac As SqlDataReader = komanda.ExecuteReader()
+                    If citac IsNot Nothing Then
+                        While citac.Read()
+                            html.AppendFormat("{0}", citac("Iznos"))
+                        End While
+                    End If
+                End Using
+            End Using
+        End Using
+
+        If html.ToString = "" Then
+            html.Append("0")
+        End If
+
+        Return html.ToString()
+    End Function
 
     '----------------------------------------------------------------------------------------------> General functions END <-------------------------------------------------------------------------------------------
 

@@ -90,8 +90,6 @@ Public Class CMS
         html.Append("<button class=""navbar-toggler"" type=""button"" data-toggle=""collapse"" data-target=""#main-menu"" aria-controls=""main-menu"" aria-expanded=""false"" aria-label=""Toggle navigation"">")
         html.Append("<i class=""fa fa-bars""></i>")
         html.Append("</button>")
-        html.Append("<a class=""navbar-brand"" href=""/CMS/Dashboard.aspx""><img src=""/CMS/images/logo.png"" alt=""Logo""></a>")
-        html.Append("<a class=""navbar-brand hidden"" href=""/CMS/Dashboard.aspx""><img src=""/CMS/images/logo2.png"" alt=""Logo""></a>")
         html.Append("</div>") 'navbar-header
 
         html.Append("<div id=""main-menu"" class=""main-menu collapse navbar-collapse"">")
@@ -297,11 +295,11 @@ Public Class CMS
         Dim html As New StringBuilder
         Dim ime As String = ImeKorisnika(Komponente.LogiraniKorisnikID)
         Dim names() As String = ime.Split(" "c)
-        Dim incijali As String = String.Join("", Array.ConvertAll(names, Function(n) n.Substring(0, 1).ToUpper))
+        'Dim incijali As String = String.Join("", Array.ConvertAll(names, Function(n) n.Substring(0, 1).ToUpper))
 
         html.Append("<div class=""user-area dropdown float-right"">")
         html.Append("<a href=""#"" class=""dropdown-toggle"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">")
-        html.AppendFormat("<span>{0}</span>", incijali)
+        'html.AppendFormat("<span>{0}</span>", incijali)
         'html.Append("<img class=""user-avatar rounded-circle"" src=""images/admin.jpg"" alt=""User Avatar"">")
         html.Append("</a>")
         html.Append("<div class=""user-menu dropdown-menu"">")
@@ -374,38 +372,10 @@ Public Class CMS
         Return html.ToString
     End Function
 
-    Private Shared Function BrojNeprocitanihObavjesti(idLogiranogKorisnika As Integer) As Object
-        Dim html As New StringBuilder
-        Dim putanja As String = Komponente.SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT COUNT(ID) AS Broj FROM Obavjesti WHERE Aktivno='1' AND ID NOT IN (SELECT ObavjestID FROM ObavjestiStatus WHERE ProcitaoID=@KorisnikID)"
-                komanda.Parameters.AddWithValue("@KorisnikID", idLogiranogKorisnika)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            html.AppendFormat("{0}", citac("Broj"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-        If html.ToString = "" Then
-            html.Append("0")
-        End If
-
-        Return html.ToString()
-    End Function
 
     Public Shared Function Notification() As String
         Dim html As New StringBuilder
         Dim idLogiranogKorisnika As Integer = Komponente.LogiraniKorisnikID
-        Dim broj As Integer = BrojNeprocitanihObavjesti(idLogiranogKorisnika)
 
         html.Append("<div class=""dropdown for-notification"">")
         html.Append("<button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""notification"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">")
@@ -1157,11 +1127,11 @@ Public Class CMS
         html.Append("<tr>")
         html.Append("<th>&nbsp</th>")
         html.Append("<th>Naziv Artikla</th>")
-        html.Append("<th>Šifra Artikla</th>")
-        html.Append("<th>Bar Cod</th>")
+        'html.Append("<th>Šifra Artikla</th>")
+        'html.Append("<th>Bar Cod</th>")
         html.Append("<th>Cijena</th>")
         html.Append("<th>Količina</th>")
-        html.Append("<th>Skladište</th>")
+        'html.Append("<th>Skladište</th>")
         html.Append("<th>Aktivan</th>")
         html.Append("</tr>")
         html.Append("</thead>")
@@ -1260,11 +1230,11 @@ Public Class CMS
                             html.AppendFormat("{0}", citac("Naziv"))
                             html.Append("</a>")
                             html.Append("</td>")
-                            html.AppendFormat("<td>{0}</td>", citac("SifraRobe"))
-                            html.AppendFormat("<td>{0}</td>", citac("BarCod"))
+                            'html.AppendFormat("<td>{0}</td>", citac("SifraRob"))
+                            'html.AppendFormat("<td>{0}</td>", citac("BarCod"))
                             html.AppendFormat("<td>{0}</td>", citac("Cijena"), Postavke("Valuta"))
                             html.AppendFormat("<td>{0}</td>", citac("Kolicina"))
-                            html.AppendFormat("<td>{0}</td>", citac("Skladiste"))
+                            'html.AppendFormat("<td>{0}</td>", citac("Skladiste"))
                             html.Append("<td>")
                             html.Append("<label class=""switch switch-3d switch-primary mr-3"">")
                             html.AppendFormat("<input type=""checkbox"" class=""switch-input"" data-id=""{1}"" {0}>", If(citac("Aktivno") = 0, " ", " checked"), citac("ID"))
@@ -2021,7 +1991,7 @@ Public Class CMS
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM ArtikliNadGrupeBulk ORDER BY NadGrupa ASC"
+                komanda.CommandText = "SELECT * FROM ArtikliNadGrupe ORDER BY NadGrupa ASC"
                 'komanda.Parameters.AddWithValue("@SifraKategorije", KlasaSifra)
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
@@ -2075,7 +2045,7 @@ Public Class CMS
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM ArtikliGrupeBulk WHERE NadGrupaID=@KategorijaID ORDER BY Grupa"
+                komanda.CommandText = "SELECT * FROM ArtikliGrupe WHERE NadGrupaID=@KategorijaID ORDER BY Grupa"
                 komanda.Parameters.AddWithValue("@KategorijaID", KategorijaID)
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
