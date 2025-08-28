@@ -679,7 +679,7 @@ Public Class Komponente
 
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
 
                             html.Append("<div class='btn-icon-group dugmicDodaj-artikal'>")
@@ -890,7 +890,7 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href='/artikal/{1}/{0}/'>", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
 
                             html.Append("</a>") '/artikal/{0}
@@ -1091,7 +1091,7 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
                             html.Append("</a>")
                             html.Append("<div class='btn-icon-group'>")
@@ -1303,7 +1303,7 @@ Public Class Komponente
                             html.Append("<div class='sticky-slider'>")
                             html.Append("<div class='product-slider-container product-item'>")
                             html.Append("<div class='product-single-carousel owl-carousel owl-theme'>")
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}.png' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
                             'html.AppendFormat(SlikeArtikla(citac("ID"), "product-item", "product-single-image"))
                             html.Append("</div>")
