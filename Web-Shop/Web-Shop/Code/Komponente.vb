@@ -771,12 +771,9 @@ Public Class Komponente
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
                             'Slika artikla
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
-                            If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
-                                html.AppendFormat("<img class=""product-image-photo"" src=""/Thumb2.ashx?i={0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img class=""product-image-photo"" src=""{0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            End If
-                            html.Append("</a>") '/artikal
+                            html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
 
                             html.Append("<div class='btn-icon-group'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
