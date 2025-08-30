@@ -73,9 +73,6 @@ Public Class PosaljiNarudzbuSession
                 Dim KorisnikID = komanda.Parameters("@NoviID").Value
                 Dim tipUnosa As Integer = komanda.Parameters("@TipUnosa").Value
                 UnesiNarudzbu(n, KorisnikID, nacinPlacanja, "1", napomena, NacinDostave)
-                'If tipUnosa = 1 Then
-                '    'PoslajiObavjestKreiranjaRacuna(KorisnikID)
-                'End If
             End Using
         End Using
 
@@ -92,7 +89,6 @@ Public Class PosaljiNarudzbuSession
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.StoredProcedure
                 komanda.CommandText = "UnesiNarudzbu"
-                'komanda.Parameters.AddWithValue("@ID", formID)
                 komanda.Parameters.AddWithValue("@KupacID", KorisnikID)
                 komanda.Parameters.AddWithValue("@DatumKreiranja", DateAndTime.Now())
                 komanda.Parameters.AddWithValue("@NacinPlacanja", NacinPlacanja)
@@ -129,7 +125,6 @@ Public Class PosaljiNarudzbuSession
                     komanda.Parameters.AddWithValue("@NazivArtikla", a.naziv)
                     komanda.Parameters.AddWithValue("@Cijena", a.JedCijena)
                     komanda.Parameters.AddWithValue("@Kolicina", a.Kolicina)
-                    'komanda.Parameters.AddWithValue("@Iznos", a.JedCijena * a.Kolicina)
                     komanda.ExecuteNonQuery()
                 End Using
             Next
@@ -177,7 +172,6 @@ Public Class PosaljiNarudzbuSession
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
-                            'naziv kupca
                             poruka.Append("<tr>")
                             poruka.Append("<td style=""width:68%;"">")
                             poruka.Append("<b>Broj narudžbe:</b> " & NarudzbaID & "<br/>")
@@ -199,7 +193,6 @@ Public Class PosaljiNarudzbuSession
                 End Using
             End Using
         End Using
-        'poruka.Append("<tr><td colspan=""2""><b>Datum narudžbe:</b> " & Format(DateAndTime.Now(), "dd.MM.yyyy") & "</td></tr>")
 
         poruka.Append("</table><br/>")
         'Artikli
@@ -255,9 +248,7 @@ Public Class PosaljiNarudzbuSession
         poruka.AppendFormat("<td colspan='3' style='text-align:right;font-weight: bold;padding-top: 10px;font-size: 14px;'>Ukupan iznos za platiti: </td>")
         Dim suma As Decimal = Komponente.Suma(NarudzbaID)
         Dim PopustZiralno As Integer = 0
-        'If NacinPlacanja = "virman" Then
-        '    PopustZiralno = Komponente.Postavke("PopustZiralno")
-        'End If
+
         Dim sapopustom As Decimal = suma * (100 - PopustZiralno) / 100
         poruka.AppendFormat("<td colspan='2' style='text-align:right;font-weight: bold;padding-top: 10px;font-size: 14px;'>{0} {1}</td>", Format(sapopustom + NaplataDostave, "N2"), Komponente.Postavke("Valuta"))
         poruka.Append("</tr>")
@@ -266,36 +257,8 @@ Public Class PosaljiNarudzbuSession
         If NacinPlacanja = "mikrofin" Then
             poruka.Append("<br/>")
             poruka.Append("Preko Mikrofin mikrokreditne organizacije možete kupiti svu robu iz našeg asortimana do 18 mjesečnih rata (nije uvjet da morate biti zaposleni).")
-            'poruka.Append("<strong>Mikrofin- Robni kredit</strong>")
-            'poruka.Append("<br/>")
-            'poruka.Append("MKD Mikrofin je omogućio svima da na jednostavan način dođu do željene robe i usluge.  Izaberite željeni proizvod, popunite osnovne podatke, a neko od naših ljubaznih operatera će vas kontaktirati. ")
-            'poruka.Append("Ili jednostavno, uzmite predračun i javite se u jednu od preko 100 Mikrofin poslovnica širom BIH.")
-            'poruka.Append("Potrebno je da imate ličnu kartu, cips i dokaz o primanjima, a kredit kod nas može biti odobren zaposlenom stanovništvu, preduzetnicima i poljoprivrednicima.")
-            'poruka.Append("<ul>")
-            'poruka.Append("<li>Iznos kredita od 200,00 do  20.000,00 KM, a period otplate do 60 mjeseci.</li>")
-            'poruka.Append("<li>Minimalna mjesečna rata je 25,00 KM.</li>")
-            'poruka.Append("</ul>")
-            'poruka.Append("<br/>")
-            'poruka.Append("Lako i brzo do ispunjenja vaših želja, uz naše Robne kredite.")
-            'poruka.Append("<br/>")
-            'poruka.Append("<ul>")
-            'poruka.Append("<strong>MKD ""Mikrofin"" d.o.o.</strong> Banja Luka (skraćeno društvo) se obavezuje da će čuvati privatnost podataka svih korisnika i obrađivati u skladu sa Zakonom o zaštiti ličnih podataka na pravičan i zakonit način.</li>")
-            'poruka.Append("<li>Društvo prikuplja, obrađuje lične podatke samo u mjeri i obimu koji je neophodan za ispunjenje svrhe odnosno realizaciju ugovornog odnosa.</li>")
-            'poruka.Append("<li>Podaci kojima društvo raspolože predstavljaju službenu tajnu i neće se iznajmljivati, pozajmljivati trećim stranama osim u slučaju zakonske /pravne obaveze da se dostave određeni podaci nadležnim institucijama.</li>")
-            'poruka.Append("<li>Lični podaci korisnika su zaštićeni nizom organizacionih i tehničkih mjera koje društvo primjenjuje u svom radu.</li>")
-            'poruka.Append("<li>Podaci o korisnicima se strogo čuvaju i dostupni su samo službenicima kojima su ti podaci neophodni za obavljanje posla.</li>")
-            'poruka.Append("<li>Ukoliko se ne slažete sa ovom izjavom, molimo da vaše lične podatke ne ostavljate i ne deponujete - www.igre.ba</li>")
-            'poruka.Append("<li>Za sva dodatna pitanja možete se obratiti direktno društvu na adresu Vase Pelagića 22, 78000 Banja Luka ili putem e- pošte na adresu: mikrofin@mikrofin.com</li>")
-            'poruka.Append("</ul>")
-        End If
-        'poruka.Append("<table style=""width: 100%; margin: 80px auto 40px auto;"">")
-        'poruka.Append("<tr>")
-        'poruka.Append("<td align=""center"">_________________<br />Primio</td>")
-        'poruka.Append("<td align=""center"">M.P.</td>")
-        'poruka.Append("<td align=""center"">_________________<br />Izdao</td>")
-        'poruka.Append("</tr>")
-        'poruka.Append("</table>")
 
+        End If
         Using konekcijaKomentar As New SqlConnection(Komponente.SQLKonekcija())
             konekcijaKomentar.Open()
             Using komanda As New SqlCommand()
@@ -304,7 +267,6 @@ Public Class PosaljiNarudzbuSession
                 komanda.CommandText = "SELECT * FROM Narudzbe WHERE ID=" & NarudzbaID
                 Using citacNar As SqlDataReader = komanda.ExecuteReader
                     While citacNar.Read
-                        'poruka.AppendFormat("<br/>Odabrani način plaćanja ""{0}""", citacNar("NacinPlacanja"))
                         poruka.AppendFormat("<br/>Napomena: ""{0}""", citacNar("Napomena"))
                     End While
                 End Using
@@ -355,7 +317,6 @@ Public Class PosaljiNarudzbuSession
         End Using
 
         If n.Mail <> "" Then
-            'On Error Resume Next
             Dim mailKupac As New MailAddress(n.Mail)
             Dim mlKupac As New MailMessage(mailFrom, mailKupac)
             mlKupac.ReplyToList.Add(Komponente.Postavke("MailOdgovor"))
@@ -365,8 +326,6 @@ Public Class PosaljiNarudzbuSession
             mlKupac.IsBodyHtml = True
             mlKupac.Subject = Server.HtmlEncode("Vaša narudžba RescueEquip WebShop")
 
-            'Dim dodatniLink As String = "<br><br>Ako želite ocijeniti proizvod, kliknite <a href='https://bulk.ba/recenzija?narudzbaID=" & NarudzbaID & "'>OVDJE</a>."
-            'mlKupac.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString & dodatniLink)
 
             mlKupac.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString)
             srv.Send(mlKupac)
@@ -458,22 +417,10 @@ Public Class PosaljiNarudzbuSession
                             poruka.Append("na WebeShop-u RescueEquip je kreiran korisnički račun")
                             poruka.Append("<br/><br/>")
                             poruka.Append("Pristup korisničkom sučelju RescueEquip:<br/>")
-                            'If HttpContext.Current.Request.Url.ToString.Contains("localhost") = False Then
-                            'poruka.AppendFormat("<a href=""https://www.igre.ba/login"">www.igre.ba/login</a>")
-                            'Else
-                            ' poruka.AppendFormat("<a href=""http://localhost:53080/login"">www.igre.ba/login</a>")
-                            'End If
                             poruka.Append("<br/><br/>")
-                            'poruka.Append("Kliknuli ste? Uživajte u kupnji, napunite zalihe i uštedite vrijeme!")
-                            'poruka.Append("<br/><br/>")
                             poruka.AppendFormat("Vaše korisničko ime: {0}", citac("Email"))
                             poruka.Append("<br/>")
                             poruka.Append("Vaša lozinka: ******** (poznata je samo vama)<br/>")
-                            ' If HttpContext.Current.Request.Url.ToString.Contains("localhost") = False Then
-                            ' poruka.Append("Ukoliko ste zaboravili Vašu lozinku zartažite novu klikom na <a href=""https://www.igre.ba/izgubljena-lozinka"">Izgubili ste lozinku?</a>""")
-                            ' Else
-                            'poruka.Append("Ukoliko ste zaboravili Vašu lozinku zartažite novu klikom na <a href=""http://localhost:53080/izgubljena-lozinka"">Izgubili ste lozinku?</a>""")
-                            'End If
                             poruka.Append("<br/><br/>")
                             poruka.Append("<strong>Vaš RescueEquip TEAM</strong>")
                             poruka.Append("<hr/><br/><br/>")
