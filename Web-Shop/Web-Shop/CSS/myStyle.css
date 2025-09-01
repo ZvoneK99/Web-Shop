@@ -15,7 +15,12 @@
     color: white;
 }
 
-
+.moja-slika {
+    min-height: 520px; 
+    width: 100%; /* ili fiksna širina */
+    height: auto; /* čuva proporcije */
+    object-fit: cover; /* popunjava prostor bez deformacije */
+}
 .header-middle.sticky-header {
     /*background-color: #5C7782 !important;*/
     background-color: #5C7782 !important;
@@ -511,6 +516,9 @@ textarea.form-control {
 @media only screen and (max-width: 768px) {
     .logo-rescue img {
         width: 70px !important;
+    }
+    .moja-slika {
+        min-height: 250px !important;
     }
 
     .user-icons {

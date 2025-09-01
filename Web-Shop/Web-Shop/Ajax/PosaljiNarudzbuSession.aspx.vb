@@ -10,11 +10,10 @@ Public Class PosaljiNarudzbuSession
         If IsNothing(Session("Narudzba")) = False Then
             Dim nacin As String = Request.Form("nacin-placanja")
             Dim napomena As String = Request.Form("napomena")
-            Dim NacinDostave As String = "Brza pošta" 'Request.Form("nacindostave")
+            Dim NacinDostave As String = "Brza pošta"
             Dim n As Narudzba
             n = CType(Session("Narudzba"), Narudzba)
             UnesiKorisnikaUSesiju()
-            'MsgBox(nacin)
             UnesiKorisnikaSQL(n, nacin, "1", napomena, NacinDostave)
             Session.Clear()
             Response.Redirect("/pocetna")
@@ -28,7 +27,6 @@ Public Class PosaljiNarudzbuSession
         Dim ZIP As String = Request.Form("postBr")
         Dim Email As String = Request.Form("email")
         Dim Telefon As String = Request.Form("brTel")
-        'Dim Napomena As String = Request.Form("txtNapomena")
         Dim NacinPlacanja As String = Request.Form("nacin-placanja")
 
         Dim n As Narudzba
@@ -54,11 +52,8 @@ Public Class PosaljiNarudzbuSession
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.StoredProcedure
                 komanda.CommandText = "UnesiKorisnika"
-                'komanda.Parameters.AddWithValue("@ID", formID)
                 komanda.Parameters.AddWithValue("@ImePrezime", n.Ime)
                 komanda.Parameters.AddWithValue("@Adresa", n.Adresa)
-                'komanda.Parameters.AddWithValue("@IdBroj", "")
-                'komanda.Parameters.AddWithValue("@PdvBroj", "")
                 komanda.Parameters.AddWithValue("@Grad", n.Mjesto)
                 komanda.Parameters.AddWithValue("@ZIP", n.zip)
                 komanda.Parameters.AddWithValue("@Telefon", n.Telefon)
@@ -96,9 +91,7 @@ Public Class PosaljiNarudzbuSession
                 komanda.Parameters.AddWithValue("@Napomena", napomena)
                 komanda.Parameters.AddWithValue("@Gatway", NacinPlacanja)
                 komanda.Parameters.AddWithValue("@BrojRata", "1")
-                ' komanda.Parameters.AddWithValue("@IpAdresa", Komponente.IpAdresa())
                 komanda.Parameters.AddWithValue("@BesplatnaDostava", BesplatnaDostavaZaArtikal)
-                'komanda.Parameters.AddWithValue("@Domena", "www.igre.ba")
                 komanda.Parameters.Add("@NoviID", SqlDbType.Int)
                 komanda.Parameters("@NoviID").Direction = ParameterDirection.Output
                 komanda.ExecuteNonQuery()
@@ -397,69 +390,6 @@ Public Class PosaljiNarudzbuSession
         Return s
     End Function
 
-    Private Sub PoslajiObavjestKreiranjaRacuna(KorisnikID As Integer)
-        Dim poruka As New StringBuilder
-        Dim putanja As String = Komponente.SQLKonekcija()
 
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM Korisnici WHERE ID=@ID"
-                komanda.Parameters.AddWithValue("@ID", KorisnikID)
-                Using citac As SqlDataReader = komanda.ExecuteReader()
-                    If citac IsNot Nothing Then
-                        While citac.Read()
-                            poruka.Append("<hr/>")
-                            poruka.AppendFormat("{0},", citac("ImePrezime"))
-                            poruka.Append("<br/><br/>")
-                            poruka.Append("na WebeShop-u RescueEquip je kreiran korisnički račun")
-                            poruka.Append("<br/><br/>")
-                            poruka.Append("Pristup korisničkom sučelju RescueEquip:<br/>")
-                            poruka.Append("<br/><br/>")
-                            poruka.AppendFormat("Vaše korisničko ime: {0}", citac("Email"))
-                            poruka.Append("<br/>")
-                            poruka.Append("Vaša lozinka: ******** (poznata je samo vama)<br/>")
-                            poruka.Append("<br/><br/>")
-                            poruka.Append("<strong>Vaš RescueEquip TEAM</strong>")
-                            poruka.Append("<hr/><br/><br/>")
-
-                            Dim srv As New SmtpClient
-                            Dim mailFrom As New MailAddress(ConfigurationManager.AppSettings("mailFrom"), "RescueEquip WebShop")
-                            Dim mailToFirma As New MailAddress(citac("Email"))
-                            Dim mlFirma As New MailMessage(mailFrom, mailToFirma)
-                            mlFirma.SubjectEncoding = Encoding.UTF8
-                            mlFirma.Priority = MailPriority.Normal
-                            mlFirma.BodyEncoding = Encoding.UTF8
-                            mlFirma.IsBodyHtml = True
-                            mlFirma.Subject = HttpContext.Current.Server.HtmlEncode("Kreiran račun RescueEquip WebShop-u")
-                            mlFirma.Body = String.Format(Dokument("/Ajax/predlozak2.htm"), poruka.ToString)
-                            srv.Send(mlFirma)
-                            mlFirma.Dispose()
-                            UnesiNewsletter(citac("ImePrezime"), citac("Email"))
-                        End While
-                    End If
-                End Using
-            End Using
-        End Using
-
-    End Sub
-
-    Private Sub UnesiNewsletter(ImePrezime As String, Email As String)
-        Dim putanja As String = Komponente.SQLKonekcija()
-
-        Using konekcija As New SqlConnection(putanja)
-            konekcija.Open()
-            Using komanda As New SqlCommand()
-                komanda.Connection = konekcija
-                komanda.CommandType = CommandType.StoredProcedure
-                komanda.Parameters.AddWithValue("@ImePrezime", ImePrezime)
-                komanda.Parameters.AddWithValue("@Email", Email)
-                komanda.CommandText = "UnesiNewsletter"
-                komanda.ExecuteNonQuery()
-            End Using
-        End Using
-    End Sub
 
 End Class

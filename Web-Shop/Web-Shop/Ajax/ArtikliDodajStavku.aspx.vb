@@ -20,17 +20,12 @@
         Integer.TryParse(Request.Form("kolicina"), kolicina)
 
         kolicina = Request.Form("kolicina")
-        ' Dim besplatnadostava As Boolean = Komponente.ProvjeraNaplateDostave(ID)
         If kolicina > 0 Then
             If IsNothing(n.Artikli.Find(Function(a As ArtikalSession) a.id = ID.ToString)) = True Then
-                'n.Artikli.Add(New ArtikalSession(ID.ToString, Komponente.DostavaDaNe(ID), Komponente.NazivArtikal(ID), Komponente.CijenaArtika(ID), kolicina, 0, 0))
                 n.Artikli.Add(New ArtikalSession(ID.ToString, Komponente.NazivArtikal(ID), Komponente.CijenaArtika(ID), kolicina, 0, 0, 0))
             Else
                 Dim postojeciArtikal As ArtikalSession = n.Artikli.Find(Function(a As ArtikalSession) a.id = ID.ToString)
                 postojeciArtikal.Kolicina += kolicina
-                'If postojeciArtikal.Kolicina > Komponente.Postavke("MaxBrojGuma") Then
-                '    postojeciArtikal.Kolicina = 8
-                'End If
             End If
         End If
         UcitajKolicinuArtikala()

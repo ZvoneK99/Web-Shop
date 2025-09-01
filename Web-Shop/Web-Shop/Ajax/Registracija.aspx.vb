@@ -30,7 +30,6 @@ Public Class RegistracijaAjax
                         komanda.Connection = konekcija
                         komanda.CommandType = CommandType.StoredProcedure
                         komanda.CommandText = "UnesiKorisnika"
-                        'komanda.Parameters.AddWithValue("@ID", formID)
                         komanda.Parameters.AddWithValue("@ImePrezime", ImePrezime)
                         komanda.Parameters.AddWithValue("@Email", Email)
                         komanda.Parameters.AddWithValue("@Adresa", Adresa)

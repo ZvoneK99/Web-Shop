@@ -679,8 +679,8 @@ Public Class Komponente
 
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
-
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='product-image-photo istaknuto-img {1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.Append("</a>")
 
                             html.Append("<div class='btn-icon-group dugmicDodaj-artikal'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
@@ -738,14 +738,14 @@ Public Class Komponente
         Dim putanja As String = SQLKonekcija()
 
 
-        Dim KupacLogiran As Boolean
-        Dim NivoTrenutnogKupca As String
-        If HttpContext.Current.Session("ValjanUser") = True Then
-            KupacLogiran = HttpContext.Current.Session("ValjanUser")
-        Else
-            KupacLogiran = False
-            NivoTrenutnogKupca = "0"
-        End If
+        'Dim KupacLogiran As Boolean
+        'Dim NivoTrenutnogKupca As String
+        'If HttpContext.Current.Session("ValjanUser") = True Then
+        '    KupacLogiran = HttpContext.Current.Session("ValjanUser")
+        'Else
+        '    KupacLogiran = False
+        '    NivoTrenutnogKupca = "0"
+        'End If
 
         html.Append("<section class='product-panel'>")
         html.Append("<div class='section-title'>")
@@ -764,16 +764,15 @@ Public Class Komponente
                         While citac.Read()
 
                             html.AppendFormat("<div class='product-default inner-quickview inner-icon center-details div{0}'>", citac("ID"))
-                            If citac("BesplatnaDostava") = True Then
-                                html.AppendFormat("<div class=""free-shipping""></div>")
-                            End If
+                            'If citac("BesplatnaDostava") = True Then
+                            '    html.AppendFormat("<div class=""free-shipping""></div>")
+                            'End If
                             html.Append("<figure>")
-                            html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
                             'Slika artikla
                             Dim slika As String = ZadanaSlikaArtikla(citac("ID"))
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
-
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='product-image-photo {1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.Append("</a>") '/artikal
 
                             html.Append("<div class='btn-icon-group'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
@@ -887,7 +886,7 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href='/artikal/{1}/{0}/'>", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='moja-slika {1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
 
                             html.Append("</a>") '/artikal/{0}
@@ -1049,10 +1048,6 @@ Public Class Komponente
             NivoTrenutnogKupca = "0"
         End If
 
-        '' Ograničenje pristupa određenim nadgrupama
-        'If KupacLogiran = True And NivoTrenutnogKupca = "9" And (NadGrupaID = 7 Or NadGrupaID = 8) Then
-        '    HttpContext.Current.Response.Redirect("/")
-        'End If
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
@@ -1087,7 +1082,7 @@ Public Class Komponente
                             html.Append("<figure>")
                             html.AppendFormat("<a href=""/artikal/{1}/{0}/"">", SrediNaziv(citac("Naziv")), citac("ID"))
 
-                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='{1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='moja-slika {1}' alt='{1}'/>", citac("Slika"), citac("ID"))
 
                             html.Append("</a>")
                             html.Append("<div class='btn-icon-group'>")

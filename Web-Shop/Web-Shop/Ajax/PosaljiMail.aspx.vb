@@ -65,11 +65,7 @@ Public Class PosaljiMail
                     konekcija.Close()
                 End Using
 
-                ' Obavijest korisniku
-
                 Response.Redirect("/kontakt?msg=poslano")
-                'Response.Write("<script>alert('Poruka je uspješno poslana!');</script>")
-                'Response.Redirect("/")
             Catch ex As Exception
                 Response.Write("Greška: " & ex.Message.ToString())
             End Try

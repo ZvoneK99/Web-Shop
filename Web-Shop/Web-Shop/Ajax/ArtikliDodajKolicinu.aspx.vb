@@ -5,7 +5,6 @@
         Dim id As Integer = Convert.ToInt32(Request.Form("id"))
         Dim formKolicina As String = Request.Form("kolicina")
         Dim formTrenutna As String = Request.Form("trenutna")
-        'Dim putanja As String = Conti.conekcijaVibar
 
         Dim n As Narudzba
         n = CType(Session("Narudzba"), Narudzba)

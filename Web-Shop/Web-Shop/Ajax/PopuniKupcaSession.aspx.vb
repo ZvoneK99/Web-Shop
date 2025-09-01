@@ -9,10 +9,6 @@
         Dim grad As String = Request.Form("grad")
         Dim tel As String = Request.Form("telefon")
         Dim napomena As String = Request.Form("napomena")
-        'If napomena = "" Then
-        '    napomena = ""
-        'End If
-        'Dim vulkanizer As Integer = Request.Form("vulkanizer")
 
         Dim n As Narudzba
         n = CType(Session("Narudzba"), Narudzba)

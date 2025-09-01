@@ -71,7 +71,6 @@ Public Class ResetLozinke
         End Using
         Response.Redirect("/izgubljena-lozinka?msg=poslano")
 
-        'Response.Redirect("/login")
 
     End Sub
 

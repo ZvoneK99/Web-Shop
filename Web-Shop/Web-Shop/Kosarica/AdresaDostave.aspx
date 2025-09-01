@@ -50,7 +50,7 @@
                 <br />
                 <br />
                 <br />
-                <div class="col-md-6 ">
+                <%--<div class="col-md-6 ">
                     <div class="heading">
                         <h2 class="title">Prijavljeni korisnik?</h2>
                     </div>
@@ -67,11 +67,11 @@
                             <p class="forgot-pass"><a href="/izgubljena-lozinka" class="forget-pass">Zaboravljena lozinka?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         </div>
                     </form>
-                </div>
+                </div>--%>
 
-                <div class="col-md-6 registration-div">
+                <div class="col-md-12 registration-div">
                     <div class="heading">
-                        <h2 class="title" id="/registracija">Naručujete kao GOST? - Ispunite podatke!</h2>
+                        <h2 class="title" id="/registracija">Ispunite podatke!</h2>
                     </div>
 
                     <form novalidate method="post" action="/GoPay" id="registracijaFormular" autocomplete="off">
