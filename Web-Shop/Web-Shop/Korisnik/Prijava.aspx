@@ -61,7 +61,7 @@
                             <input type="password" id="prijavaLozinka" name="prijavaLozinka" class="form-control" required />
 
                             <% If Request.QueryString("msg-passw") = "pogreska" Then %>
-                                <h3 style="color: red; text-align: center; font-size:12px; font-weight: 400;" id="reset-div">Pogrešna lozinka ili email!</h3>
+                            <h3 style="color: red; text-align: center; font-size: 12px; font-weight: 400;" id="reset-div">Pogrešna lozinka ili email!</h3>
                             <% End If %>
 
                             <div class="form-footer">

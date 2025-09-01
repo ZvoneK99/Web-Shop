@@ -261,62 +261,10 @@
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="CSS\myStyle.css" />
-    <Content Include="Datoteke\Artikli\2.jpg" />
-    <Content Include="Datoteke\Artikli\activan.jpg" />
-    <Content Include="Datoteke\Artikli\agilissnowice51.jpg" />
-    <Content Include="Datoteke\Artikli\noimage.png" />
-    <Content Include="Datoteke\Artikli\viseca_mastercard_visa-silber.png" />
-    <Content Include="Datoteke\Brendovi\apple.jpg" />
-    <Content Include="Datoteke\Brendovi\brand1.png" />
-    <Content Include="Datoteke\Brendovi\brand2.png" />
-    <Content Include="Datoteke\Brendovi\brand3.png" />
-    <Content Include="Datoteke\Brendovi\brand4.png" />
-    <Content Include="Datoteke\Brendovi\brand5.png" />
-    <Content Include="Datoteke\Brendovi\hp.jpg" />
-    <Content Include="Datoteke\Brendovi\huawei.jpg" />
-    <Content Include="Datoteke\Brendovi\mi.jpg" />
-    <Content Include="Datoteke\Brendovi\nitendo.jpg" />
-    <Content Include="Datoteke\Brendovi\playstation.jpg" />
-    <Content Include="Datoteke\Brendovi\samsung.jpg" />
-    <Content Include="Datoteke\Brendovi\shell_alter.png" />
-    <Content Include="Datoteke\Brendovi\xboxone.jpg" />
-    <Content Include="Datoteke\Icone\avi.png" />
-    <Content Include="Datoteke\Icone\doc.png" />
-    <Content Include="Datoteke\Icone\file.png" />
-    <Content Include="Datoteke\Icone\gif.png" />
-    <Content Include="Datoteke\Icone\jpeg.png" />
-    <Content Include="Datoteke\Icone\mp3.png" />
-    <Content Include="Datoteke\Icone\pdf.png" />
-    <Content Include="Datoteke\Icone\png.png" />
-    <Content Include="Datoteke\Icone\rar.png" />
-    <Content Include="Datoteke\Icone\xls.png" />
-    <Content Include="Datoteke\Icone\zip.png" />
-    <Content Include="Datoteke\Katalozi\2024-03-18-11-56_mreza.txt" />
     <Content Include="Datoteke\Logo\RescueEquip-logoDark.png" />
     <Content Include="Datoteke\Logo\RescueEquip-logoLight.png" />
     <Content Include="Datoteke\Logo\ViberLogo.png" />
     <Content Include="Datoteke\Logo\WhatsAppLogo.png" />
-    <Content Include="Datoteke\Novosti\3f56f2ea-4060-48fc-b727-1481bd3cb713.jpg" />
-    <Content Include="Datoteke\Novosti\443633_w926.jpg" />
-    <Content Include="Datoteke\Novosti\5u35hwhwhwh6whh62.jpg" />
-    <Content Include="Datoteke\Novosti\815x470.jpg" />
-    <Content Include="Datoteke\Novosti\comodo_secure_seal_113x59_transp.png" />
-    <Content Include="Datoteke\Novosti\days-gone.jpg" />
-    <Content Include="Datoteke\Novosti\fifa_19.jpg" />
-    <Content Include="Datoteke\Novosti\klklklii.png" />
-    <Content Include="Datoteke\Novosti\maestro.jpg" />
-    <Content Include="Datoteke\Novosti\mastercard.jpg" />
-    <Content Include="Datoteke\Novosti\PikPay.png" />
-    <Content Include="Datoteke\Novosti\playstation-store-christmas-deals.jpg" />
-    <Content Include="Datoteke\Novosti\playstation-store-summer-sale-2018.jpg" />
-    <Content Include="Datoteke\Novosti\pubg-ps4.jpg" />
-    <Content Include="Datoteke\Novosti\rdr2-officialart-3840x2160.jpg" />
-    <Content Include="Datoteke\Novosti\shoe_star_rasprodaja_vesti.jpg" />
-    <Content Include="Datoteke\Novosti\unicerditcard.jpg" />
-    <Content Include="Datoteke\Novosti\unicerditcard_–_kopija_–_kopija_%282%29.jpg" />
-    <Content Include="Datoteke\Novosti\virman_2.jpg" />
-    <Content Include="Datoteke\Novosti\visa.jpg" />
-    <Content Include="Datoteke\Novosti\visual_hochaufloesend_300dpi.png" />
     <Content Include="Datoteke\Slider\Slider1-mob.png" />
     <Content Include="Datoteke\Slider\Slider1.png" />
     <Content Include="Datoteke\Slider\Slider2-mob.png" />
@@ -834,9 +782,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Datoteke\Baneri\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

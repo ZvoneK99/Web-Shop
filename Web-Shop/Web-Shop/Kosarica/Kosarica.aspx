@@ -52,7 +52,6 @@
     <div class="mobile-menu-container">
         <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
-    <!-- End .page-wrapper -->
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     <%=Web_Shop.Komponente.FooterScript() %>

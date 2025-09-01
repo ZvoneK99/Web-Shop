@@ -38,7 +38,7 @@
 
             <% If Request.QueryString("msg") = "poslano" Then %>
             <div class="div-kontakt-reset" id="reset-div">
-            <h3 style="color: green; text-align: center;" id="restart-msg">Vaša lozinka je poslana na Email!</h3>
+                <h3 style="color: green; text-align: center;" id="restart-msg">Vaša lozinka je poslana na Email!</h3>
             </div>
             <% End If %>
 
@@ -55,7 +55,7 @@
 
                     <div class="form-footer">
                         <button type="submit" class="btn btn-primary">Zatraži</button>
-                                <p class="back-to-login"><a href="/login" class="forget-pass">Vratite se na prijavu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p class="back-to-login"><a href="/login" class="forget-pass">Vratite se na prijavu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
                     </div>
                     <!-- End .form-footer -->

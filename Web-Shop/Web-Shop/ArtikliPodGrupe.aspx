@@ -8,7 +8,6 @@
     End If
     Dim idNadGrupe As Integer = Web_Shop.Komponente.PronadjiIdNadGrupe(idPodGrupe)%>
 
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 

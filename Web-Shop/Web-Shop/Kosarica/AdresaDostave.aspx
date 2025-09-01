@@ -53,9 +53,7 @@
                 <div class="col-md-6 ">
                     <div class="heading">
                         <h2 class="title">Prijavljeni korisnik?</h2>
-                        <%--<p>Ako već imate račun kod nas, prijavite se.</p>--%>
                     </div>
-                    <!-- End .heading -->
                     <form novalidate method="post" action="/Ajax/KorisnikPrijava.aspx?putanja=/adresa-dostave" id="prijavaFormular">
 
                         <label for="prijavaKorisnickoIme">Email</label>
@@ -67,7 +65,6 @@
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary">PRIJAVA</button>
                             <p class="forgot-pass"><a href="/izgubljena-lozinka" class="forget-pass">Zaboravljena lozinka?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                            <%--<a href="#" class="forget-pass">Nemate račun? Registrirajte se!</a>--%>
                         </div>
                     </form>
                 </div>
@@ -75,9 +72,7 @@
                 <div class="col-md-6 registration-div">
                     <div class="heading">
                         <h2 class="title" id="/registracija">Naručujete kao GOST? - Ispunite podatke!</h2>
-                        <!--<p>Molimo Vas ispunite podatke.</p>-->
                     </div>
-                    <!-- End .heading -->
 
                     <form novalidate method="post" action="/GoPay" id="registracijaFormular" autocomplete="off">
                         <label>Ime i Prezime:</label>
@@ -100,10 +95,8 @@
 
                         <label for="nacin-placanja">Način plaćanja</label>
                         <select name="nacin-placanja" class="form-control">
-                        <%--<option value="Virman">Virman</option>--%>
-                        <option value="poduzecem">Poduzećem</option>
-                        <%--<option value="karticno">Kartično</option>--%>
-                        <%--<option value="mikrofin">MKD Mikrofin</option>--%>
+                            <option value="poduzecem">Poduzećem</option>
+                            <%--<option value="karticno">Kartično</option>--%>
                         </select>
 
                         <label for="Napomena"></label>
@@ -114,12 +107,8 @@
                         </div>
                     </form>
                 </div>
-            
-                <!-- End .col-md-6 -->
             </div>
-            <!-- End .row -->
         </div>
-        <!-- End .main -->
         <%=Web_Shop.Komponente.Footer() %>
     </div>
 
@@ -130,7 +119,6 @@
         <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
 
-    <!-- End .page-wrapper -->
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     <%=Web_Shop.Komponente.FooterScript() %>

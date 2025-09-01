@@ -1,20 +1,20 @@
-﻿    <%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Artikal.aspx.vb" Inherits="Web_Shop.Artikal" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Artikal.aspx.vb" Inherits="Web_Shop.Artikal" %>
 
 <%
-Dim idArtikla As Integer = 0
+    Dim idArtikla As Integer = 0
 
-' Try query string first
-If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
-    Integer.TryParse(Request.QueryString("id"), idArtikla)
-End If
-
-' If still zero, try path segments
-If idArtikla = 0 Then
-    Dim segments() As String = Request.Path.Split("/"c)
-    If segments.Length > 2 Then
-        Integer.TryParse(segments(2), idArtikla)
+    ' Try query string first
+    If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
+        Integer.TryParse(Request.QueryString("id"), idArtikla)
     End If
-End If
+
+    ' If still zero, try path segments
+    If idArtikla = 0 Then
+        Dim segments() As String = Request.Path.Split("/"c)
+        If segments.Length > 2 Then
+            Integer.TryParse(segments(2), idArtikla)
+        End If
+    End If
 %>
 
 
@@ -26,7 +26,7 @@ End If
 <%Dim NazivGrupe As String = Web_Shop.Komponente.PronadjiNazivGrupe(idGrupe)%>
 <%Dim NazivArtikla As String = Web_Shop.Komponente.NazivArtikal(idArtikla)%>
 
-    
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hr-BA" xml:lang="hr-BA">
 <head>
@@ -65,7 +65,6 @@ End If
         <header class="header">
             <%=Web_Shop.Komponente.Header() %>
         </header>
-        <!-- End .header -->
 
         <main class="main">
 
@@ -97,20 +96,14 @@ End If
                 <%=Web_Shop.Komponente.NajNovije() %>
             </div>
         </main>
-        <!-- End .main -->
         <%=Web_Shop.Komponente.Footer() %>
     </div>
-    <!-- End .page-wrapper -->
     <div class="mobile-menu-overlay"></div>
 
     <div class="mobile-menu-container">
 
         <%=Web_Shop.Komponente.HeaderMobile() %>
     </div>
-    <!-- End .mobile-menu-container -->
-
-    <!-- Add Cart Modal -->
-    <%--<%=Web_Shop.Komponente.DodajUKosaricu() %>--%>
     <div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -119,7 +112,6 @@ End If
                         Proizvod je dodan u košaricu<br>
                     </p>
                     <h4 id="productTitle"></h4>
-                    <%--<img src="" id="productImage" width="100" height="100" alt="adding cart image">--%>
                     <div class="btn-actions">
                         <a href="/kosarica">
                             <button class="btn-primary">Idite na košaricu!</button></a>
@@ -134,7 +126,6 @@ End If
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     <%=Web_Shop.Komponente.FooterScript() %>
-    <!-- www.addthis.com share plugin -->
     <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b927288a03dbde6"></script>
 
     <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b927288a03dbde6"></script>
