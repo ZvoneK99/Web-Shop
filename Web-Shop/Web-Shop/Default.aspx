@@ -19,7 +19,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://rescueequip.ba" />
     <meta property="twitter:title" content="RescueEquip" />
-    <meta property="twitter:description" content="Primjer web shop projekta za završni rad – planinarska i spasilačka oprema s količinskim popustima." />
+    <meta property="twitter:description" content="Primjer web shop projekta za završni rad – planinarska i   spasilačka oprema s količinskim popustima." />
 
 
     <script type="text/javascript">
