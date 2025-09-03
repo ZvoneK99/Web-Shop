@@ -35,34 +35,6 @@ Public Class Komponente
         'Moj CSS File
         html.AppendFormat("<link rel='stylesheet' type='text/css' href='/CSS/myStyle.css?v={0}' />", Format(DateAndTime.Now(), "HHmm"))
 
-        'FAVICONS
-        ' Apple Touch Icons
-        html.Append("<link rel=""apple-touch-icon"" sizes=""57x57"" href=""/apple-icon-57x57.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""60x60"" href=""/apple-icon-60x60.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""72x72"" href=""/apple-icon-72x72.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""76x76"" href=""/apple-icon-76x76.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""114x114"" href=""/apple-icon-114x114.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""120x120"" href=""/apple-icon-120x120.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""144x144"" href=""/apple-icon-144x144.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""152x152"" href=""/apple-icon-152x152.png""/>")
-        html.Append("<link rel=""apple-touch-icon"" sizes=""180x180"" href=""/apple-icon-180x180.png""/>")
-
-        ' Favicon Icons
-        html.Append("<link rel=""icon"" type=""image/png"" sizes=""192x192"" href=""/android-icon-192x192.png""/>")
-        html.Append("<link rel=""icon"" type=""image/png"" sizes=""32x32"" href=""/favicon-32x32.png""/>")
-        html.Append("<link rel=""icon"" type=""image/png"" sizes=""96x96"" href=""/favicon-96x96.png""/>")
-        html.Append("<link rel=""icon"" type=""image/png"" sizes=""16x16"" href=""/favicon-16x16.png""/>")
-
-        ' Web Manifest
-        html.Append("<link rel=""manifest"" href=""/manifest.json""/>")
-
-        ' Microsoft Specific
-        html.Append("<meta name=""msapplication-TileColor"" content=""#ffffff""/>")
-        html.Append("<meta name=""msapplication-TileImage"" content=""/ms-icon-144x144.png""/>")
-
-        ' Theme Color
-        html.Append("<meta name=""theme-color"" content=""#ffffff""/>")
-
         Return html.ToString()
     End Function
 
@@ -737,16 +709,6 @@ Public Class Komponente
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
-
-        'Dim KupacLogiran As Boolean
-        'Dim NivoTrenutnogKupca As String
-        'If HttpContext.Current.Session("ValjanUser") = True Then
-        '    KupacLogiran = HttpContext.Current.Session("ValjanUser")
-        'Else
-        '    KupacLogiran = False
-        '    NivoTrenutnogKupca = "0"
-        'End If
-
         html.Append("<section class='product-panel'>")
         html.Append("<div class='section-title'>")
         html.Append("<h2>Novo iz ponude</h2>")
@@ -758,7 +720,7 @@ Public Class Komponente
             Using komanda As New SqlCommand()
                 komanda.Connection = konekcija
                 komanda.CommandType = CommandType.Text
-                komanda.CommandText = "SELECT * FROM (SELECT TOP 20 * FROM dbo.Artikli WHERE Aktivno='1' AND Kolicina>'0' ORDER BY ID DESC ) AS Last20 ORDER BY NEWID();"
+                komanda.CommandText = "SELECT * FROM (SELECT TOP 10 * FROM dbo.Artikli WHERE Aktivno='1' AND Kolicina>'0' ORDER BY ID ASC ) AS Last10 ORDER BY NEWID();"
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
@@ -1550,16 +1512,6 @@ Public Class Komponente
         Dim html As New StringBuilder
         Dim putanja As String = SQLKonekcija()
 
-        Dim KupacLogiran As Boolean
-        Dim NivoTrenutnogKupca As String
-        If HttpContext.Current.Session("ValjanUser") = True Then
-            KupacLogiran = HttpContext.Current.Session("ValjanUser")
-            NivoTrenutnogKupca = NivoLogiranogKorisnika()
-        Else
-            KupacLogiran = False
-            NivoTrenutnogKupca = "0"
-        End If
-
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
             Using komanda As New SqlCommand()
@@ -1591,7 +1543,6 @@ Public Class Komponente
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
                             html.AppendFormat("<button type='button' class='btn-icon btn-add-cart dugmicDodaj' data-toggle='modal' data-id=""{0}"" data-target='#addCartModal' title=""Dodaj u košaricu""><i class='icon-bag'></i></button>", citac("ID"))
                             html.Append("</div>") 'btn-icon-group
-                            'html.AppendFormat("<a href='/artikal/{0}' class='btn-quickview' title='Vidi proizvod'>Vidi proizvod</a>", citac("ID"))
 
                             Dim NazivNadGrupe As String = Komponente.PronadjiNazivNadGrupe(citac("NadGrupaID"))
                             Dim NazivGrupe As String = Komponente.PronadjiNazivGrupe(citac("GrupaID"))
@@ -1601,9 +1552,7 @@ Public Class Komponente
                             html.Append("<div class='category-wrap'>")
                             html.Append(" <div class='category-list'>")
                             html.AppendFormat("<a href=""/grupa/{0}/{1}/"" class='product-category nadgrupa'>{2}</a>", citac("NadgrupaId"), SrediNaziv(NazivNadGrupe), NazivNadGrupe)
-                            'html.AppendFormat("<a href='/grupa?id={1}' class='product-category'>{0}</a>", NazivGrupe, citac("GrupaId"))
                             html.Append("</div>") 'category-list
-                            'html.Append("<a href='#' class='btn-icon-wish'><i class='icon-heart'></i></a>")
                             html.Append("</div>") 'category-wrap
 
 
