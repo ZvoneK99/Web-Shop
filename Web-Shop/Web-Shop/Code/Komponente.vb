@@ -1532,12 +1532,8 @@ Public Class Komponente
                             html.Append("<div class='product-default inner-quickview inner-icon'>")
                             html.Append("<figure>")
                             html.AppendFormat("<a href='/artikal/{0}'>", citac("ID"))
-                            Dim slika As String = ZadanaSlikaArtikla(citac("ID"))   'Slika
-                            If slika.Contains("http") = False Then 'Or slika.Contains("http://") = False Then
-                                html.AppendFormat("<img src=""http://igre.ba/Thumb2.ashx?i={0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            Else
-                                html.AppendFormat("<img src=""{0}"" alt=""{1}"">", ZadanaSlikaArtikla(citac("ID")), citac("Naziv"))
-                            End If
+                            html.AppendFormat("<img src='/Datoteke/SlikeArtikala/{0}' class='moja-slika {1}' alt='{1}'/>", citac("Slika"), citac("ID"))
+
                             html.Append("</a>") '/artikal/{0}
                             html.Append("<div class='btn-icon-group'>")
                             html.AppendFormat("<input type=""hidden"" class=""qty {0}"" value=""1"">", citac("ID"))
