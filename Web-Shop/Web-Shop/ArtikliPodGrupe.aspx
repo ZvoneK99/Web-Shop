@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row row-sm">
                     <div class="col-lg-12 shop-inner podkategorija">
-                        <nav class="toolbox">
+                       <%-- <nav class="toolbox">
                             <div class="toolbox-left">
                                 <div class="toolbox-item toolbox-sort">
                                     <div class="select-custom" style="cursor: pointer;">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </nav>
+                        </nav>--%>
                         <div class="row row-sm product-intro divide-line up-effect products-grid shopArt">
                             <%=Web_Shop.Komponente.ArtikliGrupe(idGrupe) %>
                         </div>

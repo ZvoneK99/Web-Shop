@@ -396,7 +396,7 @@ Public Class Komponente
                 Using citac As SqlDataReader = komanda.ExecuteReader()
                     If citac IsNot Nothing Then
                         While citac.Read()
-                            html.AppendFormat("{0}", citac("Datoteka"))
+                            html.AppendFormat("{0}", citac("Slika"))
                         End While
                     End If
                 End Using
@@ -998,18 +998,15 @@ Public Class Komponente
             End If
         End If
 
-        Dim NadGrupaID As Integer = PronadjiIdNadGrupe(GrupaID)
+        Dim NadGrupaID As Integer = 0
+        Dim tmp As String = PronadjiIdNadGrupe(GrupaID)
 
-        ' Provjera je li kupac logiran
-        Dim KupacLogiran As Boolean
-        Dim NivoTrenutnogKupca As String
-        If HttpContext.Current.Session("ValjanUser") IsNot Nothing AndAlso HttpContext.Current.Session("ValjanUser") = True Then
-            KupacLogiran = True
+        ' Pokušaj pretvoriti string u integer
+        If Integer.TryParse(tmp, NadGrupaID) Then
+            ' tmp je validan broj, NadGrupaID dobio tu vrijednost
         Else
-            KupacLogiran = False
-            NivoTrenutnogKupca = "0"
+            ' tmp nije broj, NadGrupaID ostaje 0
         End If
-
 
         Using konekcija As New SqlConnection(putanja)
             konekcija.Open()
