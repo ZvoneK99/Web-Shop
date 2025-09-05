@@ -16,11 +16,12 @@ Public Class KorisnikPrijava
         Dim com As New SqlCommand(sqlUserName, Conn)
         com.Parameters.AddWithValue("@Email", username)
         com.Parameters.AddWithValue("@Lozinka", pwd)
-        Dim CurrentName As String
-        CurrentName = CStr(com.ExecuteScalar)
-        If CurrentName <> "" Then
+        'Dim CurrentName As String
+        Dim brojKorisnika As Integer = Convert.ToInt32(com.ExecuteScalar())
+        If brojKorisnika > 0 Then
             Session("ValjanUser") = True
-            If IsNothing(Request.QueryString("putanja")) = False Then
+            ' Ovdje možeš spremiti i ID korisnika ako trebaš
+            If Not String.IsNullOrEmpty(Request.QueryString("putanja")) Then
                 Response.Redirect(Request.QueryString("putanja"))
             Else
                 Response.Redirect("/")
@@ -28,8 +29,8 @@ Public Class KorisnikPrijava
         Else
             Session("ValjanUser") = False
             Response.Redirect("/login?msg-passw=pogreska")
-            Response.Redirect("/login?s=false")
         End If
+
         Conn.Close()
     End Sub
 

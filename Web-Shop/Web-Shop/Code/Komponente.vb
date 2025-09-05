@@ -63,17 +63,17 @@ Public Class Komponente
         html.Append("<a href='mailto:info@rescuequip.ba' class='element-footer' target='_blank'><i class='fa fa-envelope fa-2x wp-viber-header' style='font-size: 20px; color: white;'></i></a>")
         html.Append("</div>") 'header-left
 
-        html.Append("<div class='header-right'>")
-        html.Append("<ul>")
-        If HttpContext.Current.Session("ValjanUser") = False Then   'If user is not logged in
-            html.Append("<li><a href='/login' class='header-text'>Registriraj se</a></li>")
-            html.Append("<li><a href='/login' class='header-text'>Prijavi se</a></li>")
-        Else
-            'Ovdje prikazati korisnikovo ime
-            html.Append("<li><a href='/login?a=logout'>Odjavi se</a></li>")
-        End If
-        html.Append("</ul>")
-        html.Append("</div>") 'header-right
+        'html.Append("<div class='header-right'>")
+        'html.Append("<ul>")
+        'If HttpContext.Current.Session("ValjanUser") = False Then   'If user is not logged in
+        '    html.Append("<li><a href='/login' class='header-text'>Registriraj se</a></li>")
+        '    html.Append("<li><a href='/login' class='header-text'>Prijavi se</a></li>")
+        'Else
+        '    'Ovdje prikazati korisnikovo ime
+        '    html.Append("<li><a href='/login?a=logout'>Odjavi se</a></li>")
+        'End If
+        'html.Append("</ul>")
+        'html.Append("</div>") 'header-right
         html.Append("</div>") 'container
         html.Append("</div>") 'header-top
 
@@ -156,7 +156,7 @@ Public Class Komponente
         html.Append("</div>") ' header-search-wrapper
         html.Append("</form>")
         html.Append("</div>") ' header-search
-        html.Append("<a href='/login' class='top-my-account'><i class='icon-user user-icons'></i></a>")
+        ' html.Append("<a href='/login' class='top-my-account'><i class='icon-user user-icons'></i></a>")
 
         html.Append("<div class=""dropdown cart-dropdown kosarica-header"">")
         html.Append("<a href=""/kosarica"" class=""dropdown-toggle"" role=""button"" aria-haspopup=""true"" aria-expanded=""false"" data-display=""static"">")
