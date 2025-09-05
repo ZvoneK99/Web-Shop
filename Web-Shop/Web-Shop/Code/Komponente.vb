@@ -1305,95 +1305,23 @@ Public Class Komponente
                             ' ----- NAV TABOVI -----
                             html.Append("<ul class='nav nav-tabs' role='tablist'>")
 
-                            'Cijene na rate
-                            html.Append("<li class='nav-item'>")
-                            html.Append("<a class='nav-link active' id='product-tab-desc' data-toggle='tab' href='#product-desc-content' role='tab' aria-controls='product-desc-content' aria-selected='true'>Cijena na rate</a>")
-                            html.Append("</li>")
 
                             'Detaljni opis
                             html.Append("<li class='nav-item'>")
-                            html.Append("<a class='nav-link' id='product-tab-tags' data-toggle='tab' href='#product-tags-content' role='tab' aria-controls='product-tags-content' aria-selected='false'>Detaljni opis</a>")
-                            html.Append("</li>")
-
-                            'Recenzije
-                            html.Append("<li class='nav-item'>")
-                            html.Append("<a class='nav-link' id='product-tab-reviews' data-toggle='tab' href='#product-reviews-content' role='tab' aria-controls='product-reviews-content' aria-selected='false'>Komentari</a>")
+                            html.Append("<a class='nav-link active' id='product-tab-tags' data-toggle='tab' href='#product-tags-content' role='tab' aria-controls='product-tags-content' aria-selected='true'>Detaljni opis</a>")
                             html.Append("</li>")
 
                             html.Append("</ul>") ' Kraj nav-tabs
 
-
                             html.Append("<div class='tab-content'>")
 
-                            'Cijena na rate
-                            'html.Append("<div class='tab-pane fade show active' id='product-desc-content' role='tabpanel' aria-labelledby='product-tab-desc'>")
-                            'html.Append("<div class='product-tags-content'>")
-                            'html.Append("<table class='ratings-table tablica-rata'>")
-                            'html.AppendFormat("<tr><td>2 - 3 rate:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(3)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(3)) / 100) / 3), "N2"))
-                            'html.AppendFormat("<tr><td>4 - 6 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(6)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(6)) / 100) / 6), "N2"))
-                            'html.AppendFormat("<tr><td>7 - 12 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(12)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(12)) / 100) / 12), "N2"))
-                            'html.AppendFormat("<tr><td>18 rata:</td><td>{0} KM</td><td class='rating'>(već od {1} KM mjesečno)</td></tr>", Format(cijenaSaKalkulacijom * (100 + ProvizijaRate(18)) / 100, "N2"), Format(((cijenaSaKalkulacijom * (100 + ProvizijaRate(18)) / 100) / 18), "N2"))
-                            'html.Append("</table>")
-                            'html.Append("</div>") ' Kraj product-tags-content
-                            'html.Append("</div>") ' Kraj tab-pane (Cijena na rate)
-
                             'Detaljni opis
-                            html.Append("<div class='tab-pane fade' id='product-tags-content' role='tabpanel' aria-labelledby='product-tab-tags'>")
+                            html.Append("<div class='tab-pane fade show active' id='product-tags-content' role='tabpanel' aria-labelledby='product-tab-tags'>")
                             html.Append("<div class='product-desc-content'>")
                             html.AppendFormat("<p>{0}</p>", citac("Opis"))
                             html.Append("</div>") ' Kraj product-desc-content
                             html.Append("</div>") ' Kraj tab-pane (Detaljni opis)
 
-                            'Komentari
-                            html.Append("<div class='tab-pane fade' id='product-reviews-content' role='tabpanel' aria-labelledby='product-tab-reviews'>")
-                            html.Append("<div class='product-reviews-content'>")
-                            html.Append("<div class='add-product-review'>")
-
-                            'Using konekcijaKomentara As New SqlConnection(putanja)
-                            '    konekcijaKomentara.Open()
-                            '    Using komandaKomentara As New SqlCommand()
-                            '        komandaKomentara.Connection = konekcijaKomentara
-                            '        komandaKomentara.CommandType = CommandType.Text
-                            '        komandaKomentara.CommandText = "SELECT * FROM Komentari WHERE NarudzbaID IN (SELECT NarudzbaID FROM NarudzbeStavke WHERE ArtikalID=@ArtikalID) AND Odobreno=1 ORDER BY Date DESC;"
-                            '        komandaKomentara.Parameters.AddWithValue("@ArtikalID", ArtikalID)
-                            '        Using citacKomentara As SqlDataReader = komandaKomentara.ExecuteReader()
-                            '            If citacKomentara IsNot Nothing Then
-                            '                While citacKomentara.Read()
-                            '                    Dim ocjena As Integer = Convert.ToInt32(citacKomentara("Ocjena"))
-
-                            '                    html.Append("<div class='comment-box'>")
-                            '                    ' Ime + zvjezdice
-                            '                    html.Append("<div class='comment-name-date'>")
-                            '                    html.Append(citacKomentara("Ime"))
-
-                            '                    ' Zvjezdice
-                            '                    html.Append("<span class='comment-stars'>")
-                            '                    For i As Integer = 1 To 5
-                            '                        If i <= ocjena Then
-                            '                            html.Append("<span class='star active'>&#9733;</span>")
-                            '                        Else
-                            '                            html.Append("<span class='star'>&#9733;</span>")
-                            '                        End If
-                            '                    Next
-                            '                    html.Append("</span>")
-                            '                    html.Append("</div>") ' comment-name-date
-
-                            '                    ' Tekst komentara
-                            '                    html.Append("<div class='comment-text'>")
-                            '                    html.Append(citacKomentara("Komentar"))
-                            '                    html.Append("</div>")
-
-                            '                    html.Append("</div>") ' comment-box
-                            '                    html.Append("<hr class='comment-line-my'/>")
-                            '                End While
-                            '            End If
-                            '        End Using
-                            '    End Using
-                            'End Using
-
-                            html.Append("</div>") ' add-product-review
-                            html.Append("</div>") ' product-reviews-content
-                            html.Append("</div>") ' Kraj tab-pane (Recenzije)
 
                             html.Append("</div>") ' Kraj tab-content
                             html.Append("</div>") ' Kraj product-single-tabs
