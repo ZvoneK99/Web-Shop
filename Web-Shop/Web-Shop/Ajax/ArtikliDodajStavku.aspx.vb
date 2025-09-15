@@ -1,6 +1,7 @@
 ﻿Public Class ArtikliDodajStavku
     Inherits System.Web.UI.Page
 
+    'Kod koji se izvršava pri učitavanju stranice te dodaje stavku u narudžbu nakon što je korisnik kliknuo na "Dodaj u košaricu" i izvršio se AJAX poziv
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim n As Narudzba
         If IsNothing(Session("Narudzba")) = True Then
